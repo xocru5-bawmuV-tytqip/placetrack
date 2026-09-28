@@ -1,0 +1,513 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── ENUMS ────────────────────────────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  PLACED_STUDENT
+  STUDENT
+  COMPANY_REP
+  VIEWER
+}
+
+enum SubscriptionTier {
+  FREE
+  BASIC
+  PRO
+  ENTERPRISE
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+  PENDING
+}
+
+enum DriveType {
+  ON_CAMPUS
+  OFF_CAMPUS
+  POOL_CAMPUS
+  VIRTUAL
+}
+
+enum QuestionType {
+  APTITUDE
+  CODING
+  TECHNICAL
+  HR
+  GROUP_DISCUSSION
+  CASE_STUDY
+}
+
+enum QuestionDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum ChatType {
+  DIRECT
+  COMPANY_ROOM
+  UNIVERSITY_ROOM
+  GENERAL
+}
+
+enum MessageStatus {
+  SENT
+  DELIVERED
+  READ
+  BLOCKED
+}
+
+enum WarningSeverity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+// ─── UNIVERSITY & ACADEMIC ────────────────────────────────────────────────────
+
+model University {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  shortName   String?
+  logo        String?
+  coverImage  String?
+  location    String
+  city        String
+  state       String
+  website     String?
+  established Int?
+  type        String   @default("Private") // Private, Government, Deemed
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  departments    Department[]
+  drives         PlacementDrive[]
+  users          User[]
+  chatRooms      ChatRoom[]
+  questions      InterviewQuestion[]
+  studentProfiles StudentProfile[]
+
+  @@index([slug])
+}
+
+model Department {
+  id           String     @id @default(cuid())
+  universityId String
+  name         String
+  code         String     // CS, IT, MBA, ECE, ME, CE
+  description  String?
+  createdAt    DateTime   @default(now())
+
+  university University @relation(fields: [universityId], references: [id], onDelete: Cascade)
+  courses    Course[]
+
+  @@unique([universityId, code])
+}
+
+model Course {
+  id           String   @id @default(cuid())
+  departmentId String
+  name         String   // B.Tech CS, MBA, M.Tech, BCA
+  duration     Int      // in years
+  type         String   // UG, PG, Diploma
+  createdAt    DateTime @default(now())
+
+  department      Department       @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  studentProfiles StudentProfile[]
+}
+
+// ─── USERS & AUTH ─────────────────────────────────────────────────────────────
+
+model User {
+  id               String           @id @default(cuid())
+  email            String           @unique
+  password         String?
+  name             String?
+  image            String?
+  role             Role             @default(STUDENT)
+  subscriptionTier SubscriptionTier @default(FREE)
+  universityId     String?
+  emailVerified    DateTime?
+  isActive         Boolean          @default(true)
+  isBanned         Boolean          @default(false)
+  banReason        String?
+  banExpiresAt     DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  university     University?      @relation(fields: [universityId], references: [id])
+  accounts       Account[]
+  sessions       Session[]
+  studentProfile StudentProfile?
+  loginLogs      LoginLog[]
+  subscription   Subscription?
+  sentMessages   ChatMessage[]    @relation("SentMessages")
+  chatWarnings   ChatWarning[]
+  chatRoomMembers ChatRoomMember[]
+
+  @@index([email])
+  @@index([universityId])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model LoginLog {
+  id        String   @id @default(cuid())
+  userId    String
+  ip        String?
+  device    String?
+  browser   String?
+  location  String?
+  success   Boolean
+  reason    String?  // failed reason
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// ─── STUDENT PROFILES ─────────────────────────────────────────────────────────
+
+model StudentProfile {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  universityId  String
+  courseId      String
+  rollNo        String?
+  collegeEmail  String?
+  passingYear   Int
+  batch         String?   // "2020-2024"
+  photo         String?
+  bio           String?   @db.Text
+  linkedIn      String?
+  github        String?
+  portfolio     String?
+  phone         String?   // stored encrypted, never shown publicly
+  skills        String[]  @default([])
+  isPlaced      Boolean   @default(false)
+  placedAt      String?   // Company name (denormalized for quick display)
+  ctc           Float?    // in LPA
+  role          String?   // Job title
+  joiningDate   DateTime?
+  profileVisible Boolean  @default(true)
+  resumePublic  Boolean   @default(false) // visible to Pro+ subscribers
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  university University   @relation(fields: [universityId], references: [id])
+  course     Course       @relation(fields: [courseId], references: [id])
+  projects   Project[]
+  resumes    Resume[]
+  placements Placement[]
+  achievements Achievement[]
+
+  @@index([universityId])
+  @@index([passingYear])
+  @@index([isPlaced])
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  studentId   String
+  title       String
+  description String   @db.Text
+  techStack   String[] @default([])
+  githubUrl   String?
+  liveUrl     String?
+  thumbnail   String?
+  year        Int
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  student StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+}
+
+model Resume {
+  id         String   @id @default(cuid())
+  studentId  String
+  fileUrl    String
+  fileName   String
+  fileSize   Int?
+  isActive   Boolean  @default(true)
+  uploadedAt DateTime @default(now())
+
+  student StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  studentId   String
+  title       String
+  description String?
+  year        Int?
+  category    String?  // hackathon, certification, award
+  createdAt   DateTime @default(now())
+
+  student StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+// ─── COMPANIES ────────────────────────────────────────────────────────────────
+
+model Company {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  logo        String?
+  sector      String?  // IT, Finance, Consulting, Core
+  website     String?
+  linkedIn    String?
+  description String?  @db.Text
+  hqLocation  String?
+  founded     Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  drives    PlacementDrive[]
+  placements Placement[]
+  questions  InterviewQuestion[]
+  chatRooms  ChatRoom[]
+
+  @@index([slug])
+}
+
+// ─── PLACEMENT DRIVES ─────────────────────────────────────────────────────────
+
+model PlacementDrive {
+  id                 String    @id @default(cuid())
+  universityId       String
+  companyId          String
+  year               Int
+  type               DriveType @default(ON_CAMPUS)
+  date               DateTime?
+  registrationDeadline DateTime?
+  studentsEligible   Int?
+  studentsApplied    Int?
+  studentsPlaced     Int       @default(0)
+  minCTC             Float?
+  maxCTC             Float?
+  avgCTC             Float?
+  roles              String[]  @default([])
+  coursesEligible    String[]  @default([])
+  description        String?   @db.Text
+  isActive           Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  university University  @relation(fields: [universityId], references: [id])
+  company    Company     @relation(fields: [companyId], references: [id])
+  placements Placement[]
+
+  @@index([universityId, year])
+  @@index([companyId])
+}
+
+model Placement {
+  id            String   @id @default(cuid())
+  driveId       String
+  studentId     String
+  companyId     String
+  ctc           Float?
+  role          String?
+  joiningDate   DateTime?
+  offerLetterUrl String?
+  isVerified    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  drive   PlacementDrive @relation(fields: [driveId], references: [id])
+  student StudentProfile @relation(fields: [studentId], references: [id])
+  company Company        @relation(fields: [companyId], references: [id])
+
+  @@unique([driveId, studentId])
+  @@index([companyId])
+  @@index([studentId])
+}
+
+// ─── INTERVIEW QUESTIONS ──────────────────────────────────────────────────────
+
+model InterviewQuestion {
+  id           String             @id @default(cuid())
+  companyId    String?
+  universityId String?
+  year         Int?
+  round        String?
+  type         QuestionType
+  question     String             @db.Text
+  answer       String?            @db.Text
+  difficulty   QuestionDifficulty @default(MEDIUM)
+  tags         String[]           @default([])
+  upvotes      Int                @default(0)
+  isVerified   Boolean            @default(false)
+  submittedBy  String?            // userId
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+
+  company    Company?    @relation(fields: [companyId], references: [id])
+  university University? @relation(fields: [universityId], references: [id])
+
+  @@index([companyId])
+  @@index([type])
+}
+
+// ─── SUBSCRIPTIONS ────────────────────────────────────────────────────────────
+
+model Subscription {
+  id            String             @id @default(cuid())
+  userId        String             @unique
+  tier          SubscriptionTier
+  status        SubscriptionStatus @default(PENDING)
+  startDate     DateTime?
+  endDate       DateTime?
+  paymentId     String?
+  orderId       String?
+  amount        Float?
+  currency      String             @default("INR")
+  autoRenew     Boolean            @default(false)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+}
+
+// ─── CHAT ─────────────────────────────────────────────────────────────────────
+
+model ChatRoom {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  type         ChatType
+  companyId    String?
+  universityId String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+
+  company    Company?    @relation(fields: [companyId], references: [id])
+  university University? @relation(fields: [universityId], references: [id])
+  messages   ChatMessage[]
+  members    ChatRoomMember[]
+
+  @@index([type])
+}
+
+model ChatRoomMember {
+  id        String   @id @default(cuid())
+  roomId    String
+  userId    String
+  joinedAt  DateTime @default(now())
+
+  room ChatRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, userId])
+}
+
+model ChatMessage {
+  id           String        @id @default(cuid())
+  senderId     String
+  receiverId   String?       // for DMs
+  roomId       String?       // for room chats
+  content      String        @db.Text
+  type         ChatType
+  status       MessageStatus @default(SENT)
+  isRestricted Boolean       @default(false)
+  flagReason   String?
+  moderatedBy  String?       // "SevenAI" or admin userId
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  sender   User     @relation("SentMessages", fields: [senderId], references: [id])
+  chatRoom ChatRoom? @relation(fields: [roomId], references: [id])
+
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([roomId])
+  @@index([createdAt])
+}
+
+model ChatWarning {
+  id        String          @id @default(cuid())
+  userId    String
+  reason    String
+  severity  WarningSeverity @default(LOW)
+  messageId String?
+  issuedAt  DateTime        @default(now())
+  expiresAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// ─── AI INTERACTIONS ──────────────────────────────────────────────────────────
+
+model AISession {
+  id           String   @id @default(cuid())
+  userId       String
+  sessionType  String   // "chat" | "interview" | "project_analysis"
+  messages     Json     @default("[]")
+  company      String?  // for interview simulator
+  role         String?
+  score        Float?
+  feedback     String?  @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId])
+}
