@@ -44,6 +44,7 @@ declare module 'next-auth/jwt' {
 
 export const authOptions: NextAuthOptions = {
   // Adapter omitted when using JWT sessions to allow offline/demo resilience
+  secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET || 'placetrack-fallback-secret-production-key-32chars',
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days

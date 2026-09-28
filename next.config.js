@@ -1,7 +1,9 @@
+const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'https://placetrack.vercel.app',
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL || vercelUrl || 'https://placetrack.vercel.app',
   },
   images: {
     remotePatterns: [

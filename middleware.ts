@@ -72,6 +72,7 @@ export default withAuth(
     return NextResponse.next()
   },
   {
+    secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET || 'placetrack-fallback-secret-production-key-32chars',
     callbacks: {
       /**
        * This callback controls whether withAuth runs the middleware function.
