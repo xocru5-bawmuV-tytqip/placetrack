@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {
   Users, Building2, GraduationCap, TrendingUp,
   MessageSquare, Bot, Bell, ChevronRight, Star,
-  ArrowUpRight, Briefcase, BookOpen
+  ArrowUpRight, Briefcase, BookOpen, Linkedin
 } from 'lucide-react'
 
 async function getDashboardData(userId: string) {
@@ -16,11 +16,11 @@ async function getDashboardData(userId: string) {
     avgCTC: 8.4,
     highestCTC: 42,
     recentPlacements: [
-      { name: 'Arjun Sharma', company: 'Google', ctc: 42, role: 'SDE-2', year: 2024, avatar: 'AS' },
-      { name: 'Priya Verma', company: 'Microsoft', ctc: 38, role: 'Software Engineer', year: 2024, avatar: 'PV' },
-      { name: 'Rohit Jain', company: 'Amazon', ctc: 32, role: 'SDE-1', year: 2024, avatar: 'RJ' },
-      { name: 'Sneha Gupta', company: 'Adobe', ctc: 28, role: 'Frontend Engineer', year: 2024, avatar: 'SG' },
-      { name: 'Karan Mehta', company: 'TCS', ctc: 7, role: 'System Engineer', year: 2024, avatar: 'KM' },
+      { name: 'Arjun Sharma', company: 'Google', ctc: 42, role: 'SDE-2', year: 2024, avatar: 'AS', linkedIn: 'https://www.linkedin.com/in/arjun-sharma-sde' },
+      { name: 'Priya Verma', company: 'Microsoft', ctc: 38, role: 'Software Engineer', year: 2024, avatar: 'PV', linkedIn: 'https://www.linkedin.com/in/priya-verma-msft' },
+      { name: 'Rohit Jain', company: 'Amazon', ctc: 32, role: 'SDE-1', year: 2024, avatar: 'RJ', linkedIn: 'https://www.linkedin.com/in/rohit-jain-aws' },
+      { name: 'Sneha Gupta', company: 'Adobe', ctc: 28, role: 'Frontend Engineer', year: 2024, avatar: 'SG', linkedIn: 'https://www.linkedin.com/in/sneha-gupta-adobe' },
+      { name: 'Karan Mehta', company: 'TCS', ctc: 7, role: 'System Engineer', year: 2024, avatar: 'KM', linkedIn: 'https://www.linkedin.com/in/karan-mehta-tcs' },
     ],
     topCompanies: [
       { name: 'TCS', placed: 89, avgCTC: 6.5 },
@@ -102,20 +102,32 @@ export default async function DashboardPage() {
             </div>
             <div className="space-y-3">
               {data.recentPlacements.map((p) => (
-                <div key={p.name} className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors group cursor-pointer">
+                <div key={p.name} className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors group">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-sm font-bold flex-shrink-0">
                     {p.avatar}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="font-medium text-white">{p.name}</span>
-                      <ArrowUpRight className="w-3 h-3 text-white/30 group-hover:text-blue-400 transition-colors" />
                     </div>
                     <div className="text-sm text-white/50">{p.role} at {p.company}</div>
                   </div>
-                  <div className="text-right flex-shrink-0">
-                    <div className="text-sm font-semibold text-green-400">₹{p.ctc} LPA</div>
-                    <div className="text-xs text-white/30">{p.year}</div>
+                  <div className="flex items-center gap-3 flex-shrink-0">
+                    <div className="text-right">
+                      <div className="text-sm font-semibold text-green-400">₹{p.ctc} LPA</div>
+                      <div className="text-xs text-white/30">{p.year}</div>
+                    </div>
+                    {p.linkedIn && (
+                      <a
+                        href={p.linkedIn}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-lg bg-[#0A66C2]/15 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white flex items-center justify-center transition-colors border border-[#0A66C2]/30"
+                        title={`Connect with ${p.name} on LinkedIn`}
+                      >
+                        <Linkedin className="w-4 h-4" />
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}

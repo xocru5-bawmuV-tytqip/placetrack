@@ -27,6 +27,7 @@ import {
   HelpCircle,
   GraduationCap,
   ArrowRight,
+  Linkedin,
 } from "lucide-react";
 
 export default function CompanyDetailPage({
@@ -308,16 +309,29 @@ export default function CompanyDetailPage({
               {placedCandidates.map((c) => (
                 <GlassCard key={c.id} padding="sm" glow glowColor="blue">
                   <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-xs">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-xs shrink-0">
                         {c.avatar}
                       </div>
-                      <div>
-                        <p className="font-bold text-white text-xs">{c.name}</p>
-                        <p className="text-[10px] text-slate-400">{c.university}</p>
+                      <div className="min-w-0">
+                        <p className="font-bold text-white text-xs truncate">{c.name}</p>
+                        <p className="text-[10px] text-slate-400 truncate">{c.university}</p>
                       </div>
                     </div>
-                    <span className="text-xs font-bold text-emerald-400">₹{c.ctc} LPA</span>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <span className="text-xs font-bold text-emerald-400">₹{c.ctc} LPA</span>
+                      {c.linkedIn && (
+                        <a
+                          href={c.linkedIn}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-7 h-7 rounded-lg bg-[#0A66C2]/20 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white flex items-center justify-center transition-all duration-200 border border-[#0A66C2]/30"
+                          title={`Connect with ${c.name} on LinkedIn`}
+                        >
+                          <Linkedin size={13} />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </GlassCard>
               ))}

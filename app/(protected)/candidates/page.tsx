@@ -27,6 +27,7 @@ interface Candidate {
   isPlaced: boolean
   location: string
   skills: string[]
+  linkedin: string
 }
 
 // ─── Sample Data (20 candidates) ──────────────────────────────────────────────
@@ -36,121 +37,141 @@ const ALL_CANDIDATES: Candidate[] = [
     id: '1', name: 'Arjun Sharma', company: 'Google', role: 'Software Engineer',
     ctc: 42.0, year: 2024, course: 'B.Tech CSE', university: 'Poornima University',
     avatar: 'AS', isPlaced: true, location: 'Bangalore',
-    skills: ['React', 'Node.js', 'Python', 'System Design']
+    skills: ['React', 'Node.js', 'Python', 'System Design'],
+    linkedin: 'https://linkedin.com/in/arjun-sharma-sde'
   },
   {
     id: '2', name: 'Priya Patel', company: 'Microsoft', role: 'SDE-1',
     ctc: 38.5, year: 2024, course: 'B.Tech CSE', university: 'Poornima University',
     avatar: 'PP', isPlaced: true, location: 'Hyderabad',
-    skills: ['C++', 'Azure', 'TypeScript', 'Algorithms']
+    skills: ['C++', 'Azure', 'TypeScript', 'Algorithms'],
+    linkedin: 'https://linkedin.com/in/priya-patel-msft'
   },
   {
     id: '3', name: 'Amit Verma', company: 'Amazon', role: 'SDE-1',
     ctc: 35.0, year: 2024, course: 'B.Tech IT', university: 'Poornima University',
     avatar: 'AV', isPlaced: true, location: 'Bangalore',
-    skills: ['Java', 'AWS', 'Microservices', 'DSA']
+    skills: ['Java', 'AWS', 'Microservices', 'DSA'],
+    linkedin: 'https://linkedin.com/in/amit-verma-aws'
   },
   {
     id: '4', name: 'Sneha Gupta', company: 'Adobe', role: 'Member of Technical Staff',
     ctc: 32.0, year: 2024, course: 'B.Tech CSE', university: 'Poornima University',
     avatar: 'SG', isPlaced: true, location: 'Noida',
-    skills: ['JavaScript', 'React', 'GraphQL', 'CSS']
+    skills: ['JavaScript', 'React', 'GraphQL', 'CSS'],
+    linkedin: 'https://linkedin.com/in/sneha-gupta-adobe'
   },
   {
     id: '5', name: 'Vikram Singh', company: 'TCS', role: 'Systems Engineer',
     ctc: 7.5, year: 2024, course: 'B.Tech CSE', university: 'Poornima University',
     avatar: 'VS', isPlaced: true, location: 'Mumbai',
-    skills: ['Java', 'SQL', 'Agile', 'Testing']
+    skills: ['Java', 'SQL', 'Agile', 'Testing'],
+    linkedin: 'https://linkedin.com/in/vikram-singh-tcs'
   },
   {
     id: '6', name: 'Ananya Joshi', company: 'Infosys', role: 'Software Engineer',
     ctc: 6.8, year: 2024, course: 'B.Tech IT', university: 'Poornima University',
     avatar: 'AJ', isPlaced: true, location: 'Pune',
-    skills: ['Python', 'Django', 'MySQL', 'Linux']
+    skills: ['Python', 'Django', 'MySQL', 'Linux'],
+    linkedin: 'https://linkedin.com/in/ananya-joshi-tech'
   },
   {
     id: '7', name: 'Rohan Mehta', company: 'Wipro', role: 'Project Engineer',
     ctc: 6.5, year: 2024, course: 'B.Tech CSE', university: 'Poornima University',
     avatar: 'RM', isPlaced: true, location: 'Bangalore',
-    skills: ['Java', 'Spring Boot', 'REST APIs', 'Git']
+    skills: ['Java', 'Spring Boot', 'REST APIs', 'Git'],
+    linkedin: 'https://linkedin.com/in/rohan-mehta-wipro'
   },
   {
     id: '8', name: 'Kavita Rao', company: 'Deloitte', role: 'Analyst',
     ctc: 12.0, year: 2024, course: 'B.Tech CSE', university: 'Poornima University',
     avatar: 'KR', isPlaced: true, location: 'Gurgaon',
-    skills: ['SAP', 'Business Analysis', 'SQL', 'Excel']
+    skills: ['SAP', 'Business Analysis', 'SQL', 'Excel'],
+    linkedin: 'https://linkedin.com/in/kavita-rao-deloitte'
   },
   {
     id: '9', name: 'Amit Tiwari', company: 'HCL', role: 'Software Engineer',
     ctc: 5.5, year: 2023, course: 'B.Tech ECE', university: 'Poornima University',
     avatar: 'AT', isPlaced: true, location: 'Noida',
-    skills: ['Embedded C', 'VLSI', 'Python', 'IoT']
+    skills: ['Embedded C', 'VLSI', 'Python', 'IoT'],
+    linkedin: 'https://linkedin.com/in/amit-tiwari-hcl'
   },
   {
     id: '10', name: 'Nisha Agarwal', company: 'Tech Mahindra', role: 'Associate Engineer',
     ctc: 4.8, year: 2023, course: 'B.Tech IT', university: 'Poornima University',
     avatar: 'NA', isPlaced: true, location: 'Pune',
-    skills: ['HTML/CSS', 'JavaScript', 'Angular', 'MongoDB']
+    skills: ['HTML/CSS', 'JavaScript', 'Angular', 'MongoDB'],
+    linkedin: 'https://linkedin.com/in/nisha-agarwal-tech'
   },
   {
     id: '11', name: 'Deepak Kumar', company: 'Google', role: 'Cloud Engineer',
     ctc: 28.0, year: 2023, course: 'B.Tech CSE', university: 'BITS Pilani',
     avatar: 'DK', isPlaced: true, location: 'Bangalore',
-    skills: ['GCP', 'Kubernetes', 'Terraform', 'Go']
+    skills: ['GCP', 'Kubernetes', 'Terraform', 'Go'],
+    linkedin: 'https://linkedin.com/in/deepak-kumar-cloud'
   },
   {
     id: '12', name: 'Sakshi Dubey', company: 'Microsoft', role: 'Program Manager',
     ctc: 30.0, year: 2023, course: 'B.Tech CSE', university: 'VIT University',
     avatar: 'SD', isPlaced: true, location: 'Hyderabad',
-    skills: ['Product Management', 'SQL', 'Agile', 'UX Research']
+    skills: ['Product Management', 'SQL', 'Agile', 'UX Research'],
+    linkedin: 'https://linkedin.com/in/sakshi-dubey-pm'
   },
   {
     id: '13', name: 'Manish Yadav', company: 'Amazon', role: 'Data Engineer',
     ctc: 26.0, year: 2023, course: 'B.Tech CSE', university: 'Manipal University',
     avatar: 'MY', isPlaced: true, location: 'Bangalore',
-    skills: ['Spark', 'Hadoop', 'Python', 'AWS Redshift']
+    skills: ['Spark', 'Hadoop', 'Python', 'AWS Redshift'],
+    linkedin: 'https://linkedin.com/in/manish-yadav-data'
   },
   {
     id: '14', name: 'Riya Sharma', company: 'HDFC Bank', role: 'Technology Analyst',
     ctc: 8.5, year: 2024, course: 'B.Tech IT', university: 'Poornima University',
     avatar: 'RS', isPlaced: true, location: 'Mumbai',
-    skills: ['Java', 'Oracle', 'Banking Systems', 'SQL']
+    skills: ['Java', 'Oracle', 'Banking Systems', 'SQL'],
+    linkedin: 'https://linkedin.com/in/riya-sharma-analyst'
   },
   {
     id: '15', name: 'Karan Malhotra', company: 'Jio', role: 'Network Engineer',
     ctc: 9.0, year: 2024, course: 'B.Tech ECE', university: 'Poornima University',
     avatar: 'KM', isPlaced: true, location: 'Mumbai',
-    skills: ['5G', 'Networking', 'Python', 'Cloud']
+    skills: ['5G', 'Networking', 'Python', 'Cloud'],
+    linkedin: 'https://linkedin.com/in/karan-malhotra-jio'
   },
   {
     id: '16', name: 'Pooja Sinha', company: 'EY', role: 'Technology Consultant',
     ctc: 11.5, year: 2024, course: 'B.Tech CSE', university: 'Amity University',
     avatar: 'PS', isPlaced: true, location: 'Gurgaon',
-    skills: ['SAP', 'ABAP', 'Business Intelligence', 'Tableau']
+    skills: ['SAP', 'ABAP', 'Business Intelligence', 'Tableau'],
+    linkedin: 'https://linkedin.com/in/pooja-sinha-ey'
   },
   {
     id: '17', name: 'Aditya Raj', company: 'Airtel', role: 'Software Developer',
     ctc: 8.0, year: 2023, course: 'B.Tech CSE', university: 'Poornima University',
     avatar: 'AR', isPlaced: true, location: 'Gurgaon',
-    skills: ['React Native', 'Node.js', 'MongoDB', 'Firebase']
+    skills: ['React Native', 'Node.js', 'MongoDB', 'Firebase'],
+    linkedin: 'https://linkedin.com/in/aditya-raj-dev'
   },
   {
     id: '18', name: 'Meera Nair', company: 'KPMG', role: 'Associate Consultant',
     ctc: 10.0, year: 2024, course: 'MBA', university: 'Poornima University',
     avatar: 'MN', isPlaced: true, location: 'Mumbai',
-    skills: ['Financial Analysis', 'Excel', 'PowerBI', 'Strategy']
+    skills: ['Financial Analysis', 'Excel', 'PowerBI', 'Strategy'],
+    linkedin: 'https://linkedin.com/in/meera-nair-kpmg'
   },
   {
     id: '19', name: 'Saurabh Pandey', company: 'Adobe', role: 'Frontend Developer',
     ctc: 22.0, year: 2023, course: 'B.Tech CSE', university: 'BITS Pilani',
     avatar: 'SP', isPlaced: true, location: 'Noida',
-    skills: ['React', 'TypeScript', 'WebGL', 'Performance']
+    skills: ['React', 'TypeScript', 'WebGL', 'Performance'],
+    linkedin: 'https://linkedin.com/in/saurabh-pandey-web'
   },
   {
     id: '20', name: 'Tanvi Kapoor', company: 'TCS', role: 'Digital Engineer',
     ctc: 7.0, year: 2024, course: 'B.Tech IT', university: 'Poornima University',
     avatar: 'TK', isPlaced: true, location: 'Chennai',
-    skills: ['Python', 'Machine Learning', 'TensorFlow', 'SQL']
+    skills: ['Python', 'Machine Learning', 'TensorFlow', 'SQL'],
+    linkedin: 'https://linkedin.com/in/tanvi-kapoor-ml'
   },
 ]
 
@@ -457,6 +478,25 @@ export default function CandidatesPage() {
                       </span>
                     )}
                   </div>
+
+                  {/* Senior LinkedIn Profile Connect */}
+                  {candidate.linkedin && (
+                    <div className="mt-3 pt-2.5 border-t border-white/5">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          window.open(candidate.linkedin, '_blank', 'noopener,noreferrer')
+                        }}
+                        className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-[#0A66C2]/15 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white border border-[#0A66C2]/30 text-xs font-semibold transition-all duration-200 group/btn"
+                        title={`Connect with ${candidate.name} on LinkedIn`}
+                      >
+                        <Linkedin className="w-3.5 h-3.5 group-hover/btn:scale-110 transition-transform" />
+                        <span>Connect on LinkedIn</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               </Link>
             ))}

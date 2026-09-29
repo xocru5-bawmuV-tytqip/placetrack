@@ -27,6 +27,8 @@ import {
   FolderGit2,
   ChevronRight,
   SlidersHorizontal,
+  Linkedin,
+  ExternalLink,
 } from "lucide-react";
 
 export default function PlacementsPage() {
@@ -399,10 +401,27 @@ export default function PlacementsPage() {
                           </span>
                         )}
                       </div>
+
+                      {/* Senior LinkedIn Profile Link */}
+                      {candidate.linkedIn && (
+                        <div className="mt-4 pt-3 border-t border-white/5">
+                          <a
+                            href={candidate.linkedIn}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-[#0A66C2]/15 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white border border-[#0A66C2]/30 text-xs font-semibold transition-all duration-200 group/btn shadow-sm"
+                            title={`Connect with ${candidate.name} on LinkedIn`}
+                          >
+                            <Linkedin size={14} className="shrink-0 group-hover/btn:scale-110 transition-transform" />
+                            <span>Connect on LinkedIn</span>
+                            <ExternalLink size={11} className="opacity-70" />
+                          </a>
+                        </div>
+                      )}
                     </div>
 
                     {/* Footer Row */}
-                    <div className="mt-5 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400">
+                    <div className="mt-3 pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400">
                       <div className="flex items-center gap-1">
                         <MapPin size={11} className="text-slate-500" />
                         <span>{candidate.location}</span>

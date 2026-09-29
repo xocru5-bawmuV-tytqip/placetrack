@@ -26,6 +26,7 @@ import {
   Trophy,
   ArrowRight,
   FolderGit2,
+  Linkedin,
 } from "lucide-react";
 
 export default function UniversityDetailPage({
@@ -302,6 +303,19 @@ export default function UniversityDetailPage({
                 {student.projectTitle && (
                   <div className="text-[11px] text-slate-400 line-clamp-1 mb-2">
                     📁 <em>{student.projectTitle}</em>
+                  </div>
+                )}
+
+                {student.linkedIn && (
+                  <div className="mb-3 pt-1">
+                    <a
+                      href={student.linkedIn}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0A66C2]/15 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white border border-[#0A66C2]/30 text-xs font-semibold transition-all duration-200"
+                    >
+                      <Linkedin size={13} /> Connect on LinkedIn
+                    </a>
                   </div>
                 )}
 

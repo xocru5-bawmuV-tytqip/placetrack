@@ -29,6 +29,7 @@ import {
   IndianRupee,
   Clock,
   Send,
+  Linkedin,
 } from "lucide-react";
 
 /* ─── Types ─────────────────────────────────────────────────────────────── */
@@ -52,6 +53,7 @@ interface PlacementCard {
   year: number;
   branch: string;
   avatar: string;
+  linkedIn: string;
 }
 
 interface PlanFeature {
@@ -144,6 +146,7 @@ const recentPlacements: PlacementCard[] = [
     year: 2024,
     branch: "B.Tech CSE",
     avatar: "AS",
+    linkedIn: "https://www.linkedin.com/in/amit-sharma-swe",
   },
   {
     id: "2",
@@ -154,6 +157,7 @@ const recentPlacements: PlacementCard[] = [
     year: 2024,
     branch: "B.Tech IT",
     avatar: "PM",
+    linkedIn: "https://www.linkedin.com/in/priya-meena-msft",
   },
   {
     id: "3",
@@ -164,6 +168,7 @@ const recentPlacements: PlacementCard[] = [
     year: 2024,
     branch: "B.Tech CSE",
     avatar: "AS",
+    linkedIn: "https://www.linkedin.com/in/arjun-singh-aws",
   },
   {
     id: "4",
@@ -174,6 +179,7 @@ const recentPlacements: PlacementCard[] = [
     year: 2024,
     branch: "B.Sc. DS",
     avatar: "AG",
+    linkedIn: "https://www.linkedin.com/in/anjali-gupta-data",
   },
   {
     id: "5",
@@ -184,6 +190,7 @@ const recentPlacements: PlacementCard[] = [
     year: 2024,
     branch: "B.Tech CSE",
     avatar: "VP",
+    linkedIn: "https://www.linkedin.com/in/vikram-patel-fintech",
   },
   {
     id: "6",
@@ -194,6 +201,7 @@ const recentPlacements: PlacementCard[] = [
     year: 2024,
     branch: "MBA",
     avatar: "NJ",
+    linkedIn: "https://www.linkedin.com/in/neha-joshi-pm",
   },
   {
     id: "7",
@@ -204,6 +212,7 @@ const recentPlacements: PlacementCard[] = [
     year: 2024,
     branch: "B.Tech CSE",
     avatar: "RA",
+    linkedIn: "https://www.linkedin.com/in/rohan-agarwal-dev",
   },
   {
     id: "8",
@@ -214,6 +223,7 @@ const recentPlacements: PlacementCard[] = [
     year: 2024,
     branch: "B.Tech ECE",
     avatar: "DV",
+    linkedIn: "https://www.linkedin.com/in/divya-verma-sde",
   },
 ];
 
@@ -1423,7 +1433,7 @@ export default function HomePage() {
                       <p className="text-xs text-slate-400">{placement.role}</p>
                     </div>
 
-                    {/* Stats */}
+                    {/* Stats & LinkedIn Connect */}
                     <div className="flex items-center justify-between pt-3 border-t border-white/10">
                       <div className="flex items-center gap-1">
                         <IndianRupee
@@ -1434,12 +1444,16 @@ export default function HomePage() {
                           {placement.ctc}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Clock size={11} className="text-slate-500" />
-                        <span className="text-[11px] text-slate-500">
-                          {placement.year}
-                        </span>
-                      </div>
+                      <a
+                        href={placement.linkedIn}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#0A66C2]/15 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white border border-[#0A66C2]/30 text-xs font-semibold transition-all duration-200"
+                        title={`Connect with ${placement.name} on LinkedIn`}
+                      >
+                        <Linkedin size={12} />
+                        <span>Connect</span>
+                      </a>
                     </div>
                   </GlassCard>
                 </motion.div>
