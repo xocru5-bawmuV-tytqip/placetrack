@@ -59,13 +59,13 @@ export default function UniversitiesPage() {
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-xs font-semibold tracking-wide uppercase">
               <GraduationCap size={14} className="text-blue-400" />
-              Verified Institutional Database
+              Official Poornima Group Portal
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
-              Compare <span className="gradient-text">University Placements</span>
+              Poornima Group <span className="gradient-text">Campuses & Placements</span>
             </h1>
             <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
-              Explore authentic campus placement statistics, branch-wise salary distributions, NIRF rankings, and recruiter trends across premier universities.
+              Explore authentic campus placement statistics, branch-wise salary packages, NAAC & NBA accreditations, and premier recruiters across Poornima University, PCE, and PIET.
             </p>
           </motion.div>
         </div>
@@ -73,7 +73,7 @@ export default function UniversitiesPage() {
 
       {/* Main Section */}
       <section className="section-container py-12">
-        {/* Search & Type Filter Bar */}
+        {/* Search Bar */}
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-between mb-8">
           {/* Search Box */}
           <div className="relative w-full sm:max-w-md">
@@ -83,7 +83,7 @@ export default function UniversitiesPage() {
             />
             <input
               type="text"
-              placeholder="Search by university name, city, or recruiter..."
+              placeholder="Search by campus name, department, or recruiter..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 text-sm transition-all"
@@ -97,28 +97,11 @@ export default function UniversitiesPage() {
               </button>
             )}
           </div>
-
-          {/* Type Selector Tabs */}
-          <div className="flex items-center gap-1.5 bg-white/5 p-1 rounded-xl border border-white/10 w-full sm:w-auto">
-            {["all", "private", "government", "deemed"].map((type) => (
-              <button
-                key={type}
-                onClick={() => setSelectedType(type)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all flex-1 sm:flex-initial ${
-                  selectedType === type
-                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                    : "text-slate-400 hover:text-white hover:bg-white/5"
-                }`}
-              >
-                {type === "all" ? "All Types" : type}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Counter */}
         <div className="text-xs text-slate-400 mb-6">
-          Showing <strong className="text-white">{filteredUniversities.length}</strong> accredited universities
+          Showing <strong className="text-white">{filteredUniversities.length}</strong> Poornima Group institutions
         </div>
 
         {/* University Cards Grid */}

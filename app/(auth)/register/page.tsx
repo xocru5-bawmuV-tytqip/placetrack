@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { User, Mail, Lock, GraduationCap, Building, Loader2, ArrowRight } from 'lucide-react'
+import { User, Mail, Lock, ShieldCheck, GraduationCap, Building, Loader2, ArrowRight, CheckCircle2 } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 export default function RegisterPage() {
@@ -13,36 +13,75 @@ export default function RegisterPage() {
     name: '',
     email: '',
     password: '',
+    confirmPassword: '',
     universityName: 'Poornima University',
-    courseName: 'B.Tech Computer Science',
+    course: 'B.Tech Computer Science & Engineering',
     passingYear: '2025',
     rollNo: '',
+    isPlaced: false,
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { name, value, type } = e.target
+    if (type === 'checkbox') {
+      const checked = (e.target as HTMLInputElement).checked
+      setFormData((prev) => ({ ...prev, [name]: checked }))
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }))
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Client-side validations
+    if (formData.password.length < 8) {
+      toast.error('Password must be at least 8 characters long.')
+      return
+    }
+    if (!/[A-Z]/.test(formData.password)) {
+      toast.error('Password must include at least one uppercase letter (A-Z).')
+      return
+    }
+    if (!/[0-9]/.test(formData.password)) {
+      toast.error('Password must include at least one number (0-9).')
+      return
+    }
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Passwords do not match.')
+      return
+    }
+
     setLoading(true)
 
     try {
+      const payload = {
+        name: formData.name.trim(),
+        email: formData.email.toLowerCase().trim(),
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+        universityName: formData.universityName.trim(),
+        course: formData.course.trim(),
+        passingYear: parseInt(formData.passingYear, 10) || 2025,
+        rollNo: formData.rollNo.trim() || undefined,
+        isPlaced: formData.isPlaced,
+      }
+
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       })
 
       const data = await res.json()
       if (!res.ok) {
         toast.error(data.message || 'Registration failed')
       } else {
-        toast.success('Registration successful! Please sign in.')
+        toast.success('Account created securely! Please sign in.')
         router.push('/login')
       }
     } catch (err) {
-      toast.error('Network error during registration')
+      toast.error('Network error during registration. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -51,6 +90,10 @@ export default function RegisterPage() {
   return (
     <div className="w-full max-w-lg mx-auto space-y-6">
       <div className="text-center space-y-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
+          <ShieldCheck className="w-3.5 h-3.5" />
+          End-to-End Encrypted & Hashed Storage
+        </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
           Create Student Account
         </h1>
@@ -83,7 +126,6 @@ export default function RegisterPage() {
               <input
                 type="text"
                 name="rollNo"
-                required
                 value={formData.rollNo}
                 onChange={handleChange}
                 placeholder="21PUCS089"
@@ -108,20 +150,39 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300">Password</label>
-            <div className="relative">
-              <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
-              <input
-                type="password"
-                name="password"
-                required
-                minLength={6}
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Create secure password"
-                className="w-full bg-slate-800/80 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
-              />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-slate-300">Password</label>
+              <div className="relative">
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                <input
+                  type="password"
+                  name="password"
+                  required
+                  minLength={8}
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Min 8 chars, 1 uppercase, 1 number"
+                  className="w-full bg-slate-800/80 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-slate-300">Confirm Password</label>
+              <div className="relative">
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  required
+                  minLength={8}
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm password"
+                  className="w-full bg-slate-800/80 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                />
+              </div>
             </div>
           </div>
 
@@ -135,26 +196,54 @@ export default function RegisterPage() {
                 className="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
               >
                 <option>Poornima University</option>
-                <option>BITS Pilani</option>
-                <option>VIT Vellore</option>
-                <option>Manipal University</option>
+                <option>Poornima College of Engineering (PCE)</option>
+                <option>Poornima Institute of Engineering & Technology (PIET)</option>
               </select>
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-300">Graduation Year</label>
+              <label className="text-xs font-semibold text-slate-300">Course / Branch</label>
               <select
-                name="passingYear"
-                value={formData.passingYear}
+                name="course"
+                value={formData.course}
                 onChange={handleChange}
                 className="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
               >
-                <option>2024 (Placed/Alumni)</option>
-                <option>2025 (Final Year)</option>
-                <option>2026 (Pre-final Year)</option>
-                <option>2027 (Junior)</option>
+                <option>B.Tech Computer Science & Engineering</option>
+                <option>B.Tech Information Technology</option>
+                <option>B.Tech Electronics & Communication</option>
+                <option>BCA / MCA</option>
+                <option>MBA</option>
               </select>
             </div>
+          </div>
+
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-300">Graduation Year</label>
+            <select
+              name="passingYear"
+              value={formData.passingYear}
+              onChange={handleChange}
+              className="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
+            >
+              <option value="2024">2024 (Alumni / Placed)</option>
+              <option value="2025">2025 (Final Year)</option>
+              <option value="2026">2026 (Pre-final Year)</option>
+              <option value="2027">2027 (Junior)</option>
+            </select>
+          </div>
+
+          <div className="pt-1">
+            <label className="flex items-center gap-2.5 cursor-pointer text-xs text-slate-300 select-none">
+              <input
+                type="checkbox"
+                name="isPlaced"
+                checked={formData.isPlaced}
+                onChange={handleChange}
+                className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-blue-600 focus:ring-blue-500"
+              />
+              <span>I am already placed (join as Placed Senior / Mentor)</span>
+            </label>
           </div>
 
           <button

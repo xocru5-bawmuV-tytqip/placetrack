@@ -79,7 +79,7 @@ ${roundsText}
     }
   }
 
-  // 3. Check for specific other universities (MNIT, BITS, VIT, JECRC)
+  // 3. Check for specific Poornima Group institutions (PU, PCE, PIET)
   for (const uni of UNIVERSITIES_DATA) {
     if (query.includes(uni.slug) || query.includes(uni.name.toLowerCase()) || query.includes(uni.shortName.toLowerCase())) {
       return `🏫 **${uni.name} (${uni.shortName}) Placement Overview**

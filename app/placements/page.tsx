@@ -102,7 +102,7 @@ export default function PlacementsPage() {
               Explore <span className="gradient-text">Placement Records</span>
             </h1>
             <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
-              Transparent, student-verified placement records, CTC packages, engineering roles, and capstone projects from Poornima University and premier institutions.
+              Transparent, student-verified placement records, CTC packages, engineering roles, and capstone projects from Poornima University, PCE, and PIET.
             </p>
           </motion.div>
 
@@ -190,7 +190,7 @@ export default function PlacementsPage() {
               onChange={(e) => setSelectedUniversity(e.target.value)}
               className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-300 focus:outline-none focus:border-blue-500/50"
             >
-              <option value="all" className="bg-[#0A0F1E]">All Universities</option>
+              <option value="all" className="bg-[#0A0F1E]">All Poornima Campuses</option>
               {UNIVERSITIES_DATA.map((u) => (
                 <option key={u.slug} value={u.slug} className="bg-[#0A0F1E]">
                   {u.name}

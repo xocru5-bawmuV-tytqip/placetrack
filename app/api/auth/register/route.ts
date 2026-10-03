@@ -5,43 +5,59 @@ import { prisma } from '@/lib/prisma'
 
 // ─── Validation Schema ────────────────────────────────────────────────────────
 
-const registerSchema = z.object({
-  // Step 1
-  name: z.string().min(2, 'Name must be at least 2 characters').max(100),
-  email: z.string().email('Invalid email address'),
-  password: z
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .regex(/[A-Z]/, 'Must contain at least one uppercase letter')
-    .regex(/[0-9]/, 'Must contain at least one number'),
-  confirmPassword: z.string(),
+const registerSchema = z
+  .object({
+    // Step 1
+    name: z.string().min(2, 'Name must be at least 2 characters').max(100),
+    email: z.string().email('Invalid email address'),
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .regex(/[A-Z]/, 'Must contain at least one uppercase letter')
+      .regex(/[0-9]/, 'Must contain at least one number'),
+    confirmPassword: z.string().optional(),
 
-  // Step 2
-  universityName: z.string().min(2, 'University is required'),
-  course: z.string().min(2, 'Course is required'),
-  passingYear: z
-    .number()
-    .int()
-    .min(2000)
-    .max(new Date().getFullYear() + 5),
-  rollNo: z.string().optional(),
+    // Step 2
+    universityName: z.string().min(2, 'University is required').default('Poornima University'),
+    course: z.string().optional(),
+    courseName: z.string().optional(),
+    passingYear: z
+      .union([z.number(), z.string()])
+      .transform((val) => {
+        if (typeof val === 'number') return val
+        const num = parseInt(String(val).replace(/\D/g, '').slice(0, 4), 10)
+        return isNaN(num) ? 2025 : num
+      })
+      .pipe(z.number().int().min(2000).max(new Date().getFullYear() + 10)),
+    rollNo: z.string().optional().nullable(),
 
-  // Step 3
-  isPlaced: z.boolean(),
-  linkedIn: z
-    .string()
-    .url('Invalid LinkedIn URL')
-    .optional()
-    .or(z.literal('')),
-  github: z
-    .string()
-    .url('Invalid GitHub URL')
-    .optional()
-    .or(z.literal('')),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: 'Passwords do not match',
-  path: ['confirmPassword'],
-})
+    // Step 3
+    isPlaced: z.boolean().optional().default(false),
+    linkedIn: z
+      .string()
+      .url('Invalid LinkedIn URL')
+      .optional()
+      .or(z.literal(''))
+      .nullable(),
+    github: z
+      .string()
+      .url('Invalid GitHub URL')
+      .optional()
+      .or(z.literal(''))
+      .nullable(),
+  })
+  .refine(
+    (data) => {
+      if (data.confirmPassword) {
+        return data.password === data.confirmPassword
+      }
+      return true
+    },
+    {
+      message: 'Passwords do not match',
+      path: ['confirmPassword'],
+    }
+  )
 
 type RegisterPayload = z.infer<typeof registerSchema>
 
@@ -82,8 +98,8 @@ export async function POST(request: Request) {
       )
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(data.password, 10)
+    // Hash password securely with bcrypt (12 salt rounds)
+    const hashedPassword = await bcrypt.hash(data.password, 12)
 
     // Resolve or create the university record
     const normalizedName = data.universityName.trim()
@@ -128,10 +144,12 @@ export async function POST(request: Request) {
       })
     }
 
+    const courseNameClean = (data.course || data.courseName || 'B.Tech Computer Science').trim()
+
     let course = await prisma.course.findFirst({
       where: {
         departmentId: department.id,
-        name: { equals: data.course.trim(), mode: 'insensitive' },
+        name: { equals: courseNameClean, mode: 'insensitive' },
       },
       select: { id: true },
     })
@@ -140,7 +158,7 @@ export async function POST(request: Request) {
       course = await prisma.course.create({
         data: {
           departmentId: department.id,
-          name: data.course.trim(),
+          name: courseNameClean,
           duration: 4,
           type: 'UG',
         },

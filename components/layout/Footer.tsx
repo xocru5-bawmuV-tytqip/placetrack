@@ -21,12 +21,11 @@ const footerLinks = {
     { label: "Interview Simulator", href: "/ai/interview" },
     { label: "Pricing", href: "/pricing" },
   ],
-  Universities: [
-    { label: "Poornima University", href: "/universities/poornima" },
-    { label: "VIT Jaipur", href: "/universities/vit-jaipur" },
-    { label: "MNIT Jaipur", href: "/universities/mnit" },
-    { label: "Jaipur National Univ.", href: "/universities/jnu" },
-    { label: "Add Your University", href: "/universities/add" },
+  "Poornima Campuses": [
+    { label: "Poornima University (PU)", href: "/universities/poornima" },
+    { label: "Poornima College of Engg. (PCE)", href: "/universities/pce" },
+    { label: "Poornima Inst. of Engg. & Tech. (PIET)", href: "/universities/piet" },
+    { label: "Placement Statistics", href: "/placements" },
   ],
   Resources: [
     { label: "Placement Guide", href: "/resources/guide" },

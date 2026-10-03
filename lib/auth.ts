@@ -78,77 +78,65 @@ export const authOptions: NextAuthOptions = {
         try {
           const user = await prisma.user.findUnique({
             where: { email },
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              password: true,
+              image: true,
+              role: true,
+              subscriptionTier: true,
+              isBanned: true,
+              isActive: true,
+              universityId: true,
+            },
           })
 
-          if (user) {
-            if (!user.password) {
-              throw new Error('USE_OAUTH')
-            }
-            const passwordValid = await bcrypt.compare(credentials.password, user.password)
-            if (!passwordValid) {
-              throw new Error('INVALID_CREDENTIALS')
-            }
-            if (user.isBanned) {
-              throw new Error('ACCOUNT_BANNED')
-            }
-            if (!user.isActive) {
-              throw new Error('ACCOUNT_INACTIVE')
-            }
-
-            return {
-              id: user.id,
-              email: user.email,
-              name: user.name,
-              image: user.image,
-              role: user.role,
-              subscriptionTier: user.subscriptionTier,
-              isBanned: user.isBanned,
-              universityId: user.universityId,
-            }
+          if (!user) {
+            throw new Error('INVALID_CREDENTIALS')
           }
-        } catch (dbErr: any) {
-          console.warn('Database offline or unreachable, providing demo login session:', dbErr?.message)
-        }
 
-        // Demo / offline fallback mode for immediate testing without local PostgreSQL
-        if (email.includes('admin')) {
+          if (!user.password) {
+            throw new Error('USE_OAUTH')
+          }
+
+          const passwordValid = await bcrypt.compare(credentials.password, user.password)
+          if (!passwordValid) {
+            throw new Error('INVALID_CREDENTIALS')
+          }
+
+          if (user.isBanned) {
+            throw new Error('ACCOUNT_BANNED')
+          }
+
+          if (!user.isActive) {
+            throw new Error('ACCOUNT_INACTIVE')
+          }
+
+          // Return sanitized user object - NEVER include password
           return {
-            id: 'admin_demo_id',
-            email: 'admin@placetrack.in',
-            name: 'Campus Admin',
-            image: null,
-            role: 'ADMIN' as Role,
-            subscriptionTier: 'ENTERPRISE' as SubscriptionTier,
-            isBanned: false,
-            universityId: 'pu_main',
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            image: user.image,
+            role: user.role,
+            subscriptionTier: user.subscriptionTier,
+            isBanned: user.isBanned,
+            universityId: user.universityId,
           }
-        }
-
-        if (email.includes('arjun')) {
-          return {
-            id: 'arjun_placed_id',
-            email: 'arjun.sharma@poornima.edu.in',
-            name: 'Arjun Sharma (Google SDE)',
-            image: null,
-            role: 'PLACED_STUDENT' as Role,
-            subscriptionTier: 'PRO' as SubscriptionTier,
-            isBanned: false,
-            universityId: 'pu_main',
+        } catch (err: any) {
+          if ([
+            'EMAIL_PASSWORD_REQUIRED',
+            'USE_OAUTH',
+            'INVALID_CREDENTIALS',
+            'ACCOUNT_BANNED',
+            'ACCOUNT_INACTIVE',
+          ].includes(err?.message)) {
+            throw err
           }
-        }
 
-        // Any other student (e.g. amit13520@poornima.edu.in)
-        const namePart = email.split('@')[0].replace(/[0-9]/g, '')
-        const displayName = namePart ? namePart.charAt(0).toUpperCase() + namePart.slice(1) : 'Student'
-        return {
-          id: `student_${Date.now()}`,
-          email,
-          name: `${displayName} (Poornima Univ)`,
-          image: null,
-          role: 'STUDENT' as Role,
-          subscriptionTier: 'PRO' as SubscriptionTier,
-          isBanned: false,
-          universityId: 'pu_main',
+          console.error('[AUTH_ERROR]', err?.message || err)
+          throw new Error('DATABASE_UNAVAILABLE')
         }
       },
     }),

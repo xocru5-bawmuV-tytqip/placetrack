@@ -29,7 +29,17 @@ export default function LoginPage() {
       })
 
       if (res?.error) {
-        toast.error(res.error || 'Invalid email or password')
+        if (res.error === 'INVALID_CREDENTIALS' || res.error === 'CredentialsSignin') {
+          toast.error('Invalid email or password.')
+        } else if (res.error === 'DATABASE_UNAVAILABLE') {
+          toast.error('Database connection error. Please verify DATABASE_URL in .env')
+        } else if (res.error === 'ACCOUNT_BANNED') {
+          toast.error('This account has been suspended.')
+        } else if (res.error === 'ACCOUNT_INACTIVE') {
+          toast.error('This account is inactive.')
+        } else {
+          toast.error(res.error)
+        }
       } else {
         toast.success('Welcome back to PlaceTrack!')
         router.push('/dashboard')
@@ -42,9 +52,9 @@ export default function LoginPage() {
     }
   }
 
-  const handleDemoLogin = (demoEmail: string) => {
+  const handleDemoLogin = (demoEmail: string, pass: string) => {
     setEmail(demoEmail)
-    setPassword('Student@123')
+    setPassword(pass)
   }
 
   return (
@@ -109,14 +119,14 @@ export default function LoginPage() {
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
-              onClick={() => handleDemoLogin('arjun.sharma@poornima.edu.in')}
+              onClick={() => handleDemoLogin('arjun.sharma@poornima.edu.in', 'Student@123')}
               className="px-2.5 py-1.5 rounded-lg bg-slate-800/70 hover:bg-slate-800 border border-slate-700 text-[11px] text-slate-300 text-center truncate"
             >
               🎓 Placed Senior (Arjun)
             </button>
             <button
               type="button"
-              onClick={() => handleDemoLogin('admin@placetrack.in')}
+              onClick={() => handleDemoLogin('admin@placetrack.in', 'Admin@123')}
               className="px-2.5 py-1.5 rounded-lg bg-slate-800/70 hover:bg-slate-800 border border-slate-700 text-[11px] text-slate-300 text-center truncate"
             >
               🛡️ Campus Admin

@@ -76,63 +76,63 @@ interface Plan {
 const universities: UniversityCard[] = [
   {
     id: "poornima",
-    name: "Poornima University",
-    location: "Jaipur, Rajasthan",
+    name: "Poornima University (PU Main)",
+    location: "Sitapura Extension, Jaipur",
     placed: 1842,
     companies: 210,
     avgCTC: "₹6.4 LPA",
-    topCompany: "Google",
+    topCompany: "Google (₹42 LPA)",
     logo: "PU",
   },
   {
-    id: "vit-jaipur",
-    name: "VIT Jaipur",
-    location: "Jaipur, Rajasthan",
-    placed: 2130,
-    companies: 185,
-    avgCTC: "₹7.2 LPA",
-    topCompany: "Microsoft",
-    logo: "VJ",
+    id: "pce",
+    name: "Poornima College of Engineering (PCE)",
+    location: "Sitapura, Jaipur",
+    placed: 1420,
+    companies: 180,
+    avgCTC: "₹6.1 LPA",
+    topCompany: "Microsoft (₹38 LPA)",
+    logo: "PCE",
   },
   {
-    id: "mnit",
-    name: "MNIT Jaipur",
-    location: "Jaipur, Rajasthan",
-    placed: 980,
-    companies: 156,
-    avgCTC: "₹12.8 LPA",
-    topCompany: "Amazon",
-    logo: "MN",
+    id: "piet",
+    name: "Poornima Institute of Engg. & Tech. (PIET)",
+    location: "Sitapura, Jaipur",
+    placed: 1280,
+    companies: 165,
+    avgCTC: "₹6.2 LPA",
+    topCompany: "Amazon (₹35 LPA)",
+    logo: "PIET",
   },
   {
-    id: "bits-pilani",
-    name: "BITS Pilani",
-    location: "Pilani, Rajasthan",
-    placed: 1560,
-    companies: 240,
-    avgCTC: "₹18.5 LPA",
-    topCompany: "Goldman Sachs",
-    logo: "BP",
+    id: "poornima",
+    name: "Faculty of Computer Science & Engg.",
+    location: "Poornima University, Jaipur",
+    placed: 850,
+    companies: 160,
+    avgCTC: "₹7.8 LPA",
+    topCompany: "Google (₹42 LPA)",
+    logo: "CSE",
   },
   {
-    id: "jnu-jaipur",
-    name: "Jaipur National Univ.",
-    location: "Jaipur, Rajasthan",
-    placed: 720,
-    companies: 98,
-    avgCTC: "₹4.8 LPA",
-    topCompany: "TCS",
-    logo: "JN",
+    id: "piet",
+    name: "Dept. of AI & Data Science (PIET & PU)",
+    location: "Poornima Tech Campuses, Jaipur",
+    placed: 460,
+    companies: 110,
+    avgCTC: "₹8.2 LPA",
+    topCompany: "Microsoft (₹38 LPA)",
+    logo: "AI",
   },
   {
-    id: "jecrc",
-    name: "JECRC University",
-    location: "Jaipur, Rajasthan",
-    placed: 890,
-    companies: 120,
-    avgCTC: "₹5.2 LPA",
-    topCompany: "Infosys",
-    logo: "JE",
+    id: "poornima",
+    name: "Faculty of Management & Commerce (MBA)",
+    location: "Poornima University, Jaipur",
+    placed: 360,
+    companies: 85,
+    avgCTC: "₹6.8 LPA",
+    topCompany: "Deloitte (₹20 LPA)",
+    logo: "MBA",
   },
 ];
 
@@ -764,15 +764,13 @@ export default function HomePage() {
             <motion.div variants={fadeUp} className="text-center space-y-3">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/8 text-blue-400 text-sm">
                 <GraduationCap size={14} />
-                50+ Universities Listed
+                Poornima Group Institutions
               </span>
               <h2 className="text-4xl sm:text-5xl font-bold">
-                Find Your{" "}
-                <span className="gradient-text">University</span>
+                Poornima Group <span className="gradient-text">Institutions</span>
               </h2>
               <p className="text-slate-400 max-w-xl mx-auto">
-                Search from 50+ universities across Rajasthan and India. Compare
-                placement stats, salaries, and top recruiters.
+                Explore placement records, top CTC distributions, NIRF achievements, and premier recruiting companies across Poornima University, PCE, and PIET.
               </p>
             </motion.div>
 
@@ -1163,8 +1161,8 @@ export default function HomePage() {
                   <span className="gradient-text-gold">Placement Coach</span>
                 </h2>
                 <p className="text-slate-400 text-lg leading-relaxed">
-                  SevenAI is built on Google Gemini and trained on placement data
-                  from 50+ universities. Ask anything about placements, companies,
+                  SevenAI is built on Google Gemini and trained on verified placement data
+                  from Poornima University and Poornima Group campuses. Ask anything about placements, companies,
                   salaries, or interview prep.
                 </p>
               </motion.div>

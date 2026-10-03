@@ -105,21 +105,21 @@ const ALL_CANDIDATES: Candidate[] = [
   },
   {
     id: '11', name: 'Deepak Kumar', company: 'Google', role: 'Cloud Engineer',
-    ctc: 28.0, year: 2023, course: 'B.Tech CSE', university: 'BITS Pilani',
+    ctc: 28.0, year: 2023, course: 'B.Tech CSE', university: 'Poornima College of Engineering (PCE)',
     avatar: 'DK', isPlaced: true, location: 'Bangalore',
     skills: ['GCP', 'Kubernetes', 'Terraform', 'Go'],
     linkedin: 'https://linkedin.com/in/deepak-kumar-cloud'
   },
   {
     id: '12', name: 'Sakshi Dubey', company: 'Microsoft', role: 'Program Manager',
-    ctc: 30.0, year: 2023, course: 'B.Tech CSE', university: 'VIT University',
+    ctc: 30.0, year: 2023, course: 'B.Tech CSE', university: 'Poornima Institute of Engineering & Technology (PIET)',
     avatar: 'SD', isPlaced: true, location: 'Hyderabad',
     skills: ['Product Management', 'SQL', 'Agile', 'UX Research'],
     linkedin: 'https://linkedin.com/in/sakshi-dubey-pm'
   },
   {
     id: '13', name: 'Manish Yadav', company: 'Amazon', role: 'Data Engineer',
-    ctc: 26.0, year: 2023, course: 'B.Tech CSE', university: 'Manipal University',
+    ctc: 26.0, year: 2023, course: 'B.Tech CSE', university: 'Poornima University',
     avatar: 'MY', isPlaced: true, location: 'Bangalore',
     skills: ['Spark', 'Hadoop', 'Python', 'AWS Redshift'],
     linkedin: 'https://linkedin.com/in/manish-yadav-data'
@@ -133,14 +133,14 @@ const ALL_CANDIDATES: Candidate[] = [
   },
   {
     id: '15', name: 'Karan Malhotra', company: 'Jio', role: 'Network Engineer',
-    ctc: 9.0, year: 2024, course: 'B.Tech ECE', university: 'Poornima University',
+    ctc: 9.0, year: 2024, course: 'B.Tech ECE', university: 'Poornima College of Engineering (PCE)',
     avatar: 'KM', isPlaced: true, location: 'Mumbai',
     skills: ['5G', 'Networking', 'Python', 'Cloud'],
     linkedin: 'https://linkedin.com/in/karan-malhotra-jio'
   },
   {
     id: '16', name: 'Pooja Sinha', company: 'EY', role: 'Technology Consultant',
-    ctc: 11.5, year: 2024, course: 'B.Tech CSE', university: 'Amity University',
+    ctc: 11.5, year: 2024, course: 'B.Tech CSE', university: 'Poornima Institute of Engineering & Technology (PIET)',
     avatar: 'PS', isPlaced: true, location: 'Gurgaon',
     skills: ['SAP', 'ABAP', 'Business Intelligence', 'Tableau'],
     linkedin: 'https://linkedin.com/in/pooja-sinha-ey'
@@ -161,14 +161,14 @@ const ALL_CANDIDATES: Candidate[] = [
   },
   {
     id: '19', name: 'Saurabh Pandey', company: 'Adobe', role: 'Frontend Developer',
-    ctc: 22.0, year: 2023, course: 'B.Tech CSE', university: 'BITS Pilani',
+    ctc: 22.0, year: 2023, course: 'B.Tech CSE', university: 'Poornima College of Engineering (PCE)',
     avatar: 'SP', isPlaced: true, location: 'Noida',
     skills: ['React', 'TypeScript', 'WebGL', 'Performance'],
     linkedin: 'https://linkedin.com/in/saurabh-pandey-web'
   },
   {
     id: '20', name: 'Tanvi Kapoor', company: 'TCS', role: 'Digital Engineer',
-    ctc: 7.0, year: 2024, course: 'B.Tech IT', university: 'Poornima University',
+    ctc: 7.0, year: 2024, course: 'B.Tech IT', university: 'Poornima Institute of Engineering & Technology (PIET)',
     avatar: 'TK', isPlaced: true, location: 'Chennai',
     skills: ['Python', 'Machine Learning', 'TensorFlow', 'SQL'],
     linkedin: 'https://linkedin.com/in/tanvi-kapoor-ml'
