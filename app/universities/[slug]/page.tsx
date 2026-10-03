@@ -74,8 +74,12 @@ export default function UniversityDetailPage({
 
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-start sm:items-center gap-5">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-br from-blue-500/20 via-blue-600/30 to-purple-700/30 border border-blue-500/40 flex items-center justify-center text-3xl sm:text-4xl font-black text-blue-300 shadow-xl shadow-blue-500/10 shrink-0">
-                {uni.logo}
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-white p-2.5 border border-white/30 flex items-center justify-center text-3xl sm:text-4xl font-black text-blue-300 shadow-xl shadow-blue-500/10 shrink-0 overflow-hidden">
+                {uni.logo.startsWith('/') ? (
+                  <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain" />
+                ) : (
+                  <span className="text-slate-900 font-bold text-xl">{uni.logo}</span>
+                )}
               </div>
               <div className="space-y-1.5">
                 <div className="flex flex-wrap items-center gap-2">

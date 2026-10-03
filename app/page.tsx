@@ -77,42 +77,42 @@ const universities: UniversityCard[] = [
   {
     id: "poornima",
     name: "Poornima University (PU Main)",
-    location: "Sitapura Extension, Jaipur",
-    placed: 1842,
-    companies: 210,
-    avgCTC: "₹6.4 LPA",
-    topCompany: "Google (₹42 LPA)",
-    logo: "PU",
+    location: "Ramchandrapura, Sitapura Ext., Jaipur",
+    placed: 1850,
+    companies: 350,
+    avgCTC: "₹5.85 LPA",
+    topCompany: "₹52.83 LPA (Peak CTC)",
+    logo: "/images/logos/poornima-university.png",
   },
   {
     id: "pce",
     name: "Poornima College of Engineering (PCE)",
-    location: "Sitapura, Jaipur",
-    placed: 1420,
-    companies: 180,
-    avgCTC: "₹6.1 LPA",
-    topCompany: "Microsoft (₹38 LPA)",
-    logo: "PCE",
+    location: "ISI-6 & 2, Sitapura, Jaipur",
+    placed: 1700,
+    companies: 350,
+    avgCTC: "₹5.65 LPA",
+    topCompany: "Amazon (₹44.10 LPA)",
+    logo: "/images/logos/poornima-pce.jpg",
   },
   {
     id: "piet",
     name: "Poornima Institute of Engg. & Tech. (PIET)",
-    location: "Sitapura, Jaipur",
+    location: "ISI-2, Sitapura, Jaipur",
     placed: 1280,
-    companies: 165,
-    avgCTC: "₹6.2 LPA",
-    topCompany: "Amazon (₹35 LPA)",
-    logo: "PIET",
+    companies: 100,
+    avgCTC: "₹5.60 LPA",
+    topCompany: "SquadStack (₹18.00 LPA)",
+    logo: "/images/logos/poornima-piet.png",
   },
   {
     id: "poornima",
-    name: "Faculty of Computer Science & Engg.",
+    name: "Faculty of Computer Science & Engineering",
     location: "Poornima University, Jaipur",
     placed: 850,
-    companies: 160,
-    avgCTC: "₹7.8 LPA",
-    topCompany: "Google (₹42 LPA)",
-    logo: "CSE",
+    companies: 240,
+    avgCTC: "₹7.80 LPA",
+    topCompany: "Amazon / Microsoft (₹44+ LPA)",
+    logo: "/images/logos/poornima-university.png",
   },
   {
     id: "piet",
@@ -120,9 +120,9 @@ const universities: UniversityCard[] = [
     location: "Poornima Tech Campuses, Jaipur",
     placed: 460,
     companies: 110,
-    avgCTC: "₹8.2 LPA",
-    topCompany: "Microsoft (₹38 LPA)",
-    logo: "AI",
+    avgCTC: "₹8.20 LPA",
+    topCompany: "Morgan Stanley (₹25.33 LPA)",
+    logo: "/images/logos/poornima-piet.png",
   },
   {
     id: "poornima",
@@ -130,119 +130,126 @@ const universities: UniversityCard[] = [
     location: "Poornima University, Jaipur",
     placed: 360,
     companies: 85,
-    avgCTC: "₹6.8 LPA",
-    topCompany: "Deloitte (₹20 LPA)",
-    logo: "MBA",
+    avgCTC: "₹6.80 LPA",
+    topCompany: "Nimai Fintech (₹18.00 LPA)",
+    logo: "/images/logos/poornima-university.png",
   },
 ];
 
 const recentPlacements: PlacementCard[] = [
   {
     id: "1",
-    name: "Amit Sharma",
-    company: "Google",
-    role: "SWE II",
-    ctc: "₹32 LPA",
-    year: 2024,
-    branch: "B.Tech CSE",
-    avatar: "AS",
-    linkedIn: "https://www.linkedin.com/in/amit-sharma-swe",
+    name: "Aanchal Asnani",
+    company: "Amazon India",
+    role: "Software Development Engineer (SDE-1)",
+    ctc: "₹44.10 LPA",
+    year: 2023,
+    branch: "B.Tech CSE (PCE)",
+    avatar: "AA",
+    linkedIn: "https://www.linkedin.com/school/poornima-college-of-engineering-jaipur",
   },
   {
     id: "2",
-    name: "Priya Meena",
-    company: "Microsoft",
-    role: "Software Engineer",
-    ctc: "₹28 LPA",
-    year: 2024,
-    branch: "B.Tech IT",
-    avatar: "PM",
-    linkedIn: "https://www.linkedin.com/in/priya-meena-msft",
+    name: "Hardik Khanchandani",
+    company: "Clumio Technologies",
+    role: "Member of Technical Staff",
+    ctc: "₹33.00 LPA",
+    year: 2022,
+    branch: "B.Tech CS (PCE)",
+    avatar: "HK",
+    linkedIn: "https://www.linkedin.com/school/poornima-college-of-engineering-jaipur",
   },
   {
     id: "3",
-    name: "Arjun Singh",
-    company: "Amazon",
-    role: "SDE I",
-    ctc: "₹24 LPA",
-    year: 2024,
-    branch: "B.Tech CSE",
-    avatar: "AS",
-    linkedIn: "https://www.linkedin.com/in/arjun-singh-aws",
+    name: "Ekta Gupta",
+    company: "Morgan Stanley",
+    role: "Technology Analyst",
+    ctc: "₹25.33 LPA",
+    year: 2022,
+    branch: "B.Tech DS (PCE)",
+    avatar: "EG",
+    linkedIn: "https://www.linkedin.com/school/poornima-college-of-engineering-jaipur",
   },
   {
     id: "4",
-    name: "Anjali Gupta",
-    company: "Flipkart",
-    role: "Data Analyst",
-    ctc: "₹18 LPA",
-    year: 2024,
-    branch: "B.Sc. DS",
-    avatar: "AG",
-    linkedIn: "https://www.linkedin.com/in/anjali-gupta-data",
+    name: "Upadhyayula Aparna",
+    company: "Nimai Fintech 360tf",
+    role: "Fintech Strategist",
+    ctc: "₹18.00 LPA",
+    year: 2022,
+    branch: "MBA (PU)",
+    avatar: "UA",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
   },
   {
     id: "5",
-    name: "Vikram Patel",
-    company: "Razorpay",
-    role: "Backend Engineer",
-    ctc: "₹22 LPA",
-    year: 2024,
-    branch: "B.Tech CSE",
-    avatar: "VP",
-    linkedIn: "https://www.linkedin.com/in/vikram-patel-fintech",
+    name: "Kiran Gaira",
+    company: "SquadStack",
+    role: "Software Engineer",
+    ctc: "₹14.00 LPA",
+    year: 2022,
+    branch: "B.Tech CS (PIET)",
+    avatar: "KG",
+    linkedIn: "https://www.linkedin.com/school/pietjaipur",
   },
   {
     id: "6",
-    name: "Neha Joshi",
-    company: "Zomato",
-    role: "Product Manager",
-    ctc: "₹20 LPA",
-    year: 2024,
-    branch: "MBA",
-    avatar: "NJ",
-    linkedIn: "https://www.linkedin.com/in/neha-joshi-pm",
+    name: "Pathan Amaankhan",
+    company: "rtCamp Solutions",
+    role: "Enterprise Web Engineer",
+    ctc: "₹12.00 LPA",
+    year: 2022,
+    branch: "B.Tech CS (PIET)",
+    avatar: "PA",
+    linkedIn: "https://www.linkedin.com/school/pietjaipur",
   },
   {
     id: "7",
-    name: "Rohan Agarwal",
-    company: "Meesho",
-    role: "Full Stack Dev",
-    ctc: "₹16 LPA",
+    name: "Deepak Saini",
+    company: "Tekion Corp",
+    role: "MTS Cloud",
+    ctc: "₹12.50 LPA",
     year: 2024,
-    branch: "B.Tech CSE",
-    avatar: "RA",
-    linkedIn: "https://www.linkedin.com/in/rohan-agarwal-dev",
+    branch: "B.Tech CSE (PIET)",
+    avatar: "DS",
+    linkedIn: "https://www.linkedin.com/school/pietjaipur",
   },
   {
     id: "8",
-    name: "Divya Verma",
-    company: "Paytm",
-    role: "SDE II",
-    ctc: "₹19 LPA",
-    year: 2024,
-    branch: "B.Tech ECE",
-    avatar: "DV",
-    linkedIn: "https://www.linkedin.com/in/divya-verma-sde",
+    name: "Anjali Shrivastava",
+    company: "Optum",
+    role: "Software Engineer",
+    ctc: "₹10.00 LPA",
+    year: 2022,
+    branch: "B.Tech CS (PCE)",
+    avatar: "AS",
+    linkedIn: "https://www.linkedin.com/school/poornima-college-of-engineering-jaipur",
   },
 ];
 
-const companyLogos = [
-  { name: "Google", color: "text-blue-400" },
-  { name: "Microsoft", color: "text-green-400" },
-  { name: "Amazon", color: "text-amber-400" },
-  { name: "Flipkart", color: "text-yellow-400" },
-  { name: "Razorpay", color: "text-blue-500" },
-  { name: "Zomato", color: "text-red-400" },
-  { name: "CRED", color: "text-emerald-400" },
-  { name: "Swiggy", color: "text-orange-400" },
-  { name: "PhonePe", color: "text-purple-400" },
-  { name: "Infosys", color: "text-blue-300" },
-  { name: "TCS", color: "text-blue-500" },
-  { name: "Wipro", color: "text-cyan-400" },
-  { name: "HCL", color: "text-indigo-400" },
-  { name: "Byju's", color: "text-violet-400" },
-  { name: "Ola", color: "text-yellow-500" },
+interface RecruiterLogo {
+  name: string;
+  color?: string;
+  logo?: string;
+}
+
+const companyLogos: RecruiterLogo[] = [
+  { name: "Amazon", logo: "/images/recruiters/amazon.jpg" },
+  { name: "Tekion Corp", logo: "/images/recruiters/tekion.jpg" },
+  { name: "Optum", logo: "/images/recruiters/optum.jpg" },
+  { name: "Celebal Technologies", logo: "/images/recruiters/celebal.jpg" },
+  { name: "Capgemini", logo: "/images/recruiters/capgemini.jpg" },
+  { name: "Infosys", logo: "/images/recruiters/infosys.jpg" },
+  { name: "Xebia", logo: "/images/recruiters/xebia.jpg" },
+  { name: "rtCamp", logo: "/images/recruiters/rtcamp.jpg" },
+  { name: "Jio Platforms", logo: "/images/recruiters/jioplatform.jpg" },
+  { name: "Synopsys", logo: "/images/recruiters/synopsys.jpg" },
+  { name: "Cimpress", logo: "/images/recruiters/cimpress.jpg" },
+  { name: "TCS", logo: "/images/logos/tcs.png" },
+  { name: "IBM", logo: "/images/logos/ibm.png" },
+  { name: "Locus", logo: "/images/recruiters/locus.jpg" },
+  { name: "Freecharge", logo: "/images/recruiters/freecharge.jpg" },
+  { name: "Sierra Cloud", logo: "/images/recruiters/sierracloud.jpg" },
 ];
 
 const plans: Plan[] = [
@@ -815,8 +822,12 @@ export default function HomePage() {
                     <Link href={`/universities/${uni.id}`}>
                       <GlassCard hover glow glowColor="blue" padding="md" className="h-full">
                         <div className="flex items-start gap-4 mb-4">
-                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-700/20 border border-blue-500/20 flex items-center justify-center text-sm font-bold text-blue-300 shrink-0">
-                            {uni.logo}
+                          <div className="w-12 h-12 rounded-xl bg-white p-1 border border-white/20 flex items-center justify-center shrink-0 shadow-md">
+                            {uni.logo.startsWith('/') ? (
+                              <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain" />
+                            ) : (
+                              <span className="text-xs font-bold text-slate-800">{uni.logo}</span>
+                            )}
                           </div>
                           <div>
                             <h3 className="font-semibold text-white text-base leading-tight">
@@ -976,10 +987,16 @@ export default function HomePage() {
             {[...companyLogos, ...companyLogos].map((company, i) => (
               <div
                 key={`${company.name}-${i}`}
-                className="inline-flex items-center gap-2.5 mx-8 px-6 py-3 rounded-xl bg-white/3 border border-white/8 whitespace-nowrap"
+                className="inline-flex items-center gap-3 mx-4 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 whitespace-nowrap hover:border-blue-500/40 hover:bg-white/[0.08] transition-all"
               >
-                <Building2 size={16} className={company.color} />
-                <span className={`font-semibold text-sm ${company.color}`}>
+                {company.logo ? (
+                  <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
+                    <img src={company.logo} alt={company.name} className="w-full h-full object-contain" />
+                  </div>
+                ) : (
+                  <Building2 size={16} className={company.color || "text-blue-400"} />
+                )}
+                <span className="font-semibold text-sm text-slate-200">
                   {company.name}
                 </span>
               </div>

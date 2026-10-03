@@ -126,8 +126,12 @@ export default function UniversitiesPage() {
                     <div>
                       {/* Top Header */}
                       <div className="flex items-start gap-4 mb-4">
-                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-700/30 border border-blue-500/30 flex items-center justify-center text-lg font-black text-blue-300 shadow-inner shrink-0 group-hover:scale-105 transition-transform">
-                          {uni.logo}
+                        <div className="w-14 h-14 rounded-2xl bg-white p-1.5 border border-white/20 flex items-center justify-center text-lg font-black text-blue-300 shadow-inner shrink-0 group-hover:scale-105 transition-transform overflow-hidden">
+                          {uni.logo.startsWith('/') ? (
+                            <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain" />
+                          ) : (
+                            <span className="text-slate-900 font-bold text-sm">{uni.logo}</span>
+                          )}
                         </div>
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">

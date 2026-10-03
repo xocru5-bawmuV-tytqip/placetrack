@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1"
+    />
+    <meta
+      name="description"
+      content="PIET - Poornima Institute of Engineering & Technology, Jaipur offers world-class engineering education with NAAC A Grade accreditation, excellent placements, and state-of-the-art infrastructure. Top engineering college in Rajasthan."
+    />
+    <meta
+      name="keywords"
+      content="PIET, Poornima Institute of Engineering and Technology, engineering college Jaipur, NAAC A Grade, engineering admission Rajasthan, top engineering college, computer science engineering, AI data science, placement engineering college, RTU affiliated college"
+    />
+    <meta
+      name="author"
+      content="Poornima Institute of Engineering & Technology"
+    />
+    <meta name="robots" content="index, follow" />
+    <title>
+      PIET - Poornima Institute of Engineering & Technology | Top Engineering
+      College Jaipur
+    </title>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://poornimainstitute.edu.in" />
+
+    <!-- Open Graph tags for better social media sharing -->
+    <meta
+      property="og:title"
+      content="PIET - Poornima Institute of Engineering & Technology | Top Engineering College Jaipur"
+    />
+    <meta
+      property="og:description"
+      content="NAAC A Grade accredited engineering college in Jaipur offering quality education in Computer Science, AI & Data Science, IoT with excellent placement records."
+    />
+    <meta
+      property="og:image"
+      content="https://www.poornima.edu.in/wp-content/uploads/2023/01/PIET-Logo.png"
+    />
+    <meta property="og:url" content="https://poornimainstitute.edu.in" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:site_name"
+      content="PIET - Poornima Institute of Engineering & Technology"
+    />
+
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="PIET - Poornima Institute of Engineering & Technology"
+    />
+    <meta
+      name="twitter:description"
+      content="Top engineering college in Jaipur with NAAC A Grade accreditation and excellent placements."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.poornima.edu.in/wp-content/uploads/2023/01/PIET-Logo.png"
+    />
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Poornima Institute of Engineering & Technology",
+        "alternateName": "PIET",
+        "url": "https://poornimainstitute.edu.in",
+        "logo": "https://www.poornima.edu.in/wp-content/uploads/2023/01/PIET-Logo.png",
+        "description": "NAAC A Grade accredited engineering college offering quality education in various engineering disciplines",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "ISI 2, RIICO Institutional Area Sitapura",
+          "addressLocality": "Jaipur",
+          "addressRegion": "Rajasthan",
+          "postalCode": "302022",
+          "addressCountry": "IN"
+        },
+        "telephone": "+91-141-4071500",
+        "email": "pietjaipur@rtu.ac.in",
+        "sameAs": [
+          "https://www.facebook.com/pietjaipur",
+          "https://twitter.com/pietjaipur",
+          "https://www.linkedin.com/school/pietjaipur",
+          "https://www.instagram.com/pietjaipur"
+        ]
+      }
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" href="./images/favicon/favicon.ico" />
+    <script type="module" crossorigin src="./assets/index-CUkS8I3-.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CyKzfW48.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

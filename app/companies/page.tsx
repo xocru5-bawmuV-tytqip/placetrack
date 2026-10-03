@@ -144,8 +144,12 @@ export default function CompaniesPage() {
                       {/* Top Header */}
                       <div className="flex items-start justify-between gap-3 mb-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-600/30 border border-blue-500/30 flex items-center justify-center text-lg font-black text-white shadow-inner group-hover:scale-105 transition-transform">
-                            {company.logo}
+                          <div className="w-12 h-12 rounded-2xl bg-white p-1.5 border border-white/20 flex items-center justify-center text-lg font-black text-white shadow-inner group-hover:scale-105 transition-transform overflow-hidden shrink-0">
+                            {company.logo.startsWith('/') ? (
+                              <img src={company.logo} alt={company.name} className="w-full h-full object-contain" />
+                            ) : (
+                              <span className="text-slate-900 font-bold text-sm">{company.logo}</span>
+                            )}
                           </div>
                           <div>
                             <h3 className="font-bold text-white text-lg leading-tight group-hover:text-blue-400 transition-colors">

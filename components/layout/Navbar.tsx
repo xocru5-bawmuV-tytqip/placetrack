@@ -83,14 +83,27 @@ export default function Navbar() {
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-shadow">
-              <span className="text-white font-bold text-sm">PT</span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white/95 p-1 border border-white/20 shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
+              <img
+                src="/images/logos/poornima-royal.png"
+                alt="Poornima Group"
+                className="w-full h-full object-contain"
+              />
             </div>
-            <span className="font-bold text-lg">
-              <span className="text-white">Place</span>
-              <span className="gradient-text">Track</span>
-            </span>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5 leading-none">
+                <span className="font-extrabold text-base tracking-tight text-white group-hover:text-blue-300 transition-colors">
+                  Poornima
+                </span>
+                <span className="font-bold text-base gradient-text">
+                  PlaceTrack
+                </span>
+              </div>
+              <span className="text-[10px] text-slate-400 font-medium tracking-wide mt-1 uppercase">
+                Poornima Group Portal
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}

@@ -20,12 +20,12 @@ function AuthBranding() {
       {/* Header Logo */}
       <div className="relative z-10">
         <Link href="/" className="inline-flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-blue-500/30">
-            7
+          <div className="w-11 h-11 rounded-2xl bg-white p-1 border border-white/20 flex items-center justify-center shadow-lg shadow-blue-500/30 overflow-hidden shrink-0">
+            <img src="/images/logos/poornima-royal.png" alt="Poornima Group" className="w-full h-full object-contain" />
           </div>
           <div>
-            <span className="font-extrabold text-xl tracking-tight text-white">PlaceTrack</span>
-            <span className="block text-[11px] text-blue-400 font-semibold">Poornima University</span>
+            <span className="font-extrabold text-xl tracking-tight text-white">Poornima PlaceTrack</span>
+            <span className="block text-[11px] text-blue-400 font-semibold">Poornima Group of Colleges</span>
           </div>
         </Link>
       </div>
@@ -33,37 +33,37 @@ function AuthBranding() {
       {/* Main Pitch */}
       <div className="relative z-10 space-y-6 my-auto">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold">
-          🎓 Official Campus Drive Portal
+          🎓 Official Poornima Placement Portal
         </div>
         <h2 className="text-3xl xl:text-4xl font-extrabold text-white tracking-tight leading-tight">
           Where Poornima Students Crack <br />
           <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-amber-300 bg-clip-text text-transparent">
-            Top Tier Placements.
+            Dream Placements.
           </span>
         </h2>
         <p className="text-slate-300 text-sm leading-relaxed max-w-md">
-          Access verified senior interview questions, capstone project architectures, downloadable resumes, and 1-on-1 mentorship.
+          Explore authentic placement records, senior capstone projects, recruiter drives, and AI interview simulation across Poornima University, PCE, and PIET.
         </p>
 
         {/* Featured Placement Card */}
         <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700/80 shadow-2xl backdrop-blur-xl max-w-md space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 font-bold flex items-center justify-center text-white text-xs shadow-md">
-                AS
+              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-orange-600 font-bold flex items-center justify-center text-white text-xs shadow-md">
+                AA
               </div>
               <div>
-                <div className="font-bold text-xs text-white">Arjun Sharma</div>
-                <div className="text-[11px] text-slate-400">Google • SDE-1</div>
+                <div className="font-bold text-xs text-white">Aanchal Asnani</div>
+                <div className="text-[11px] text-slate-400">Amazon India • SDE</div>
               </div>
             </div>
-            <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold">
-              ₹42.0 LPA
+            <span className="px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold">
+              ₹44.10 LPA
             </span>
           </div>
           <div className="text-[11px] text-slate-400 pt-1 border-t border-slate-800 flex items-center justify-between">
-            <span>Poornima Univ • B.Tech CSE</span>
-            <span className="text-blue-400 font-medium">Batch 2024</span>
+            <span>Poornima College of Engg. (PCE)</span>
+            <span className="text-blue-400 font-medium">B.Tech CSE</span>
           </div>
         </div>
       </div>
@@ -71,16 +71,16 @@ function AuthBranding() {
       {/* Bottom Metrics */}
       <div className="relative z-10 grid grid-cols-3 gap-4 pt-6 border-t border-slate-800/80">
         <div>
-          <div className="text-xl font-bold text-white">5,234+</div>
-          <div className="text-[11px] text-slate-400">Students Placed</div>
+          <div className="text-xl font-bold text-white">5,000+</div>
+          <div className="text-[11px] text-slate-400">Offers Generated</div>
         </div>
         <div>
-          <div className="text-xl font-bold text-white">320+</div>
+          <div className="text-xl font-bold text-white">350+</div>
           <div className="text-[11px] text-slate-400">Recruiters</div>
         </div>
         <div>
-          <div className="text-xl font-bold text-amber-400">₹42 LPA</div>
-          <div className="text-[11px] text-slate-400">Highest CTC</div>
+          <div className="text-xl font-bold text-amber-400">₹52.83 LPA</div>
+          <div className="text-[11px] text-slate-400">Peak CTC</div>
         </div>
       </div>
     </div>

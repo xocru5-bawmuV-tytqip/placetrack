@@ -99,39 +99,60 @@ export default function Footer() {
           {/* Brand column */}
           <motion.div variants={itemVariants} className="lg:col-span-2">
             {/* Logo */}
-            <Link href="/" className="inline-flex items-center gap-2 mb-4 group">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-shadow">
-                <span className="text-white font-bold text-sm">PT</span>
+            <Link href="/" className="inline-flex items-center gap-3 mb-4 group">
+              <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white/95 p-1 border border-white/20 shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
+                <img
+                  src="/images/logos/poornima-royal.png"
+                  alt="Poornima Group"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="font-bold text-xl">
-                <span className="text-white">Place</span>
-                <span className="gradient-text">Track</span>
-              </span>
+              <div className="flex flex-col">
+                <span className="font-bold text-xl leading-none">
+                  <span className="text-white">Poornima </span>
+                  <span className="gradient-text">PlaceTrack</span>
+                </span>
+                <span className="text-[10px] text-slate-400 font-medium tracking-wide mt-1 uppercase">
+                  Official Placement Portal
+                </span>
+              </div>
             </Link>
 
             <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-xs">
-              The official placement intelligence platform for Poornima University
-              — powered by SevenAI to help students land their dream careers.
+              The official placement intelligence platform for Poornima Group of Colleges
+              (Poornima University, PCE & PIET) — powered by SevenAI to guide students to dream careers.
             </p>
+
+            {/* Accreditation Badges */}
+            <div className="flex items-center gap-2 mb-6">
+              <div className="px-2 py-1 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1.5 text-[11px] text-slate-300">
+                <img src="/images/logos/aicte.png" alt="AICTE" className="h-4 w-auto object-contain" />
+                <span>AICTE Approved</span>
+              </div>
+              <div className="px-2 py-1 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1.5 text-[11px] text-slate-300">
+                <img src="/images/logos/rtu-logo.png" alt="RTU" className="h-4 w-auto object-contain" />
+                <span>RTU Affiliated</span>
+              </div>
+            </div>
 
             {/* Contact info */}
             <div className="space-y-2 mb-6">
               <div className="flex items-center gap-2 text-sm text-slate-500">
                 <MapPin size={14} className="text-blue-400 shrink-0" />
-                <span>Jaipur, Rajasthan, India</span>
+                <span>Sitapura & Ramchandrapura, Jaipur, Rajasthan</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-500">
                 <Mail size={14} className="text-blue-400 shrink-0" />
                 <a
-                  href="mailto:support@placetrack.edu.in"
+                  href="mailto:placement@poornima.org"
                   className="hover:text-blue-400 transition-colors"
                 >
-                  support@placetrack.edu.in
+                  placement@poornima.org
                 </a>
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-500">
                 <GraduationCap size={14} className="text-blue-400 shrink-0" />
-                <span>Poornima University, Official Partner</span>
+                <span>Poornima Group (PU • PCE • PIET)</span>
               </div>
             </div>
 
