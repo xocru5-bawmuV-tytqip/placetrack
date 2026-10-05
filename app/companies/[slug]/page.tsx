@@ -57,6 +57,15 @@ export default function CompanyDetailPage({
     );
   }, [company]);
 
+  // Separate coding questions (for question paper section) and interview questions
+  const codingQuestions = useMemo(() => {
+    return companyQuestions.filter((q) => q.category === "CODING" || q.category === "SQL");
+  }, [companyQuestions]);
+
+  const interviewQuestions = useMemo(() => {
+    return companyQuestions.filter((q) => q.category !== "CODING" && q.category !== "SQL");
+  }, [companyQuestions]);
+
   return (
     <div className="min-h-screen bg-[#0A0F1E] text-white overflow-x-hidden">
       <Navbar />
@@ -263,26 +272,66 @@ export default function CompanyDetailPage({
           </div>
         </div>
 
-        {/* Real Interview Questions Asked at this Company */}
-        {companyQuestions.length > 0 && (
+        {/* Coding Question Papers (Online Assessment) */}
+        {codingQuestions.length > 0 && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                <HelpCircle className="text-amber-400" /> Recent {company.name} Interview Questions
+                <HelpCircle className="text-amber-400" /> {company.name} Coding Question Papers & OA
               </h2>
               <Link
                 href="/questions"
                 className="text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1"
               >
-                Full Question Bank <ArrowRight size={13} />
+                All Coding Questions <ArrowRight size={13} />
               </Link>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
-              {companyQuestions.map((q) => (
+              {codingQuestions.map((q) => (
                 <GlassCard key={q.id} padding="md">
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-white/5 text-amber-300 border border-white/10">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-white/5 text-emerald-400 border border-white/10">
+                      {q.category}
+                    </span>
+                    <span className="text-[11px] text-slate-400 font-medium">{q.round}</span>
+                  </div>
+                  <h4 className="font-bold text-white text-sm mb-2">{q.title}</h4>
+                  <p className="text-xs text-slate-300 line-clamp-3 leading-relaxed mb-3">
+                    {q.question}
+                  </p>
+                  <Link
+                    href="/questions"
+                    className="text-xs text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1"
+                  >
+                    View Verified Solution <ArrowRight size={12} />
+                  </Link>
+                </GlassCard>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Technical & HR Interview Questions */}
+        {interviewQuestions.length > 0 && (
+          <div className="space-y-4 pt-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                <Sparkles className="text-purple-400" /> {company.name} Interview Round Questions
+              </h2>
+              <Link
+                href="/questions"
+                className="text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1"
+              >
+                All Interview Questions <ArrowRight size={13} />
+              </Link>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              {interviewQuestions.map((q) => (
+                <GlassCard key={q.id} padding="md">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-white/5 text-purple-300 border border-white/10">
                       {q.category}
                     </span>
                     <span className="text-[11px] text-slate-400 font-medium">{q.round}</span>

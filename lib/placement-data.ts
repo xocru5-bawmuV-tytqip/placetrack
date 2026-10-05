@@ -1357,4 +1357,110 @@ WHERE rank_num = 2;`,
     solution:
       "Answer using the STAR framework (Situation, Task, Action, Result):\n\n- Situation: During our final year capstone project building a real-time collaborative code editor for Poornima University labs, our team was divided between using WebSockets with operational transforms versus HTTP polling with optimistic updates.\n- Task: As the backend lead, I needed to ensure we met sub-50ms latency requirements without overcomplicating our deployment within our 6-week sprint.\n- Action: Rather than debating theoretically, I proposed a 2-day proof-of-concept benchmark. I set up automated locust tests comparing both approaches under 100 concurrent clients. The benchmark revealed WebSockets sustained 42ms p99 latency while HTTP polling degraded to 380ms with 12x higher server CPU usage. I documented the trade-offs objectively and presented the findings to the team.\n- Result: The team unanimously agreed on WebSockets. We completed the project on schedule, which won 1st place in the university project expo and processed over 10,000 lab edits seamlessly.",
   },
+  {
+    id: "q6",
+    title: "Amazon OA: Minimum Number of Swaps to Sort Array",
+    company: "Amazon",
+    category: "CODING",
+    difficulty: "HARD",
+    year: 2024,
+    round: "Amazon Online Assessment (OA)",
+    tags: ["Arrays", "Sorting", "Graph Theory"],
+    upvotes: 145,
+    question: "Given an array of N distinct integers, find the minimum number of swaps required to sort the array in strictly increasing order.",
+    timeComplexity: "O(N log N)",
+    spaceComplexity: "O(N)",
+    solution: "1. Store elements with their original indices.\n2. Sort the elements by their values.\n3. Identify cycles in the graph formed by the original and sorted positions.\n4. For a cycle of size K, the minimum swaps needed is K-1. Sum this for all cycles.",
+    codeSnippet: `def minSwaps(arr):
+    n = len(arr)
+    arrpos = [*enumerate(arr)]
+    arrpos.sort(key = lambda it : it[1])
+    vis = {k : False for k in range(n)}
+    ans = 0
+    for i in range(n):
+        if vis[i] or arrpos[i][0] == i:
+            continue
+        cycle_size = 0
+        j = i
+        while not vis[j]:
+            vis[j] = True
+            j = arrpos[j][0]
+            cycle_size += 1
+        if cycle_size > 0:
+            ans += (cycle_size - 1)
+    return ans`,
+  },
+  {
+    id: "q7",
+    title: "Optum Technical: Merge Two Sorted Linked Lists",
+    company: "Optum",
+    category: "CODING",
+    difficulty: "EASY",
+    year: 2024,
+    round: "Technical Interview 1",
+    tags: ["Linked List", "Two Pointers"],
+    upvotes: 72,
+    question: "Merge two sorted linked lists and return it as a sorted list. The list should be made by splicing together the nodes of the first two lists.",
+    timeComplexity: "O(N + M)",
+    spaceComplexity: "O(1)",
+    solution: "Use a dummy head to simplify edge cases. Use two pointers to traverse both lists simultaneously, appending the smaller value to the merged list.",
+  },
+  {
+    id: "q8",
+    title: "Infosys DSE: Find Longest Palindromic Substring",
+    company: "Infosys",
+    category: "CODING",
+    difficulty: "MEDIUM",
+    year: 2024,
+    round: "InfyTQ / HackWithInfy",
+    tags: ["Strings", "Dynamic Programming", "Two Pointers"],
+    upvotes: 110,
+    question: "Given a string s, return the longest palindromic substring in s. Your solution should ideally have a time complexity of O(N^2) and space complexity of O(1).",
+    timeComplexity: "O(N^2)",
+    spaceComplexity: "O(1) using expand around center",
+    solution: "Use the 'Expand Around Center' approach. Iterate through each character (and between each pair of characters) as a potential center and expand outwards as long as the string remains a palindrome.",
+  },
+  {
+    id: "q9",
+    title: "Capgemini Pseudo Code & Array Manipulation",
+    company: "Capgemini",
+    category: "CODING",
+    difficulty: "EASY",
+    year: 2023,
+    round: "Coding Assessment",
+    tags: ["Arrays", "Math"],
+    upvotes: 89,
+    question: "Write a program to find the missing number in an array of size N-1 containing distinct integers in the range of 1 to N.",
+    timeComplexity: "O(N)",
+    spaceComplexity: "O(1)",
+    solution: "Calculate the sum of first N natural numbers using N*(N+1)/2. Then iterate through the array and subtract each element from this sum. The remaining value is the missing number.",
+  },
+  {
+    id: "q10",
+    title: "Celebal Data Engineer: SQL Joins & Aggregations",
+    company: "Celebal Technologies",
+    category: "SQL",
+    difficulty: "MEDIUM",
+    year: 2024,
+    round: "Technical Machine Coding",
+    tags: ["SQL", "Joins", "Aggregation"],
+    upvotes: 65,
+    question: "Write a SQL query to fetch department-wise highest salary employees. If multiple employees share the highest salary, include all of them.",
+    timeComplexity: "O(N log N)",
+    spaceComplexity: "O(N)",
+    solution: "Use the DENSE_RANK() window function partitioned by department and ordered by salary descending. Then filter for rank = 1.",
+  },
+  {
+    id: "q11",
+    title: "Tekion System Design: E-Commerce Inventory",
+    company: "Tekion",
+    category: "SYSTEM_DESIGN",
+    difficulty: "HARD",
+    year: 2024,
+    round: "Low Level Design (LLD)",
+    tags: ["System Design", "Concurrency", "Databases"],
+    upvotes: 130,
+    question: "Design an inventory management system for a high-traffic e-commerce platform. How do you handle concurrent purchases of the same item avoiding overselling (race conditions)?",
+    solution: "Discuss optimistic vs pessimistic locking in the database. A common approach is using Optimistic Locking with a 'version' column, or Pessimistic Locking (SELECT ... FOR UPDATE). Also discuss caching inventory counts in Redis and using distributed locks or atomic decr operations.",
+  },
 ];
