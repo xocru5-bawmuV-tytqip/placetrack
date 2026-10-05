@@ -219,8 +219,11 @@ export default function PlacementsPage() {
               className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-300 focus:outline-none focus:border-blue-500/50"
             >
               <option value="all" className="bg-[#0A0F1E]">All Years</option>
-              <option value="2024" className="bg-[#0A0F1E]">2024 Batch</option>
-              <option value="2023" className="bg-[#0A0F1E]">2023 Batch</option>
+              {Array.from({ length: 2026 - 2012 + 1 }, (_, i) => 2026 - i).map((year) => (
+                <option key={year} value={year} className="bg-[#0A0F1E]">
+                  {year} Batch
+                </option>
+              ))}
             </select>
 
             {/* CTC Range Filter */}
