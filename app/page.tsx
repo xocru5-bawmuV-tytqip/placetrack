@@ -452,7 +452,7 @@ export default function HomePage() {
         {/* Background image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-40"
-          style={{ backgroundImage: 'url("/images/poornima-campus-4k.jpg")' }}
+          style={{ backgroundImage: 'url("/images/poornima-real.jpg")' }}
         />
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E] via-[#0A0F1E]/90 to-[#0A0F1E]/70 pointer-events-none" />
