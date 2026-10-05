@@ -219,7 +219,7 @@ export default function PlacementsPage() {
               className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-300 focus:outline-none focus:border-blue-500/50"
             >
               <option value="all" className="bg-[#0A0F1E]">All Years</option>
-              {Array.from({ length: 2026 - 2012 + 1 }, (_, i) => 2026 - i).map((year) => (
+              {Array.from({ length: 2030 - 2018 + 1 }, (_, i) => 2030 - i).map((year) => (
                 <option key={year} value={year} className="bg-[#0A0F1E]">
                   {year} Batch
                 </option>
