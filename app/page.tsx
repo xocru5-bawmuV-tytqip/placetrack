@@ -449,11 +449,18 @@ export default function HomePage() {
           HERO SECTION
       ══════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
+        {/* Background image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-40"
+          style={{ backgroundImage: 'url("/images/poornima-campus-4k.jpg")' }}
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E] via-[#0A0F1E]/90 to-[#0A0F1E]/70 pointer-events-none" />
+
         {/* Background effects */}
-        <div className="absolute inset-0 bg-grid opacity-100 pointer-events-none" />
-        <div className="absolute inset-0 hero-glow pointer-events-none" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/3 -right-32 w-80 h-80 bg-purple-500/8 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none mix-blend-overlay" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl pointer-events-none mix-blend-screen" />
+        <div className="absolute top-1/3 -right-32 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none mix-blend-screen" />
 
         <div className="relative z-10 section-container w-full py-20">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
