@@ -451,14 +451,14 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
         {/* Background image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-40"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-70"
           style={{ backgroundImage: 'url("/images/poornima-real.jpg")' }}
         />
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E] via-[#0A0F1E]/90 to-[#0A0F1E]/70 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E] via-[#0A0F1E]/80 to-[#0A0F1E]/40 pointer-events-none" />
 
         {/* Background effects */}
-        <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none mix-blend-overlay" />
+        <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none mix-blend-overlay" />
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl pointer-events-none mix-blend-screen" />
         <div className="absolute top-1/3 -right-32 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none mix-blend-screen" />
 
@@ -529,6 +529,15 @@ export default function HomePage() {
                     FREE
                   </span>
                 </Link>
+                <a
+                  href="https://www.poornima.edu.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost group text-base px-7 py-3.5 border-white/20 hover:border-white/40"
+                >
+                  <Globe size={16} className="text-blue-400" />
+                  <span>Official Website</span>
+                </a>
               </motion.div>
 
               {/* Stats row */}

@@ -59,11 +59,11 @@ export default function UniversityDetailPage({
       <section className="relative pt-28 pb-14 border-b border-white/5 overflow-hidden">
         {/* Background image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-20"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-40"
           style={{ backgroundImage: 'url("/images/poornima-real.jpg")' }}
         />
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-[#0A0F1E]/80 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-[#0A0F1E]/70 to-[#0A0F1E]/40 pointer-events-none" />
 
         <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none mix-blend-overlay" />
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none mix-blend-screen" />
