@@ -76,6 +76,20 @@ export const authOptions: NextAuthOptions = {
         const email = credentials.email.toLowerCase().trim()
 
         try {
+          if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes('dev.db')) {
+            console.log('[AUTH] Running in demo mode, returning mock user.');
+            return {
+              id: 'mock-user-123',
+              email: email,
+              name: 'Demo Student',
+              image: null,
+              role: 'STUDENT',
+              subscriptionTier: 'PRO',
+              isBanned: false,
+              universityId: 'poornima',
+            }
+          }
+
           const user = await prisma.user.findUnique({
             where: { email },
             select: {

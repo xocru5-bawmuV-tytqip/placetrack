@@ -226,6 +226,9 @@ export default function RegisterPage() {
               onChange={handleChange}
               className="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
             >
+              <option value="2021">2021 (Alumni / Placed)</option>
+              <option value="2022">2022 (Alumni / Placed)</option>
+              <option value="2023">2023 (Alumni / Placed)</option>
               <option value="2024">2024 (Alumni / Placed)</option>
               <option value="2025">2025 (Final Year)</option>
               <option value="2026">2026 (Pre-final Year)</option>

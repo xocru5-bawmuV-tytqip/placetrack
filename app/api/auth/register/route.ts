@@ -82,6 +82,19 @@ export async function POST(request: Request) {
 
     const data: RegisterPayload = parseResult.data
 
+    // ─── DEMO MODE MOCK ───────────────────────────────────────────────────────────
+    if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes('dev.db')) {
+      console.log('[REGISTER] Running in demo mode without real DB, mocking success.');
+      return NextResponse.json(
+        {
+          success: true,
+          message: 'Account created successfully (Demo Mode)! Please sign in.',
+          userId: 'mock-user-123',
+        },
+        { status: 201 }
+      )
+    }
+
     // Check if email is already taken
     const existingUser = await prisma.user.findUnique({
       where: { email: data.email.toLowerCase().trim() },
