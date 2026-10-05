@@ -487,8 +487,13 @@ export default function HomePage() {
                   everything you need to land your dream job at{" "}
                   <span className="text-blue-400 font-medium">
                     Poornima University
-                  </span>{" "}
-                  and beyond.
+                  </span>{", "}
+                  <span className="text-purple-400 font-medium">
+                    Poornima Institute of Engineering & Technology
+                  </span>{", and "}
+                  <span className="text-emerald-400 font-medium">
+                    Poornima College of Engineering
+                  </span>.
                 </p>
               </motion.div>
 
@@ -777,7 +782,7 @@ export default function HomePage() {
                 Poornima Group <span className="gradient-text">Institutions</span>
               </h2>
               <p className="text-slate-400 max-w-xl mx-auto">
-                Explore placement records, top CTC distributions, NIRF achievements, and premier recruiting companies across Poornima University, PCE, and PIET.
+                Explore placement records, top CTC distributions, NIRF achievements, and premier recruiting companies across Poornima University, Poornima Institute of Engineering & Technology, and Poornima College of Engineering.
               </p>
             </motion.div>
 
