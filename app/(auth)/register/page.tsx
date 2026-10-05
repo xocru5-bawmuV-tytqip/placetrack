@@ -226,7 +226,7 @@ export default function RegisterPage() {
               onChange={handleChange}
               className="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
             >
-              {Array.from({ length: 2027 - 2012 + 1 }, (_, i) => 2012 + i).map((year) => {
+              {Array.from({ length: 2026 - 2012 + 1 }, (_, i) => 2012 + i).map((year) => {
                 let label = `${year}`
                 if (year <= 2024) label += ' (Alumni / Placed)'
                 else if (year === 2025) label += ' (Final Year)'
