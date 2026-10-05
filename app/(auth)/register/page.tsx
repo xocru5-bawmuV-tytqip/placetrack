@@ -16,7 +16,7 @@ export default function RegisterPage() {
     confirmPassword: '',
     universityName: 'Poornima University',
     course: 'B.Tech Computer Science & Engineering',
-    passingYear: '2025',
+    passingYear: '2027',
     rollNo: '',
     isPlaced: false,
   })
@@ -226,11 +226,11 @@ export default function RegisterPage() {
               onChange={handleChange}
               className="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
             >
-              {Array.from({ length: 2027 - 2020 + 1 }, (_, i) => 2020 + i).map((year) => {
+              {Array.from({ length: 2030 - 2020 + 1 }, (_, i) => 2020 + i).map((year) => {
                 let label = `${year}`
-                if (year <= 2024) label += ' (Alumni / Placed)'
-                else if (year === 2025) label += ' (Final Year)'
-                else if (year === 2026) label += ' (Pre-final Year)'
+                if (year <= 2026) label += ' (Alumni / Placed)'
+                else if (year === 2027) label += ' (Final Year)'
+                else if (year === 2028) label += ' (Pre-final Year)'
                 else label += ' (Junior)'
                 return (
                   <option key={year} value={year}>

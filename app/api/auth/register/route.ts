@@ -26,7 +26,7 @@ const registerSchema = z
       .transform((val) => {
         if (typeof val === 'number') return val
         const num = parseInt(String(val).replace(/\D/g, '').slice(0, 4), 10)
-        return isNaN(num) ? 2025 : num
+        return isNaN(num) ? 2027 : num
       })
       .pipe(z.number().int().min(2000).max(new Date().getFullYear() + 10)),
     rollNo: z.string().optional().nullable(),
