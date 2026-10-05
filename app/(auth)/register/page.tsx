@@ -1,4 +1,4 @@
-'use client'
+'use client' // Trigger Vercel deploy
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
