@@ -216,8 +216,11 @@ export async function chatWithSevenAI(
         }
       }
     } catch (error: any) {
-      console.warn('Gemini API call failed, falling back to local placement engine:', error?.message || error)
-      // Fall through to semantic knowledge engine
+      console.warn('Gemini API call failed:', error?.message || error)
+      return {
+        reply: `⚠️ **AI Connection Error:** ${error?.message || 'Unknown error'}\n\nPlease check your GEMINI_API_KEY in Vercel.`,
+        blocked: false
+      }
     }
   }
 
