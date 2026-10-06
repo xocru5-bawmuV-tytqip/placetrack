@@ -199,12 +199,13 @@ export async function chatWithSevenAI(
     try {
       const model = genAI.getGenerativeModel({
         model: 'gemini-1.5-flash',
-        systemInstruction: SEVEN_AI_SYSTEM_INSTRUCTION,
       })
 
-      const prompt = contextData
+      let prompt = contextData
         ? `Placement Database Context:\n${contextData}\n\nUser Question: ${userMessage}`
         : userMessage
+
+      prompt = `${SEVEN_AI_SYSTEM_INSTRUCTION}\n\n${prompt}`
 
       const result = await model.generateContent(prompt)
       const responseText = result.response.text()
