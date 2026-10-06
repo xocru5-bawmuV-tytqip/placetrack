@@ -198,7 +198,7 @@ export async function chatWithSevenAI(
   if (genAI) {
     try {
       const model = genAI.getGenerativeModel({
-        model: 'gemini-1.5-flash',
+        model: 'gemini-pro',
       })
 
       let prompt = contextData
@@ -268,7 +268,7 @@ export async function evaluateInterviewAnswer(
 ): Promise<{ score: number; strengths: string; improvements: string; overallFeedback: string }> {
   if (genAI) {
     try {
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+      const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
       const prompt = `
 You are evaluating a candidate's mock interview answer for ${company} (${role}).
 Question: "${question}"
