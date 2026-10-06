@@ -30,6 +30,7 @@ import {
   Clock,
   Send,
   Linkedin,
+  Globe,
 } from "lucide-react";
 
 /* ─── Types ─────────────────────────────────────────────────────────────── */

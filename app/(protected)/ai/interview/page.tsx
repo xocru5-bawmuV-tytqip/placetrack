@@ -135,7 +135,7 @@ export default function MockInterviewPage() {
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-800/60 border border-slate-700 text-xs sm:text-sm font-medium text-slate-100 leading-relaxed">
-              "{sampleQuestion}"
+              &quot;{sampleQuestion}&quot;
             </div>
 
             <div className="space-y-2">
