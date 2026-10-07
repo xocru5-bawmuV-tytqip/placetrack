@@ -218,8 +218,21 @@ export async function chatWithSevenAI(
       }
     } catch (error: any) {
       console.warn('Gemini API call failed:', error?.message || error)
+      let availableModels = 'Unknown';
+      try {
+        const apiKey = process.env.GEMINI_API_KEY || '';
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        const data = await res.json();
+        if (data.models) {
+          availableModels = data.models.map((m: any) => m.name).filter((n: string) => n.includes('gemini')).join(', ');
+        } else {
+          availableModels = JSON.stringify(data);
+        }
+      } catch (e) {
+        availableModels = 'Failed to fetch models';
+      }
       return {
-        reply: `⚠️ **AI Connection Error:** ${error?.message || 'Unknown error'}\n\nPlease check your GEMINI_API_KEY in Vercel.`,
+        reply: `⚠️ **AI Connection Error:** ${error?.message || 'Unknown error'}\n\n**Models available for your API Key:** ${availableModels}\n\nPlease check your GEMINI_API_KEY in Vercel.`,
         blocked: false
       }
     }
