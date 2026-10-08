@@ -637,26 +637,26 @@ export default function HomePage() {
             </div>
           </motion.div>
 
-          {/* 3D Cyberpunk AI Robot Graphic with floating telemetry */}
+          {/* ── Official Poornima Group 3D Centerpiece Showcase ── */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.4 }}
             className="relative w-full max-w-4xl mx-auto"
           >
-            {/* Ambient neon backglow */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E93]/30 via-[#D946EF]/20 to-[#8B5CF6]/30 rounded-3xl blur-3xl -z-10 scale-95" />
+            {/* Subtle serene ambient backglow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#D946EF]/20 via-[#8B5CF6]/15 to-[#38BDF8]/20 rounded-3xl blur-3xl -z-10 scale-95" />
 
-            {/* Graphic card container */}
-            <div className="relative rounded-3xl overflow-hidden border border-white/[0.12] bg-[#030508]/80 shadow-[0_0_50px_rgba(217,70,239,0.25)]">
+            {/* Emblem card container */}
+            <div className="relative rounded-3xl overflow-hidden border border-white/[0.1] bg-[#000000] shadow-[0_0_60px_rgba(217,70,239,0.2)]">
               <img
-                src="/images/serendale-hero.jpg"
-                alt="Serendale AI Placement Exploration - Cyberpunk AI Robots"
-                className="w-full h-auto max-h-[520px] object-cover object-center"
+                src="/images/poornima-group-hero.jpg"
+                alt="Poornima Group Official 3D Glass Emblem - Estd. 2000"
+                className="w-full h-auto max-h-[520px] object-contain object-center py-4"
               />
 
-              {/* Serendale dark vignette bottom fade */}
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#020408] via-[#020408]/60 to-transparent pointer-events-none" />
+              {/* Serene bottom fade into black */}
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#000000] via-[#000000]/60 to-transparent pointer-events-none" />
 
               {/* Floating Stat Badge 1: Top Left */}
               <motion.div
