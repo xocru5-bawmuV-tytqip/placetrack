@@ -43,6 +43,47 @@ export interface UniversityData {
     ctc: number;
     tier: 'Marquee' | 'Super Dream' | 'Dream' | 'Prime';
   }[];
+  facultyLeadership?: {
+    name: string;
+    designation: string;
+    department: string;
+    qualification: string;
+    specialization: string;
+    experience: string;
+  }[];
+  companyRequirements?: {
+    company: string;
+    tier: string;
+    packageLPA: number;
+    minCGPA: number;
+    min10th12th: number;
+    backlogsAllowed: boolean;
+    eligibleBranches: string[];
+    selectionRounds: string[];
+    mandatorySkills: string[];
+  }[];
+  institutionalTelemetry?: {
+    alumniGlobal: string;
+    rdFunding: string;
+    internationalCollaborations: string;
+    corporateBoardMembers: string;
+    startupsSupported: string;
+    scholarships: string;
+    patentsCopyrights: string;
+    recruitersCount: string;
+    scopusPublications: string;
+    libraryResources: string;
+  };
+  degreePrograms?: {
+    level: string;
+    courses: string[];
+  }[];
+  marqueeOffers?: {
+    studentName: string;
+    company: string;
+    packageLPA: number;
+    role?: string;
+  }[];
 }
 
 export interface CompanyData {
@@ -275,6 +316,249 @@ export const UNIVERSITIES_DATA: UniversityData[] = [
       "SAP Labs", "Celebal Technologies", "Xebia", "Persistent"
     ],
     officialOffers: POORNIMA_OFFICIAL_RECRUITERS,
+    marqueeOffers: [
+      { studentName: "Aanchal Asnani", company: "AMAZON", packageLPA: 44.10, role: "Software Development Engineer (SDE-1)" },
+      { studentName: "Gaurav Pipada", company: "TEKION INDIA", packageLPA: 29.00, role: "Member Technical Staff" },
+      { studentName: "Niharika Jain", company: "VM WARE", packageLPA: 23.80, role: "Member of Technical Staff" },
+      { studentName: "Sanidhya Agrawal", company: "Locus - Mara Studios Private Limited", packageLPA: 22.00, role: "Software Engineer" },
+      { studentName: "Manish Motwani", company: "Groww", packageLPA: 20.00, role: "Software Development Engineer" },
+      { studentName: "Janvi Kundnani", company: "Lowe’s Services India", packageLPA: 18.36, role: "Associate Software Engineer" },
+    ],
+    institutionalTelemetry: {
+      alumniGlobal: "17,500+ Alumni Thriving Across the Globe",
+      rdFunding: "₹2.25 Cr. Funding for R&D Ventures",
+      internationalCollaborations: "200+ International Collaborations & Exchanges",
+      corporateBoardMembers: "200+ Industrialists & Professionals on Corporate Advisory Board",
+      startupsSupported: "100+ Startups Incubated",
+      scholarships: "Up to 40% Merit-Based Scholarships",
+      patentsCopyrights: "200+ Copyrights & Patents",
+      recruitersCount: "350+ Recruiting Partners Eager to Hire",
+      scopusPublications: "1,000+ High-Quality Scopus / SCI Publications",
+      libraryResources: "50,000+ Books, Journals & Digital Library Resources",
+    },
+    facultyLeadership: [
+      {
+        name: "Dr. Shikha Sharma",
+        designation: "Dean & Head of Department",
+        department: "Faculty of Computer Science & Engineering",
+        qualification: "Ph.D., M.Tech, B.Tech",
+        specialization: "Artificial Intelligence, Cloud Computing & Machine Learning",
+        experience: "18+ Years",
+      },
+      {
+        name: "Dr. Ajay Khunteta",
+        designation: "Professor",
+        department: "Faculty of Computer Science & Engineering",
+        qualification: "Ph.D., M.Tech, B.E.",
+        specialization: "Computer Vision, Digital Image Processing & Pattern Recognition",
+        experience: "22+ Years",
+      },
+      {
+        name: "Dr. Vishnu Sharma",
+        designation: "Professor & Head of Department",
+        department: "Department of Computer Science & Applications (BCA/MCA)",
+        qualification: "Ph.D., MCA",
+        specialization: "Database Systems, Big Data Analytics & Cloud Architecture",
+        experience: "16+ Years",
+      },
+      {
+        name: "Dr. Neeraj Jain",
+        designation: "Director - Training & Placement (PMTPO)",
+        department: "Central Placement & Corporate Relations Cell",
+        qualification: "Ph.D., MBA, B.Tech",
+        specialization: "Corporate Alliances, Executive Hiring & Campus Recruitment",
+        experience: "20+ Years",
+      },
+      {
+        name: "Mr. Arun Dev Choudhary",
+        designation: "Director - Corporate Relations",
+        department: "Corporate Relations & Industry Interface",
+        qualification: "M.Tech, B.Tech",
+        specialization: "Industry 4.0, MNC Partnerships & Placement Strategy",
+        experience: "19+ Years",
+      },
+    ],
+    degreePrograms: [
+      {
+        level: "Bachelor of Technology (B.Tech.)",
+        courses: [
+          "B.Tech. Computer Science & Engineering (Core)",
+          "B.Tech. CSE (Artificial Intelligence & Data Science)",
+          "B.Tech. CSE (Artificial Intelligence & Machine Learning) with SAS",
+          "B.Tech. CSE (Cloud Technology & DevOps)",
+          "B.Tech. CSE (Cyber Security)",
+          "B.Tech. CSE (AI & Cybersecurity)",
+          "Lateral Entry - B.Tech. Computer Science & Engineering",
+          "Lateral Entry - B.Tech. CSE (AI & Data Science)",
+          "Lateral Entry - B.Tech. CSE (Cloud Technology & DevOps)",
+          "Lateral Entry - B.Tech. CSE (Cyber Security)",
+        ],
+      },
+      {
+        level: "Bachelor of Computer Application (BCA)",
+        courses: [
+          "BCA (Core)",
+          "BCA (Artificial Intelligence & Data Science)",
+          "BCA (Artificial Intelligence & Machine Learning) with SAS",
+          "BCA (Cloud Technology & DevOps)",
+          "BCA (Cyber Security)",
+          "BCA (AI & Cybersecurity)",
+          "BCA (Full Stack Development & Mobile Applications)",
+          "BCA (Global)",
+        ],
+      },
+      {
+        level: "Master of Technology (M.Tech.)",
+        courses: [
+          "M.Tech. CS (Artificial Intelligence & Data Science)",
+          "M.Tech. (Computer Engineering)",
+        ],
+      },
+      {
+        level: "Master of Computer Application (MCA)",
+        courses: [
+          "MCA (Core)",
+          "MCA (Artificial Intelligence & Data Science)",
+          "MCA (Artificial Intelligence & Machine Learning)",
+          "MCA (Cloud Technology & DevOps)",
+          "MCA (Cyber Security)",
+        ],
+      },
+      {
+        level: "Doctor of Philosophy (Ph.D.)",
+        courses: [
+          "Ph.D. in Computer Science & Engineering",
+        ],
+      },
+    ],
+    companyRequirements: [
+      {
+        company: "Amazon India",
+        tier: "Marquee",
+        packageLPA: 44.10,
+        minCGPA: 7.5,
+        min10th12th: 65,
+        backlogsAllowed: false,
+        eligibleBranches: ["B.Tech CSE", "B.Tech AIDS", "B.Tech IT", "M.Tech CSE"],
+        selectionRounds: [
+          "Online Coding Assessment (90 mins, 2 Hard DSA Problems)",
+          "Technical Interview 1 (Trees, Graphs, Dynamic Programming)",
+          "Technical Interview 2 (Low-Level Design, OOP, DBMS)",
+          "Bar Raiser / Leadership Principles Assessment",
+        ],
+        mandatorySkills: ["Java / C++", "Data Structures & Algorithms", "System Design", "AWS", "OOP"],
+      },
+      {
+        company: "Tekion India",
+        tier: "Marquee",
+        packageLPA: 29.00,
+        minCGPA: 7.5,
+        min10th12th: 60,
+        backlogsAllowed: false,
+        eligibleBranches: ["B.Tech CSE", "B.Tech AIDS", "B.Tech IT"],
+        selectionRounds: [
+          "HackerEarth Coding Assessment (120 mins)",
+          "Technical Problem Solving & Complex Algorithmic Optimization",
+          "Low-Level System Design & Multithreading",
+          "Techno-Managerial & Cultural Alignment",
+        ],
+        mandatorySkills: ["Java", "Spring Boot", "Microservices", "MongoDB", "Redis", "Distributed Caching"],
+      },
+      {
+        company: "VMware",
+        tier: "Marquee",
+        packageLPA: 23.80,
+        minCGPA: 7.2,
+        min10th12th: 60,
+        backlogsAllowed: false,
+        eligibleBranches: ["B.Tech CSE", "B.Tech AIDS", "B.Tech IT", "B.Tech ECE"],
+        selectionRounds: [
+          "Online Coding & CS Fundamentals Test",
+          "Operating Systems, Virtualization & Network Protocols",
+          "Advanced Data Structures & Concurrency",
+          "Engineering Leadership & Behavioral Round",
+        ],
+        mandatorySkills: ["C++", "Linux Internals", "Computer Networks", "Operating Systems", "Virtualization"],
+      },
+      {
+        company: "Locus (Mara Studios)",
+        tier: "Marquee",
+        packageLPA: 22.00,
+        minCGPA: 7.0,
+        min10th12th: 60,
+        backlogsAllowed: false,
+        eligibleBranches: ["B.Tech CSE", "B.Tech AIDS", "B.Tech IT"],
+        selectionRounds: [
+          "Take-Home Engineering Assignment / Timed Hackathon",
+          "Live System Architecture & Code Pair-Programming",
+          "Clean Code, Modularity & Distributed Systems Review",
+          "Founder / HR Culture Interview",
+        ],
+        mandatorySkills: ["Python / Go", "REST APIs", "Microservices", "Algorithms", "Docker"],
+      },
+      {
+        company: "Groww",
+        tier: "Marquee",
+        packageLPA: 20.00,
+        minCGPA: 7.0,
+        min10th12th: 60,
+        backlogsAllowed: false,
+        eligibleBranches: ["B.Tech CSE", "B.Tech AIDS", "B.Tech IT"],
+        selectionRounds: [
+          "Online Data Structures & Logical Reasoning Round",
+          "Full-Stack / Core Backend Engineering Interview",
+          "High-Throughput Financial Transaction Architecture",
+          "HR & Cultural Compatibility",
+        ],
+        mandatorySkills: ["React / Node.js", "Java", "SQL / NoSQL", "Message Queues", "Scalability"],
+      },
+      {
+        company: "Lowe’s Services India",
+        tier: "Super Dream",
+        packageLPA: 18.36,
+        minCGPA: 7.0,
+        min10th12th: 60,
+        backlogsAllowed: false,
+        eligibleBranches: ["B.Tech CSE", "B.Tech AIDS", "B.Tech IT"],
+        selectionRounds: [
+          "Online Cognitive Aptitude & Algorithmic Test",
+          "Core CS Fundamentals, DBMS & Data Structures",
+          "Real-World Retail Tech Scenario & Coding",
+          "Managerial Fit & Values Round",
+        ],
+        mandatorySkills: ["Java", "Spring Boot", "Cloud Technologies", "REST APIs", "SQL"],
+      },
+      {
+        company: "TCS Digital / Prime",
+        tier: "Dream",
+        packageLPA: 11.50,
+        minCGPA: 6.5,
+        min10th12th: 60,
+        backlogsAllowed: true,
+        eligibleBranches: ["All Engineering Branches", "MCA", "BCA"],
+        selectionRounds: [
+          "TCS National Qualifier Test (Advanced Cognitive & Coding)",
+          "Technical Interview (Projects, Core Engineering, Cloud)",
+          "HR & Behavioral Fit",
+        ],
+        mandatorySkills: ["Python / Java", "SQL", "Web Basics", "Agile Fundamentals"],
+      },
+      {
+        company: "Celebal Technologies",
+        tier: "Dream",
+        packageLPA: 7.00,
+        minCGPA: 6.0,
+        min10th12th: 60,
+        backlogsAllowed: false,
+        eligibleBranches: ["B.Tech CSE", "B.Tech AIDS", "BCA", "MCA"],
+        selectionRounds: [
+          "Online Aptitude & Programming Test",
+          "Cloud Platform (Azure/AWS) & Data Engineering Round",
+          "HR & Client Readiness Assessment",
+        ],
+        mandatorySkills: ["Python", "Azure / Cloud", "SQL", "Power BI", "Databricks"],
+      },
+    ],
   },
   {
     id: "pce",
@@ -888,6 +1172,101 @@ export const PLACEMENTS_DATA: CandidatePlacement[] = [
     projectTitle: "Scalable E-Commerce Fulfillment Engine",
     projectDescription: "High-concurrency order dispatch service with Flipkart Pre-Placement Offer (₹32.57 LPA) and Amazon India offer (₹44.10 LPA).",
     linkedIn: "https://www.linkedin.com/school/poornima-college-of-engineering-jaipur",
+  },
+  {
+    id: "pu-online-1",
+    name: "Gaurav Pipada",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Tekion India",
+    companySlug: "tekion",
+    role: "Member Technical Staff",
+    ctc: 29.0,
+    year: 2024,
+    branch: "B.Tech CSE",
+    avatar: "GP",
+    location: "Bengaluru / Jaipur",
+    isVerified: true,
+    skills: ["Java", "Spring Boot", "Microservices", "MongoDB", "Redis", "Distributed Caching"],
+    projectTitle: "Automotive Enterprise Cloud Management Service",
+    projectDescription: "High-scale automotive cloud platform processing vehicle telematics and dealer inventory workflows.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+  },
+  {
+    id: "pu-online-2",
+    name: "Niharika Jain",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "VMware",
+    companySlug: "vmware",
+    role: "Member of Technical Staff",
+    ctc: 23.8,
+    year: 2023,
+    branch: "B.Tech CSE",
+    avatar: "NJ",
+    location: "Bengaluru",
+    isVerified: true,
+    skills: ["C++", "Linux Internals", "Computer Networks", "Virtualization", "Cloud Infrastructure"],
+    projectTitle: "Hypervisor Memory Allocation & Containerization",
+    projectDescription: "Kernel-level memory virtualization optimizer reducing container context-switching overhead.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+  },
+  {
+    id: "pu-online-3",
+    name: "Sanidhya Agrawal",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Locus (Mara Studios)",
+    companySlug: "locus",
+    role: "Software Engineer",
+    ctc: 22.0,
+    year: 2023,
+    branch: "B.Tech CSE",
+    avatar: "SA",
+    location: "Bengaluru",
+    isVerified: true,
+    skills: ["Python", "Go", "Distributed Systems", "REST API", "Microservices", "Docker"],
+    projectTitle: "Automated Supply Chain Dispatch & Route Optimization",
+    projectDescription: "Smart route optimization engine computing multi-stop delivery schedules for enterprise logistics.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+  },
+  {
+    id: "pu-online-4",
+    name: "Manish Motwani",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Groww",
+    companySlug: "groww",
+    role: "Software Development Engineer",
+    ctc: 20.0,
+    year: 2023,
+    branch: "B.Tech CSE",
+    avatar: "MM",
+    location: "Bengaluru",
+    isVerified: true,
+    skills: ["React", "Node.js", "Java", "SQL", "Message Queues", "Fintech Scaling"],
+    projectTitle: "Zero-Latency Financial Ledger & Order Routing",
+    projectDescription: "High-throughput mutual fund and stock trading order processing engine with real-time portfolio updates.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+  },
+  {
+    id: "pu-online-5",
+    name: "Janvi Kundnani",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Lowe’s Services India",
+    companySlug: "lowes",
+    role: "Associate Software Engineer",
+    ctc: 18.36,
+    year: 2023,
+    branch: "B.Tech CSE",
+    avatar: "JK",
+    location: "Bengaluru",
+    isVerified: true,
+    skills: ["Java", "Spring Boot", "Cloud Technologies", "REST APIs", "SQL"],
+    projectTitle: "Omnichannel Retail Inventory Search & Synchronization",
+    projectDescription: "Real-time retail inventory synchronization across 1,700+ stores with sub-second catalog lookup.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
   },
   {
     id: "pce-2",
