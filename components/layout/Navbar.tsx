@@ -23,30 +23,40 @@ import Image from "next/image";
 
 const navLinks = [
   {
-    label: "Home",
+    label: "HOME",
+    sub: "Main Page",
     href: "/",
-    icon: Home,
   },
   {
-    label: "Universities",
+    label: "CORPORATE",
+    sub: "About Us",
+    href: "/about",
+  },
+  {
+    label: "WE OFFER",
+    sub: "Colleges",
     href: "/universities",
-    icon: GraduationCap,
   },
   {
-    label: "Companies",
+    label: "PARTNERS",
+    sub: "109 Recruiters",
     href: "/companies",
-    icon: Building2,
   },
   {
-    label: "Candidates",
+    label: "PACKAGES",
+    sub: "Top CTCs",
     href: "/placements",
-    icon: Users,
   },
   {
-    label: "SevenAI",
+    label: "SEVENAI",
+    sub: "AI Copilot",
     href: "/ai",
-    icon: Sparkles,
     highlight: true,
+  },
+  {
+    label: "CONTACT US",
+    sub: "Get In Touch",
+    href: "/contact",
   },
 ];
 
@@ -58,7 +68,7 @@ export default function Navbar() {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 16);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -81,64 +91,93 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans",
           isScrolled
-            ? "backdrop-blur-2xl bg-[#030508]/90 border-b border-white/[0.08] shadow-2xl shadow-black/80"
-            : "bg-transparent"
+            ? "bg-[#071933]/95 backdrop-blur-xl border-b border-blue-900/40 shadow-xl shadow-black/30"
+            : "bg-gradient-to-b from-[#071933] via-[#071933]/80 to-transparent"
         )}
       >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          {/* Logo */}
+        {/* Top Corporate Micro-Bar */}
+        <div className="border-b border-blue-900/30 text-[11px] text-blue-200/80 py-1.5 px-4 sm:px-8 hidden md:block">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-1.5">
+                <span className="text-[#0066FF] font-bold">📞</span>
+                <span>+91 141 3983200</span>
+                <span className="text-blue-400/50">|</span>
+                <span className="text-slate-400">24X7 Placement Cell Desk</span>
+              </span>
+              <span className="text-blue-300/80">Jaipur, Rajasthan, India</span>
+            </div>
+            <div className="flex items-center gap-5 font-medium tracking-wide">
+              <Link href="/companies" className="hover:text-white transition-colors">
+                TRACK 109 RECRUITMENT DRIVES
+              </Link>
+              <span className="text-blue-400/50">•</span>
+              <Link href="/placements" className="hover:text-white transition-colors">
+                STUDENT PLACEMENT PORTAL
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Nav */}
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          {/* Logo with Poornima University Emblem */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-2xl overflow-hidden bg-white/95 p-1 border border-white/20 shadow-md shadow-fuchsia-500/20 group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
+            <div className="bg-white px-3 py-1.5 rounded-lg shadow-md border border-slate-200/60 flex items-center gap-2 group-hover:scale-102 transition-transform">
               <img
-                src="/images/logos/poornima-royal.png"
-                alt="Poornima Group"
-                className="w-full h-full object-contain"
+                src="/images/logos/poornima-university.png"
+                alt="Poornima University"
+                className="h-8 w-auto object-contain"
               />
             </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5 leading-none">
-                <span className="font-extrabold text-base tracking-tight text-white group-hover:text-fuchsia-300 transition-colors">
-                  Poornima
-                </span>
-                <span className="font-bold text-base gradient-text-serendale">
-                  PlaceTrack
-                </span>
-              </div>
-              <span className="text-[10px] text-slate-400 font-medium tracking-wide mt-1 uppercase">
-                Poornima Group Portal
+            <div className="hidden lg:flex flex-col text-left">
+              <span className="font-extrabold text-xs tracking-wider text-white uppercase leading-none">
+                POORNIMA GROUP
+              </span>
+              <span className="text-[10px] text-blue-300/80 font-medium tracking-wider mt-1 uppercase">
+                Central Placement Portal
               </span>
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/[0.08] p-1 rounded-full backdrop-blur-xl">
+          {/* Desktop Nav - Two-Tier Corporate Typography Matching Reference Image */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks.map((link) => {
-              const Icon = link.icon;
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={cn(
-                    "flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200",
-                    link.highlight
-                      ? "text-fuchsia-300 bg-fuchsia-500/15 border border-fuchsia-500/30 hover:bg-fuchsia-500/25 shadow-[0_0_15px_rgba(217,70,239,0.25)]"
-                      : isActive
-                      ? "text-white bg-white/15 shadow-sm"
-                      : "text-slate-300 hover:text-white hover:bg-white/10"
-                  )}
+                  className="flex flex-col items-center group py-1 text-center transition-all"
                 >
-                  <Icon
-                    size={14}
-                    className={link.highlight ? "text-fuchsia-300" : ""}
-                  />
-                  {link.label}
-                  {link.highlight && (
-                    <span className="ml-0.5 px-1.5 py-0.2 text-[9px] font-extrabold bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full">
-                      AI
-                    </span>
+                  <span
+                    className={cn(
+                      "text-xs font-bold tracking-wider transition-colors uppercase",
+                      link.highlight
+                        ? "text-blue-400 group-hover:text-blue-300"
+                        : isActive
+                        ? "text-white"
+                        : "text-slate-300 group-hover:text-white"
+                    )}
+                  >
+                    {link.label}
+                  </span>
+                  <span
+                    className={cn(
+                      "text-[10px] tracking-tight transition-colors leading-tight",
+                      link.highlight
+                        ? "text-blue-400/70"
+                        : isActive
+                        ? "text-blue-400"
+                        : "text-slate-400/80 group-hover:text-slate-300"
+                    )}
+                  >
+                    {link.sub}
+                  </span>
+                  {isActive && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0066FF] mt-1" />
                   )}
                 </Link>
               );
@@ -231,15 +270,15 @@ export default function Navbar() {
               <div className="flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-xs font-semibold rounded-full text-slate-300 hover:text-white bg-white/[0.04] hover:bg-white/10 border border-white/15 transition-all duration-200"
+                  className="px-4 py-2 text-xs font-semibold rounded-full text-slate-300 hover:text-white bg-white/[0.06] hover:bg-white/12 border border-white/15 transition-all duration-200"
                 >
                   Login
                 </Link>
                 <Link
                   href="/register"
-                  className="px-5 py-2 text-xs font-bold rounded-full bg-gradient-to-r from-[#D946EF] to-[#8B5CF6] hover:from-[#E879F9] hover:to-[#A78BFA] text-white shadow-[0_0_20px_rgba(217,70,239,0.35)] border border-pink-400/30 transition-all duration-200 hover:scale-105 active:scale-95"
+                  className="px-5 py-2 text-xs font-bold rounded-full bg-[#0066FF] hover:bg-blue-600 text-white shadow-md shadow-blue-900/30 transition-all duration-200 hover:scale-105 active:scale-95"
                 >
-                  Get Started
+                  Portal Access
                 </Link>
               </div>
             )}
