@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Bot, Send, AlertTriangle, Sparkles, RefreshCw, Loader2, Home } from 'lucide-react'
+import { Bot, Send, AlertTriangle, Sparkles, RefreshCw, Loader2, Home, FileText } from 'lucide-react'
 import Link from 'next/link'
 
 interface Message {
@@ -103,6 +103,13 @@ export default function SevenAIPage() {
           >
             <Home className="w-3.5 h-3.5 text-blue-400" />
             <span>Home</span>
+          </Link>
+          <Link
+            href="/resources/resume"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-xs font-semibold text-white shadow-sm transition"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            ATS Resume Checker
           </Link>
           <Link
             href="/ai/interview"

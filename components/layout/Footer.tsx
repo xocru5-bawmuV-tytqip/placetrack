@@ -29,7 +29,7 @@ const footerLinks = {
   ],
   Resources: [
     { label: "Placement Guide", href: "/resources/guide" },
-    { label: "Resume Builder", href: "/resources/resume" },
+    { label: "ATS Resume Scoring", href: "/resources/resume" },
     { label: "Aptitude Practice", href: "/resources/aptitude" },
     { label: "Mock Interviews", href: "/ai/mock" },
     { label: "Salary Calculator", href: "/resources/salary" },

@@ -18,6 +18,7 @@ import {
   Users,
   BookOpen,
   Home,
+  FileText,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -41,6 +42,11 @@ const navLinks = [
     label: "Candidates",
     href: "/placements",
     icon: Users,
+  },
+  {
+    label: "ATS Resume",
+    href: "/resources/resume",
+    icon: FileText,
   },
   {
     label: "SevenAI",

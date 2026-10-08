@@ -878,15 +878,23 @@ export default function HomePage() {
               </div>
 
               {/* Card 4: Resume Optimization */}
-              <div className="border border-white/20 bg-white/[0.04] p-5 rounded-xl hover:border-white/40 hover:bg-white/[0.08] transition-all">
-                <FileText size={20} className="text-blue-300 mb-3" />
-                <h4 className="text-xs font-black text-white tracking-wider uppercase mb-1.5">
-                  RESUME SCREENER
+              <Link
+                href="/resources/resume"
+                className="border border-white/20 bg-white/[0.04] p-5 rounded-xl hover:border-blue-400 hover:bg-white/[0.08] transition-all block group"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <FileText size={20} className="text-blue-300 group-hover:text-blue-200" />
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30">
+                    Live Tool
+                  </span>
+                </div>
+                <h4 className="text-xs font-black text-white tracking-wider uppercase mb-1.5 group-hover:text-blue-200 transition-colors">
+                  RESUME SCREENER &amp; ATS
                 </h4>
                 <p className="text-[11px] text-slate-300 leading-relaxed">
                   ATS-optimized resume screening tailored specifically to match dream company role descriptions.
                 </p>
-              </div>
+              </Link>
 
               {/* Card 5: Alumni Network */}
               <div className="border border-white/20 bg-white/[0.04] p-5 rounded-xl hover:border-white/40 hover:bg-white/[0.08] transition-all">
