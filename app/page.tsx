@@ -450,60 +450,46 @@ export default function HomePage() {
           SERENDALE DARK NEON HERO SECTION
       ══════════════════════════════════════════ */}
       <section className="relative min-h-screen flex flex-col items-center justify-center pt-28 pb-20 overflow-hidden bg-[#020408]">
-        {/* Poornima University Campus Background with Obsidian Gradient */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-25 mix-blend-luminosity scale-105"
-          style={{ backgroundImage: 'url("/images/poornima-campus-4k.jpg")' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#020408]/90 via-[#020408]/75 to-[#020408] pointer-events-none" />
-
-        {/* Poornima University Official PNG Logo Watermark in Hero Background */}
-        <div className="absolute top-24 left-1/2 -translate-x-1/2 w-full max-w-4xl flex items-center justify-center pointer-events-none select-none z-0">
-          <div className="relative p-6 rounded-3xl bg-white/[0.015] border border-white/[0.04] backdrop-blur-[1px]">
-            <img
-              src="/images/logos/poornima-university.png"
-              alt="Poornima University Background Watermark"
-              className="w-[520px] sm:w-[680px] h-auto object-contain brightness-0 invert opacity-20 filter drop-shadow-[0_0_40px_rgba(217,70,239,0.35)]"
-            />
-          </div>
-        </div>
-
         {/* Serendale Cosmic Background Glows */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-gradient-to-r from-[#D946EF]/20 via-[#8B5CF6]/20 to-[#00F0FF]/15 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute top-12 left-10 w-96 h-96 bg-[#FF2E93]/15 rounded-full blur-[130px] pointer-events-none" />
         <div className="absolute top-1/3 right-10 w-96 h-96 bg-[#8B5CF6]/15 rounded-full blur-[130px] pointer-events-none" />
 
+        {/* Subtle Poornima Campus Architectural Atmosphere (Seamlessly blended, zero text clash) */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-10 mix-blend-screen scale-105"
+          style={{ backgroundImage: 'url("/images/poornima-campus-4k.jpg")' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020408] via-transparent to-[#020408] pointer-events-none" />
+
         {/* Ambient Grid overlay */}
         <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-          {/* Pill Badge with Official Poornima University PNG */}
+          {/* Poornima Group Official Verification Pill Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="mb-8"
           >
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-white/[0.12] bg-[#060813]/85 backdrop-blur-xl shadow-[0_0_25px_rgba(217,70,239,0.25)]">
-              <div className="bg-white/95 rounded-md px-1.5 py-0.5 flex items-center shadow-sm">
-                <img
-                  src="/images/logos/poornima-university.png"
-                  alt="Poornima University Logo"
-                  className="h-3.5 w-auto object-contain"
-                />
-              </div>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF2E93] animate-pulse" />
-              <span className="text-xs sm:text-sm font-medium tracking-wide text-white/90">
-                Poornima University Official Intelligence
+            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-white/[0.12] bg-[#060813]/90 backdrop-blur-2xl shadow-[0_0_25px_rgba(217,70,239,0.25)] hover:border-[#D946EF]/40 transition-all">
+              <span className="w-2 h-2 rounded-full bg-[#FF2E93] animate-pulse" />
+              <span className="text-xs sm:text-sm font-bold tracking-wide text-white">
+                POORNIMA GROUP
               </span>
-              <span className="text-white/30">•</span>
+              <span className="text-white/20">•</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-300">
+                PU · PCE · PIET
+              </span>
+              <span className="text-white/20">•</span>
               <span className="text-xs sm:text-sm font-semibold gradient-text-serendale">
-                109 Verified Drives
+                109 Verified Recruiter Drives
               </span>
             </div>
           </motion.div>
 
-          {/* Main Headline (Serendale typography) */}
+          {/* Main Headline (Pure Serendale display typography, crisp & unblocked) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -523,7 +509,10 @@ export default function HomePage() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8 font-normal"
           >
-            Our technology powers verified campus placement intelligence (109 Partner Companies · ₹42.10 LPA Peak), company interview preparation, and AI career acceleration across Poornima institutions.
+            Official placement intelligence for <span className="text-white font-medium">Poornima Group</span>:{" "}
+            <span className="text-slate-200">Poornima University</span>,{" "}
+            <span className="text-slate-200">Poornima College of Engineering</span>, and{" "}
+            <span className="text-slate-200">PIET</span>. 109 Partner Companies · ₹42.10 LPA Peak CTC.
           </motion.p>
 
           {/* Dual Serendale Pill CTA Buttons */}
@@ -531,7 +520,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-4 mb-14"
+            className="flex flex-wrap items-center justify-center gap-4 mb-10"
           >
             <Link
               href="/placements"
@@ -546,7 +535,7 @@ export default function HomePage() {
             >
               <span>Ecosystems</span>
               <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-fuchsia-300 group-hover:bg-[#D946EF]/20">
-                109
+                109 Drives
               </span>
             </Link>
             <Link
@@ -556,6 +545,96 @@ export default function HomePage() {
               <Sparkles size={16} className="text-amber-400" />
               <span>Ask SevenAI</span>
             </Link>
+          </motion.div>
+
+          {/* ── Proper Poornima Group Institutions Showcase Strip ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.35 }}
+            className="w-full max-w-4xl mx-auto mb-12"
+          >
+            <div className="p-4 sm:p-5 rounded-3xl bg-[#060813]/85 border border-white/[0.08] backdrop-blur-2xl shadow-[0_0_35px_rgba(217,70,239,0.15)]">
+              <div className="flex items-center justify-between flex-wrap gap-2 mb-3.5 px-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-xs font-bold tracking-wider uppercase text-slate-300">
+                    Poornima Group Campus Network
+                  </span>
+                </div>
+                <span className="text-[11px] text-[#D946EF] font-medium">
+                  NAAC &apos;A&apos; Accredited · NBA Approved · RTU Affiliated
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {/* 1. Poornima University */}
+                <Link
+                  href="/universities/poornima"
+                  className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.06] hover:border-[#D946EF]/40 transition-all group"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-md">
+                    <img
+                      src="/images/logos/poornima-university.png"
+                      alt="Poornima University"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div className="text-left min-w-0">
+                    <p className="text-xs font-bold text-white group-hover:text-fuchsia-300 transition-colors truncate">
+                      Poornima University
+                    </p>
+                    <p className="text-[10px] text-slate-400 truncate">
+                      State Private Univ · ₹42.10 LPA
+                    </p>
+                  </div>
+                </Link>
+
+                {/* 2. Poornima College of Engineering (PCE) */}
+                <Link
+                  href="/universities/pce"
+                  className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.06] hover:border-[#D946EF]/40 transition-all group"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-md">
+                    <img
+                      src="/images/logos/poornima-group.jpg"
+                      alt="Poornima College of Engineering"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div className="text-left min-w-0">
+                    <p className="text-xs font-bold text-white group-hover:text-fuchsia-300 transition-colors truncate">
+                      PCE Jaipur
+                    </p>
+                    <p className="text-[10px] text-slate-400 truncate">
+                      Estd. 2000 · NBA Accredited
+                    </p>
+                  </div>
+                </Link>
+
+                {/* 3. Poornima Institute of Engineering & Technology (PIET) */}
+                <Link
+                  href="/universities/piet"
+                  className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.06] hover:border-[#D946EF]/40 transition-all group"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-md">
+                    <img
+                      src="/images/logos/poornima-piet.png"
+                      alt="Poornima Institute of Engineering & Technology"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div className="text-left min-w-0">
+                    <p className="text-xs font-bold text-white group-hover:text-fuchsia-300 transition-colors truncate">
+                      PIET Jaipur
+                    </p>
+                    <p className="text-[10px] text-slate-400 truncate">
+                      NAAC &apos;A&apos; Grade · Autonomous
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            </div>
           </motion.div>
 
           {/* 3D Cyberpunk AI Robot Graphic with floating telemetry */}
