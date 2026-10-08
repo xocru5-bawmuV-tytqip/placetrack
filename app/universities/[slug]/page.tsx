@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import GlassCard from "@/components/ui/GlassCard";
@@ -27,6 +27,8 @@ import {
   ArrowRight,
   FolderGit2,
   Linkedin,
+  Search,
+  Filter,
 } from "lucide-react";
 
 export default function UniversityDetailPage({
@@ -35,6 +37,10 @@ export default function UniversityDetailPage({
   params: { slug: string };
 }) {
   const { slug } = params;
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTier, setSelectedTier] = useState<string>("ALL");
+  const [visibleCount, setVisibleCount] = useState<number>(30);
 
   // Find university by slug or id
   const uni = useMemo(() => {
@@ -50,6 +56,16 @@ export default function UniversityDetailPage({
       (p) => p.universitySlug === uni.slug || p.university.toLowerCase().includes(uni.name.toLowerCase())
     );
   }, [uni]);
+
+  // Filtered official offers (e.g. 109 companies)
+  const filteredOffers = useMemo(() => {
+    if (!uni.officialOffers) return [];
+    return uni.officialOffers.filter((item) => {
+      const matchesSearch = item.company.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesTier = selectedTier === "ALL" || item.tier === selectedTier;
+      return matchesSearch && matchesTier;
+    });
+  }, [uni.officialOffers, searchQuery, selectedTier]);
 
   return (
     <div className="min-h-screen bg-[#0A0F1E] text-white overflow-x-hidden">
@@ -216,6 +232,148 @@ export default function UniversityDetailPage({
             </p>
           </GlassCard>
         </div>
+
+        {/* 109 Verified Recruiter Drives & Compensation (Official Campus Data) */}
+        {uni.officialOffers && uni.officialOffers.length > 0 && (
+          <div className="space-y-6 pt-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold mb-2">
+                  🎓 Official Audited Records
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white flex items-center gap-2">
+                  <Building2 className="text-blue-400" /> Verified Campus Placement Drives ({uni.officialOffers.length} Companies)
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                  Authentic compensation records and recruitment offers at {uni.name}.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="px-3 py-1.5 rounded-xl bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs font-extrabold">
+                  Peak: ₹42.10 LPA
+                </span>
+                <span className="px-3 py-1.5 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-300 text-xs font-extrabold">
+                  17 Super Dream (&gt;10 LPA)
+                </span>
+                <span className="px-3 py-1.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-extrabold">
+                  {uni.officialOffers.length} Partner Recruiters
+                </span>
+              </div>
+            </div>
+
+            {/* Search & Tier Filter Bar */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white/[0.03] border border-white/10 p-3.5 rounded-2xl">
+              <div className="relative flex-1">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search among 109 companies (e.g. Amazon, Flipkart, VMWARE, SAP, TCS, Groww)..."
+                  className="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-10 pr-4 py-2 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition"
+                />
+              </div>
+
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+                {['ALL', 'Marquee', 'Super Dream', 'Dream', 'Prime'].map((tier) => (
+                  <button
+                    key={tier}
+                    onClick={() => {
+                      setSelectedTier(tier);
+                      setVisibleCount(30);
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
+                      selectedTier === tier
+                        ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+                        : 'bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
+                    }`}
+                  >
+                    {tier === 'ALL' ? 'All (109)' : tier}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Table Display */}
+            <div className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-md">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-white/5 text-xs text-slate-400 uppercase tracking-wider border-b border-white/10">
+                  <tr>
+                    <th className="px-5 py-3.5 text-center w-16">S. No.</th>
+                    <th className="px-5 py-3.5">Name of Company</th>
+                    <th className="px-5 py-3.5">Category Tier</th>
+                    <th className="px-5 py-3.5 text-right">Package Offered (LPA)</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5 text-slate-200">
+                  {filteredOffers.slice(0, visibleCount).map((item) => (
+                    <tr key={item.sNo} className="hover:bg-white/[0.03] transition-colors">
+                      <td className="px-5 py-3.5 text-center text-xs font-bold text-slate-400">
+                        #{item.sNo}
+                      </td>
+                      <td className="px-5 py-3.5 font-bold text-white flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center font-black text-xs text-blue-300 shrink-0">
+                          {item.company.charAt(0)}
+                        </div>
+                        <span>{item.company}</span>
+                      </td>
+                      <td className="px-5 py-3.5">
+                        <span
+                          className={`px-2.5 py-1 rounded-lg text-xs font-semibold ${
+                            item.tier === 'Marquee'
+                              ? 'bg-amber-400/15 text-amber-300 border border-amber-400/30'
+                              : item.tier === 'Super Dream'
+                              ? 'bg-purple-500/15 text-purple-300 border border-purple-500/30'
+                              : item.tier === 'Dream'
+                              ? 'bg-blue-500/15 text-blue-300 border border-blue-500/30'
+                              : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
+                          }`}
+                        >
+                          {item.tier}
+                        </span>
+                      </td>
+                      <td className="px-5 py-3.5 text-right font-extrabold text-sm sm:text-base">
+                        <span
+                          className={
+                            item.ctc >= 20
+                              ? 'gradient-text-gold font-black'
+                              : item.ctc >= 10
+                              ? 'text-purple-300 font-extrabold'
+                              : item.ctc >= 6
+                              ? 'text-blue-300 font-bold'
+                              : 'text-emerald-400 font-bold'
+                          }
+                        >
+                          ₹{item.ctc.toFixed(2).replace(/\.00$/, '')} LPA
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                  {filteredOffers.length === 0 && (
+                    <tr>
+                      <td colSpan={4} className="px-5 py-10 text-center text-slate-400 text-sm">
+                        No companies match your search &quot;{searchQuery}&quot;.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Load More Button */}
+            {filteredOffers.length > visibleCount && (
+              <div className="flex justify-center pt-1">
+                <button
+                  onClick={() => setVisibleCount((prev) => prev + 30)}
+                  className="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs sm:text-sm font-semibold text-white transition flex items-center gap-2"
+                >
+                  <span>Show Next 30 Companies ({visibleCount} of {filteredOffers.length} shown)</span>
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Department-wise Placement Breakdown */}
         {uni.departments && uni.departments.length > 0 && (

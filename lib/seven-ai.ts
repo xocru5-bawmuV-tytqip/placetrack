@@ -4,17 +4,24 @@ import {
   COMPANIES_DATA,
   PLACEMENTS_DATA,
   INTERVIEW_QUESTIONS_DATA,
+  POORNIMA_OFFICIAL_RECRUITERS,
 } from './placement-data'
 
 const apiKey = process.env.GEMINI_API_KEY || ''
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null
 
 const SEVEN_AI_SYSTEM_INSTRUCTION = `
-You are SevenAI (powered by Gemini 2.5 Flash), the official intelligent AI Assistant on the PlaceTrack platform.
+You are SevenAI (powered by Gemini 2.5 Flash), the official intelligent AI Assistant on the PlaceTrack platform for Poornima University.
+
+You have access to Poornima University's verified official records of 109 recruiting companies:
+- Highest CTC: Amazon (₹42.10 LPA)
+- Marquee Tier (>20 LPA): Flipkart (₹32.57 LPA), Morgan Stanley (₹25.33 LPA), VMWARE (₹23.80 LPA), Locus (₹22.00 LPA), Groww (₹20.00 LPA)
+- Super Dream Tier (10-20 LPA): RTCamp Solutions (₹18 LPA), Trell (₹18 LPA), Kickdrum (₹15.73 LPA), Josh Technology Group (₹15.23 LPA), Auroville (₹15 LPA), Cimpress India (₹12 LPA), TCS (₹11.5 LPA), Maersk (₹11 LPA), Safe Security (₹11 LPA), Talent Serve (₹10.5 LPA), DeltaX (₹10 LPA)
+- Dream Tier (6-10 LPA): Infosys (₹9.5 LPA), rtCamp (₹9 LPA), Hafele (₹8.54 LPA), LawSikho (₹8.4 LPA), Hashedin by Deloitte (₹8.1 LPA), SAP Labs (₹6.52 LPA), Celebal Technologies (₹7 LPA), Metacube (₹6.2 LPA), etc.
 
 You have full AI capabilities:
 1. Answer ANY question asked by the user intelligently, accurately, and rapidly (like Gemini 2.5 Flash), including campus placements, coding, data structures, software engineering, science, history, mathematics, general knowledge, career advice, resume design, or everyday topics.
-2. When asked about Poornima University placement records, company interview rounds, or salary packages (CTC), provide detailed and verified statistics.
+2. When asked about Poornima University placement records or specific companies from the 109 partner drives, provide detailed and verified statistics.
 3. Be friendly, articulate, encouraging, and helpful. Always provide clean formatting with markdown.
 `
 
@@ -30,16 +37,28 @@ function generateKnowledgeBasedResponse(userMessage: string): string {
     const pu = UNIVERSITIES_DATA.find((u) => u.id === 'poornima')!
     return `🎓 **Poornima University Placement Highlights (Official Campus Records)**
 
-• **Highest CTC:** **${pu.highestCTC}** (Offered by Google for SDE-1 role to Arjun Sharma, CSE batch)
-• **Average CTC:** **${pu.avgCTC}** across all engineering departments (CSE average is **₹7.8 LPA**, AI & Data Science average is **₹8.2 LPA**)
-• **Total Students Placed:** **${pu.placed.toLocaleString()}+** students in the 2024 season
-• **Recruiting Companies:** Over **${pu.companies}+** companies visited campus
-• **Overall Placement Rate:** **${pu.placementRate}**
+• **Highest CTC:** **₹42.10 LPA** (Offered by **Amazon**)
+• **Marquee Packages (&gt;20 LPA):** **Flipkart** (₹32.57 LPA), **Morgan Stanley** (₹25.33 LPA), **VMWARE** (₹23.80 LPA), **Locus** (₹22.00 LPA), **Groww** (₹20.00 LPA)
+• **Super Dream Packages (10-20 LPA):** **RTCamp Solutions** (₹18 LPA), **Trell** (₹18 LPA), **Kickdrum** (₹15.73 LPA), **Josh Technology Group** (₹15.23 LPA), **Auroville** (₹15 LPA), **Cimpress** (₹12 LPA), **TCS** (₹11.5 LPA), **Maersk** (₹11 LPA), **Safe Security** (₹11 LPA), **Talent Serve** (₹10.5 LPA), **DeltaX** (₹10 LPA)
+• **Dream Packages (6-10 LPA):** **Infosys** (₹9.5 LPA), **Hashedin by Deloitte** (₹8.1 LPA), **SAP Labs** (₹6.52 LPA), **Celebal Technologies** (₹7 LPA), **Metacube** (₹6.2 LPA)
+• **Total Verified Recruiting Companies:** **109 Companies** audited on campus
+• **Average Package:** **₹7.45 LPA** (Computer Science & AI branches average ₹8.2 - 8.5 LPA)
+• **Placement Rate:** **${pu.placementRate}**
 
-🏢 **Top Campus Recruiters:**
-Google (₹42 LPA), Microsoft (₹38 LPA), Amazon (₹32 LPA), Razorpay (₹22 LPA), Zomato (₹20 LPA), Flipkart (₹18 LPA), Deloitte (₹12 LPA), TCS Prime (₹11.5 LPA), Infosys (₹9.5 LPA).
+Explore the full interactive table of all 109 companies at \`/universities/poornima\`!`
+  }
 
-💡 *Tip:* Computer Science & Engineering had a 96.2% placement record with over 210 recruitment drives.`
+  // 2. Check for matching company in Poornima's 109 official recruitment drives
+  for (const offer of POORNIMA_OFFICIAL_RECRUITERS) {
+    if (query.includes(offer.company.toLowerCase())) {
+      return `🏢 **${offer.company} Placement Record at Poornima University**
+
+• **Package Offered:** **₹${offer.ctc} LPA**
+• **Hiring Category Tier:** **${offer.tier}**
+• **Official University Drive:** Verified campus placement drive on record for Poornima University.
+
+Explore the complete list of 109 placement recruiters on PlaceTrack at \`/universities/poornima\`!`
+    }
   }
 
   // 2. Check for Specific Companies (Google, Microsoft, Amazon, TCS, etc.)
