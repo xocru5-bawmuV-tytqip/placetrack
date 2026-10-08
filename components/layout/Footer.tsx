@@ -80,163 +80,171 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#040D1A] text-slate-400 border-t border-blue-950/60 font-sans">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-          {/* Column 1: Brand & Emblem (4 cols) */}
-          <div className="lg:col-span-4 space-y-4">
-            <Link href="/" className="inline-block bg-white px-3 py-1.5 rounded-lg shadow-sm border border-slate-200">
-              <img
-                src="/images/logos/poornima-university.png"
-                alt="Poornima University"
-                className="h-9 w-auto object-contain"
-              />
+    <footer className="relative bg-[#061120] text-slate-300 border-t border-white/10 overflow-hidden">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top section */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="pt-16 pb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5"
+        >
+          {/* Brand column */}
+          <motion.div variants={itemVariants} className="lg:col-span-2 space-y-4">
+            <Link href="/" className="inline-flex items-center gap-3 group">
+              <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-white p-1 border border-white/20 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
+                <img
+                  src="/images/logos/poornima-group.jpg"
+                  alt="Poornima Group"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1.5 leading-none">
+                  <span className="font-extrabold text-lg text-white">Poornima</span>
+                  <span className="font-bold text-lg text-blue-400">PlaceTrack</span>
+                </div>
+                <span className="text-[10px] text-slate-400 font-medium tracking-wider mt-1 uppercase">
+                  Central Placement Portal
+                </span>
+              </div>
             </Link>
-            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Official placement platform of Poornima Group of Colleges (Poornima University, PCE &amp; PIET Jaipur) — empowering students with verified recruitment drives, industry mentorship, and next-gen interview preparation.
+
+            <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
+              The official placement intelligence platform for Poornima Group of Colleges
+              (Poornima University, PCE & PIET). Connecting 10,000+ students with 109 global recruiters.
             </p>
-            <div className="pt-2 flex items-center gap-3">
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-[#0066FF] text-white flex items-center justify-center text-xs transition-colors"
-              >
-                𝕏
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-[#0066FF] text-white flex items-center justify-center text-xs transition-colors"
-              >
-                in
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-[#0066FF] text-white flex items-center justify-center text-xs transition-colors"
-              >
-                f
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-[#0066FF] text-white flex items-center justify-center text-xs transition-colors"
-              >
-                ▶
-              </a>
+
+            {/* Accreditation Badges */}
+            <div className="flex items-center gap-2 pt-1">
+              <div className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 flex items-center gap-1.5 text-[11px] text-slate-300">
+                <img src="/images/logos/aicte.png" alt="AICTE" className="h-4 w-auto object-contain" />
+                <span>AICTE Approved</span>
+              </div>
+              <div className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 flex items-center gap-1.5 text-[11px] text-slate-300">
+                <img src="/images/logos/rtu-logo.png" alt="RTU" className="h-4 w-auto object-contain" />
+                <span>RTU Affiliated</span>
+              </div>
             </div>
-          </div>
 
-          {/* Column 2: Services (2.5 cols) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+            {/* Social icons */}
+            <div className="flex items-center gap-2 pt-2">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-[#0066FF] border border-white/10 text-slate-400 hover:text-white transition-all duration-200"
+                  >
+                    <Icon size={14} />
+                  </a>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* Column 2: Campuses */}
+          <motion.div variants={itemVariants}>
+            <h3 className="text-xs font-bold text-white mb-4 uppercase tracking-wider">
+              Campuses
+            </h3>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <Link href="/universities/poornima" className="text-slate-400 hover:text-white transition-colors">
+                  Poornima University (PU)
+                </Link>
+              </li>
+              <li>
+                <Link href="/universities/pce" className="text-slate-400 hover:text-white transition-colors">
+                  PCE Jaipur (Estd. 2000)
+                </Link>
+              </li>
+              <li>
+                <Link href="/universities/piet" className="text-slate-400 hover:text-white transition-colors">
+                  PIET Autonomous (NAAC 'A')
+                </Link>
+              </li>
+              <li>
+                <Link href="/placements" className="text-slate-400 hover:text-white transition-colors">
+                  Central TPO Office
+                </Link>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Column 3: Services */}
+          <motion.div variants={itemVariants}>
+            <h3 className="text-xs font-bold text-white mb-4 uppercase tracking-wider">
               Services
-            </h4>
-            <ul className="space-y-2 text-xs">
+            </h3>
+            <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/companies" className="hover:text-blue-400 transition-colors">
-                  • 109 Recruiter Drives
+                <Link href="/placements" className="text-slate-400 hover:text-white transition-colors">
+                  109 Partner Companies
                 </Link>
               </li>
               <li>
-                <Link href="/ai" className="hover:text-blue-400 transition-colors">
-                  • SevenAI Mock Prep
+                <Link href="/ai" className="text-slate-400 hover:text-white transition-colors">
+                  SevenAI Copilot
                 </Link>
               </li>
               <li>
-                <Link href="/placements" className="hover:text-blue-400 transition-colors">
-                  • Verified Placement CTCs
+                <Link href="/questions" className="text-slate-400 hover:text-white transition-colors">
+                  Interview Question Bank
                 </Link>
               </li>
               <li>
-                <Link href="/universities" className="hover:text-blue-400 transition-colors">
-                  • Campus Directory
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources/internships" className="hover:text-blue-400 transition-colors">
-                  • Corporate Internships
+                <Link href="/resources/resume" className="text-slate-400 hover:text-white transition-colors">
+                  ATS Resume Scoring
                 </Link>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Column 3: Outlook (2.5 cols) */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              Outlook
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li>
-                <Link href="/universities/poornima" className="hover:text-blue-400 transition-colors">
-                  • Poornima University (PU)
-                </Link>
-              </li>
-              <li>
-                <Link href="/universities/pce" className="hover:text-blue-400 transition-colors">
-                  • PCE Jaipur (NBA)
-                </Link>
-              </li>
-              <li>
-                <Link href="/universities/piet" className="hover:text-blue-400 transition-colors">
-                  • PIET Jaipur (NAAC &apos;A&apos;)
-                </Link>
-              </li>
-              <li>
-                <Link href="/placements" className="hover:text-blue-400 transition-colors">
-                  • ₹42.10 LPA Amazon Drive
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-blue-400 transition-colors">
-                  • Placement Office Desk
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Subscribe (3 cols) */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              Subscribe
-            </h4>
+          {/* Column 4: Subscribe Box (matching reference image) */}
+          <motion.div variants={itemVariants} className="space-y-3">
+            <h3 className="text-xs font-bold text-white mb-4 uppercase tracking-wider">
+              Placement Alerts
+            </h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Get notified of upcoming company drives, recruitment criteria, and verified package announcements.
+              Get notified of new recruiter visits, eligibility criteria, and interview dates.
             </p>
-            <form onSubmit={(e) => e.preventDefault()} className="flex items-center mt-3">
-              <input
-                type="email"
-                placeholder="Enter email address"
-                className="w-full bg-slate-900/90 text-white placeholder:text-slate-500 text-xs px-3 py-2.5 rounded-l-md border border-slate-700 focus:outline-none focus:border-blue-500"
-              />
-              <button
-                type="submit"
-                className="bg-[#0066FF] hover:bg-blue-600 text-white font-bold px-4 py-2.5 rounded-r-md text-xs transition-colors shrink-0"
-              >
-                &gt;
-              </button>
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
+              <div className="flex">
+                <input
+                  type="email"
+                  placeholder="Enter your college email..."
+                  className="w-full px-3 py-2 text-xs rounded-l-lg bg-white/10 border border-white/15 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#0066FF]"
+                />
+                <button
+                  type="submit"
+                  className="px-3.5 py-2 text-xs font-bold bg-[#0066FF] hover:bg-[#0052CC] text-white rounded-r-lg transition-colors shrink-0 uppercase tracking-wide"
+                >
+                  Join
+                </button>
+              </div>
+              <p className="text-[10px] text-slate-500">Official PU / PCE / PIET student updates.</p>
             </form>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* Bottom Legal Row */}
-        <div className="mt-14 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-3">
-          <p>© {currentYear} Poornima Group of Colleges (Poornima University, PCE, PIET). All Rights Reserved.</p>
+        {/* Bottom copyright bar */}
+        <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <p>© {currentYear} Poornima Group PlaceTrack. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="hover:text-slate-400 transition-colors">
+            <Link href="/privacy" className="hover:text-slate-300 transition-colors">
               Privacy Policy
             </Link>
-            <span>•</span>
-            <Link href="/terms" className="hover:text-slate-400 transition-colors">
-              Placement Regulations
+            <Link href="/terms" className="hover:text-slate-300 transition-colors">
+              Terms of Service
             </Link>
-            <span>•</span>
-            <Link href="/contact" className="hover:text-slate-400 transition-colors">
-              Helpdesk
+            <Link href="/security" className="hover:text-slate-300 transition-colors">
+              Security
             </Link>
           </div>
         </div>
