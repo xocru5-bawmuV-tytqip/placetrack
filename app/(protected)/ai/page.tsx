@@ -18,7 +18,7 @@ export default function SevenAIPage() {
       id: 'welcome',
       role: 'assistant',
       content:
-        'Namaste! I am **SevenAI**, your dedicated Placement Intelligence Advisor for Poornima University. Ask me about on-campus placement drives, company-specific interview rounds, senior CTC statistics, or coding questions. \n\n⚠️ *Note: SevenAI strictly permits placement & study queries only. Off-topic/dating questions will be automatically blocked.*',
+        'Namaste! I am **SevenAI**, powered by **Gemini AI Pro**. Ask me *anything* — from Poornima University campus placements, company interview rounds, coding & system design, to general science, technology, mathematics, writing, and general knowledge queries!',
     },
   ])
   const [input, setInput] = useState('')
@@ -72,8 +72,8 @@ export default function SevenAIPage() {
 
   const promptSuggestions = [
     'Which companies visited Poornima for B.Tech CSE in 2024 and what was the highest CTC?',
-    'What technical questions does TCS Digital ask in Round 2?',
-    'Can you give me dating advice for college? (Test Restriction)',
+    'Explain how React Server Components work under the hood with code examples.',
+    'What are the top technical skills needed to get hired at Google or Microsoft in 2025?',
   ]
 
   return (
@@ -86,13 +86,13 @@ export default function SevenAIPage() {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-base font-extrabold text-white">SevenAI Placement Intelligence</h1>
+              <h1 className="text-base font-extrabold text-white">SevenAI Assistant</h1>
               <span className="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold border border-blue-500/30">
-                Gemini 1.5 Pro
+                Gemini AI Pro
               </span>
               <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
             </div>
-            <p className="text-xs text-slate-400">Poornima University Campus Records & Interview Prep</p>
+            <p className="text-xs text-slate-400">Powered by Gemini AI Pro • Campus Intelligence & General Assistant</p>
           </div>
         </div>
 
@@ -111,7 +111,7 @@ export default function SevenAIPage() {
                   id: 'welcome',
                   role: 'assistant',
                   content:
-                    'Conversation reset. Ask any placement or academic question regarding Poornima University.',
+                    'Conversation reset. Ask any question to SevenAI (powered by Gemini AI Pro).',
                 },
               ])
             }
@@ -167,7 +167,7 @@ export default function SevenAIPage() {
             </div>
             <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-xs text-slate-400 flex items-center gap-2">
               <Loader2 className="w-4 h-4 animate-spin text-blue-400" />
-              <span>SevenAI is querying Poornima placement records...</span>
+              <span>SevenAI (Gemini AI Pro) is generating response...</span>
             </div>
           </div>
         )}
@@ -181,11 +181,7 @@ export default function SevenAIPage() {
                 <button
                   key={i}
                   onClick={() => handleSend(prompt)}
-                  className={`text-left px-3 py-1.5 rounded-full text-xs transition border ${
-                    prompt.includes('Dating')
-                      ? 'bg-red-950/20 border-red-500/30 text-red-300 hover:bg-red-950/40'
-                      : 'bg-slate-800/80 border-slate-700 text-slate-300 hover:bg-slate-700'
-                  }`}
+                  className="text-left px-3 py-1.5 rounded-full text-xs transition border bg-slate-800/80 border-slate-700 text-slate-300 hover:bg-slate-700"
                 >
                   {prompt}
                 </button>
@@ -209,7 +205,7 @@ export default function SevenAIPage() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask SevenAI about Poornima placement drives, company rounds, coding problems..."
+              placeholder="Ask SevenAI anything (Powered by Gemini AI Pro)..."
               className="flex-1 bg-slate-800/80 border border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
             />
             <button
@@ -222,7 +218,7 @@ export default function SevenAIPage() {
             </button>
           </form>
           <p className="text-[10px] text-slate-500 text-center">
-            SevenAI Placement Assistant • Strictly academic & placement queries allowed • Poornima University
+            SevenAI • Powered by Gemini AI Pro • Ask any question
           </p>
         </div>
       </div>

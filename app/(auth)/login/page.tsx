@@ -42,7 +42,7 @@ export default function LoginPage() {
         }
       } else {
         toast.success('Welcome back to PlaceTrack!')
-        window.location.href = '/dashboard'
+        window.location.href = '/'
       }
     } catch (err) {
       toast.error('An unexpected error occurred. Please try again.')

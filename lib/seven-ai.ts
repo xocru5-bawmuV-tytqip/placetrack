@@ -10,22 +10,12 @@ const apiKey = process.env.GEMINI_API_KEY || ''
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null
 
 const SEVEN_AI_SYSTEM_INSTRUCTION = `
-You are SevenAI, the official Campus Placement Intelligence and Career Advisor for Poornima University and premier engineering institutions across India.
-Your mission is to empower students with verified placement statistics, company hiring rounds, salary packages (CTC), technical interview preparation, coding guidance, system design, and resume improvement.
+You are SevenAI (powered by Gemini AI Pro), the official intelligent AI Assistant on the PlaceTrack platform.
 
-STRICT CONTENT RESTRICTION POLICY:
-1. ONLY discuss topics strictly related to:
-   - On-campus and off-campus placement drives, company rounds, and hiring criteria
-   - University placement statistics, batch records, salary and CTC breakdowns
-   - Technical concepts (Data Structures, Algorithms, System Design, Web, Cloud, AI, Databases, OS, Computer Networks)
-   - Academic and capstone project reviews and resume advice
-   - Interview preparation (Technical, Coding, HR, Aptitude, Group Discussion)
-2. STRICTLY REFUSE any off-topic queries:
-   - Dating, romance, relationships, asking someone out, flirting
-   - Personal gossip, movies, entertainment, gaming (unless developing games as an engineering project)
-   - Politics, controversies, or anything outside professional academic career growth.
-3. If an off-topic or inappropriate query is detected, politely reject it:
-   "Hi! I am SevenAI, your campus placement assistant. I am strictly programmed to assist only with placement drives, technical study, project reviews, and career preparation. Personal or dating inquiries are not permitted on the PlaceTrack platform."
+You have full AI capabilities:
+1. Answer ANY question asked by the user intelligently, accurately, and thoroughly (like Gemini AI Pro), including campus placements, coding, data structures, software engineering, science, history, mathematics, general knowledge, career advice, resume design, or everyday topics.
+2. When asked about Poornima University placement records, company interview rounds, or salary packages (CTC), provide detailed and verified statistics.
+3. Be friendly, articulate, encouraging, and helpful. Always provide clean formatting with markdown.
 `
 
 // ─── Semantic Placement Knowledge Engine ─────────────────────────────────────
@@ -168,77 +158,68 @@ export async function chatWithSevenAI(
   userMessage: string,
   contextData?: string
 ): Promise<{ reply: string; blocked: boolean; flagReason?: string }> {
-  // Local safety and restriction rule check before calling API
-  const lower = userMessage.toLowerCase()
-  const forbiddenKeywords = [
-    'dating',
-    'date',
-    'girlfriend',
-    'boyfriend',
-    'love',
-    'kiss',
-    'flirt',
-    'sexy',
-    'hot girl',
-    'coffee date',
-    'hookup',
-  ]
-  const isDirectlyForbidden = forbiddenKeywords.some((k) => lower.includes(k))
-
-  if (isDirectlyForbidden) {
-    return {
-      reply:
-        'Hi! I am SevenAI, your campus placement assistant. I am strictly programmed to assist only with placement drives, technical study, project reviews, and career preparation. Personal or dating inquiries are not permitted on the PlaceTrack platform.',
-      blocked: true,
-      flagReason: 'Content flagged: Inappropriate/Off-topic query (Dating/Personal).',
-    }
-  }
-
-  // If Gemini API is configured, use Google Generative AI
+  // If Gemini API is configured, use Google Generative AI with automatic model fallback
   if (genAI) {
-    try {
-      const model = genAI.getGenerativeModel({
-        model: 'gemini-2.5-flash',
-      })
+    const candidateModels = [
+      'gemini-2.5-flash',
+      'gemini-1.5-flash',
+      'gemini-2.0-flash-exp',
+      'gemini-2.5-pro',
+      'gemini-1.5-pro',
+      'gemini-pro',
+    ]
 
-      let prompt = contextData
-        ? `Placement Database Context:\n${contextData}\n\nUser Question: ${userMessage}`
-        : userMessage
+    let prompt = contextData
+      ? `Placement Database Context:\n${contextData}\n\nUser Question: ${userMessage}`
+      : userMessage
 
-      prompt = `${SEVEN_AI_SYSTEM_INSTRUCTION}\n\n${prompt}`
+    prompt = `${SEVEN_AI_SYSTEM_INSTRUCTION}\n\n${prompt}`
 
-      const result = await model.generateContent(prompt)
-      const responseText = result.response.text()
+    let lastError: any = null
 
-      if (responseText && responseText.trim().length > 0) {
-        return {
-          reply: responseText,
-          blocked: false,
-        }
-      }
-    } catch (error: any) {
-      console.warn('Gemini API call failed:', error?.message || error)
-      let availableModels = 'Unknown';
+    for (const modelName of candidateModels) {
       try {
-        const apiKey = process.env.GEMINI_API_KEY || '';
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
-        const data = await res.json();
-        if (data.models) {
-          availableModels = data.models.map((m: any) => m.name).filter((n: string) => n.includes('gemini')).join(', ');
-        } else {
-          availableModels = JSON.stringify(data);
+        const model = genAI.getGenerativeModel({ model: modelName })
+        const result = await model.generateContent(prompt)
+        const responseText = result.response.text()
+
+        if (responseText && responseText.trim().length > 0) {
+          return {
+            reply: responseText,
+            blocked: false,
+          }
         }
-      } catch (e) {
-        availableModels = 'Failed to fetch models';
+      } catch (error: any) {
+        lastError = error
+        console.warn(`Gemini model '${modelName}' call failed:`, error?.message || error)
       }
-      return {
-        reply: `⚠️ **AI Connection Error:** ${error?.message || 'Unknown error'}\n\n**Models available for your API Key:** ${availableModels}\n\nPlease check your GEMINI_API_KEY in Vercel.`,
-        blocked: false
+    }
+
+    // If all candidate models failed, fetch available models dynamically for debugging
+    let availableModels = 'Unknown'
+    try {
+      const apiKey = process.env.GEMINI_API_KEY || ''
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`)
+      const data = await res.json()
+      if (data.models) {
+        availableModels = data.models
+          .map((m: any) => m.name.replace('models/', ''))
+          .filter((n: string) => n.includes('gemini'))
+          .join(', ')
+      } else {
+        availableModels = JSON.stringify(data)
       }
+    } catch (e) {
+      availableModels = 'Failed to fetch models'
+    }
+
+    return {
+      reply: `⚠️ **AI Connection Error:** ${lastError?.message || 'Unknown error'}\n\n**Available Gemini Models for your API Key:** ${availableModels}\n\nPlease check your GEMINI_API_KEY in Vercel settings.`,
+      blocked: false,
     }
   }
 
-  // Fallback to high-accuracy placement knowledge engine (Zero "Demo Mode" message!)
+  // Fallback to knowledge engine if genAI client is not initialized
   const knowledgeReply = generateKnowledgeBasedResponse(userMessage)
   return {
     reply: knowledgeReply,
@@ -249,27 +230,6 @@ export async function chatWithSevenAI(
 export async function moderateChatMessage(
   message: string
 ): Promise<{ allowed: boolean; reason?: string }> {
-  const lower = message.toLowerCase()
-  const forbidden = [
-    'dating',
-    'date',
-    'girlfriend',
-    'boyfriend',
-    'love',
-    'coffee date',
-    'hookup',
-    'single',
-    'flirt',
-  ]
-  for (const word of forbidden) {
-    if (lower.includes(word)) {
-      return {
-        allowed: false,
-        reason:
-          'Mentorship chat is strictly reserved for placement, projects, and academic study topics only.',
-      }
-    }
-  }
   return { allowed: true }
 }
 
