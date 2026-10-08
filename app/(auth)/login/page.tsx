@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Mail, Lock, Loader2, ArrowRight } from 'lucide-react'
+import { Mail, Lock, Loader2, ArrowRight, Home } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 export default function LoginPage() {
@@ -58,6 +58,16 @@ export default function LoginPage() {
 
   return (
     <div className="w-full max-w-md mx-auto space-y-6">
+      <div className="flex items-center justify-between">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-300 transition"
+        >
+          <Home className="w-4 h-4 text-blue-400" />
+          <span>Go to Home</span>
+        </Link>
+      </div>
+
       <div className="text-center space-y-2">
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
           Sign In to PlaceTrack

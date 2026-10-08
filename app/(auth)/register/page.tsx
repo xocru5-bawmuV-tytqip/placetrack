@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { User, Mail, Lock, ShieldCheck, GraduationCap, Building, Loader2, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { User, Mail, Lock, ShieldCheck, GraduationCap, Building, Loader2, ArrowRight, CheckCircle2, Home } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 export default function RegisterPage() {
@@ -89,6 +89,16 @@ export default function RegisterPage() {
 
   return (
     <div className="w-full max-w-lg mx-auto space-y-6">
+      <div className="flex items-center justify-between">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-300 transition"
+        >
+          <Home className="w-4 h-4 text-blue-400" />
+          <span>Go to Home</span>
+        </Link>
+      </div>
+
       <div className="text-center space-y-2">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
           <ShieldCheck className="w-3.5 h-3.5" />

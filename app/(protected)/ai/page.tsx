@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Bot, Send, AlertTriangle, Sparkles, RefreshCw, Loader2 } from 'lucide-react'
+import { Bot, Send, AlertTriangle, Sparkles, RefreshCw, Loader2, Home } from 'lucide-react'
 import Link from 'next/link'
 
 interface Message {
@@ -97,6 +97,13 @@ export default function SevenAIPage() {
         </div>
 
         <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition"
+          >
+            <Home className="w-3.5 h-3.5 text-blue-400" />
+            <span>Home</span>
+          </Link>
           <Link
             href="/ai/interview"
             className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700"

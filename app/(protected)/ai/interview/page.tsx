@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Sparkles, CheckCircle2, ArrowRight, Loader2, Award, Clock } from 'lucide-react'
+import { Sparkles, CheckCircle2, ArrowRight, Loader2, Award, Clock, Home } from 'lucide-react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 
@@ -67,9 +67,18 @@ export default function MockInterviewPage() {
             </div>
             <h1 className="text-2xl font-extrabold text-white">SevenAI Mock Interview Simulator</h1>
           </div>
-          <Link href="/ai" className="text-xs text-slate-400 hover:text-white">
-            Back to Advisor
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition"
+            >
+              <Home className="w-3.5 h-3.5 text-blue-400" />
+              <span>Home</span>
+            </Link>
+            <Link href="/ai" className="text-xs text-slate-400 hover:text-white">
+              Back to Advisor
+            </Link>
+          </div>
         </div>
 
         {/* STEP 1: SETUP */}

@@ -17,10 +17,16 @@ import {
   Building2,
   Users,
   BookOpen,
+  Home,
 } from "lucide-react";
 import Image from "next/image";
 
 const navLinks = [
+  {
+    label: "Home",
+    href: "/",
+    icon: Home,
+  },
   {
     label: "Universities",
     href: "/universities",
