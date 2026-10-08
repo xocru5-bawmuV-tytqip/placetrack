@@ -153,73 +153,129 @@ Here is what you can ask me:
 How can I assist your placement preparation today?`
 }
 
-export async function chatWithSevenAI(
-  conversationHistory: { role: 'user' | 'model'; content: string }[],
-  userMessage: string,
-  contextData?: string
-): Promise<{ reply: string; blocked: boolean; flagReason?: string }> {
-  // If Gemini API is configured, use Google Generative AI with automatic model fallback
+async function callGeminiAPI(prompt: string): Promise<string | null> {
+  const apiKey = process.env.GEMINI_API_KEY || ''
+  if (!apiKey) return null
+
+  // Priority list of Flash and Pro candidate models
+  const candidateModels = [
+    'gemini-2.5-flash',
+    'gemini-flash-latest',
+    'gemini-2.5-flash-lite',
+    'gemini-3.5-flash',
+    'gemini-3.6-flash',
+    'gemini-3.7-flash',
+    'gemini-3.8-flash',
+    'gemini-2.5-pro',
+    'gemini-pro-latest',
+    'gemini-1.5-flash',
+  ]
+
+  // 1. Try SDK for candidate models
   if (genAI) {
-    const candidateModels = [
-      'gemini-2.5-flash',
-      'gemini-1.5-flash',
-      'gemini-2.0-flash-exp',
-      'gemini-2.5-pro',
-      'gemini-1.5-pro',
-      'gemini-pro',
-    ]
-
-    let prompt = contextData
-      ? `Placement Database Context:\n${contextData}\n\nUser Question: ${userMessage}`
-      : userMessage
-
-    prompt = `${SEVEN_AI_SYSTEM_INSTRUCTION}\n\n${prompt}`
-
-    let lastError: any = null
-
     for (const modelName of candidateModels) {
       try {
         const model = genAI.getGenerativeModel({ model: modelName })
         const result = await model.generateContent(prompt)
         const responseText = result.response.text()
-
         if (responseText && responseText.trim().length > 0) {
-          return {
-            reply: responseText,
-            blocked: false,
-          }
+          return responseText
         }
-      } catch (error: any) {
-        lastError = error
-        console.warn(`Gemini model '${modelName}' call failed:`, error?.message || error)
+      } catch (err) {
+        // Continue trying next candidate
       }
     }
+  }
 
-    // If all candidate models failed, fetch available models dynamically for debugging
-    let availableModels = 'Unknown'
+  // 2. Try direct HTTP REST API calls
+  for (const modelName of candidateModels) {
     try {
-      const apiKey = process.env.GEMINI_API_KEY || ''
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`)
-      const data = await res.json()
-      if (data.models) {
-        availableModels = data.models
-          .map((m: any) => m.name.replace('models/', ''))
-          .filter((n: string) => n.includes('gemini'))
-          .join(', ')
-      } else {
-        availableModels = JSON.stringify(data)
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+          }),
+        }
+      )
+
+      if (res.ok) {
+        const data = await res.json()
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text
+        if (text && text.trim().length > 0) {
+          return text
+        }
       }
     } catch (e) {
-      availableModels = 'Failed to fetch models'
+      // Continue trying
     }
+  }
 
+  // 3. Dynamically discover available models for this specific API Key
+  try {
+    const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`)
+    if (listRes.ok) {
+      const listData = await listRes.json()
+      if (listData.models && Array.isArray(listData.models)) {
+        const availableGemini = listData.models
+          .filter(
+            (m: any) =>
+              m.name?.includes('gemini') &&
+              m.supportedGenerationMethods?.includes('generateContent')
+          )
+          .map((m: any) => m.name.replace('models/', ''))
+
+        for (const discoveredModel of availableGemini) {
+          try {
+            const res = await fetch(
+              `https://generativelanguage.googleapis.com/v1beta/models/${discoveredModel}:generateContent?key=${apiKey}`,
+              {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  contents: [{ parts: [{ text: prompt }] }],
+                }),
+              }
+            )
+            if (res.ok) {
+              const data = await res.json()
+              const text = data.candidates?.[0]?.content?.parts?.[0]?.text
+              if (text && text.trim().length > 0) {
+                return text
+              }
+            }
+          } catch (e) {}
+        }
+      }
+    }
+  } catch (e) {}
+
+  return null
+}
+
+export async function chatWithSevenAI(
+  conversationHistory: { role: 'user' | 'model'; content: string }[],
+  userMessage: string,
+  contextData?: string
+): Promise<{ reply: string; blocked: boolean; flagReason?: string }> {
+  let prompt = contextData
+    ? `Placement Database Context:\n${contextData}\n\nUser Question: ${userMessage}`
+    : userMessage
+
+  prompt = `${SEVEN_AI_SYSTEM_INSTRUCTION}\n\n${prompt}`
+
+  // Call Gemini API (SDK + REST + Dynamic Discovery)
+  const aiReply = await callGeminiAPI(prompt)
+  if (aiReply) {
     return {
-      reply: `⚠️ **AI Connection Error:** ${lastError?.message || 'Unknown error'}\n\n**Available Gemini Models for your API Key:** ${availableModels}\n\nPlease check your GEMINI_API_KEY in Vercel settings.`,
+      reply: aiReply,
       blocked: false,
     }
   }
 
-  // Fallback to knowledge engine if genAI client is not initialized
+  // Resilient fallback to placement knowledge engine
   const knowledgeReply = generateKnowledgeBasedResponse(userMessage)
   return {
     reply: knowledgeReply,
@@ -239,10 +295,7 @@ export async function evaluateInterviewAnswer(
   company: string,
   role: string
 ): Promise<{ score: number; strengths: string; improvements: string; overallFeedback: string }> {
-  if (genAI) {
-    try {
-      const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
-      const prompt = `
+  const prompt = `
 You are evaluating a candidate's mock interview answer for ${company} (${role}).
 Question: "${question}"
 Candidate Answer: "${userAnswer}"
@@ -255,16 +308,15 @@ Return your evaluation in strict JSON format:
   "overallFeedback": "<encouraging 2-sentence summary>"
 }
 `
-      const result = await model.generateContent(prompt)
-      const text = result.response
-        .text()
+  const text = await callGeminiAPI(prompt)
+  if (text) {
+    try {
+      const cleanedText = text
         .replace(/```json/g, '')
         .replace(/```/g, '')
         .trim()
-      return JSON.parse(text)
-    } catch (e) {
-      // Fall back to rubric evaluation
-    }
+      return JSON.parse(cleanedText)
+    } catch (e) {}
   }
 
   // Production-grade scoring rubric based on answer length and technical depth
