@@ -83,14 +83,14 @@ export default function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled
-            ? "backdrop-blur-xl bg-[#0A0F1E]/90 border-b border-white/10 shadow-lg shadow-black/20"
+            ? "backdrop-blur-2xl bg-[#030508]/90 border-b border-white/[0.08] shadow-2xl shadow-black/80"
             : "bg-transparent"
         )}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white/95 p-1 border border-white/20 shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
+            <div className="relative w-10 h-10 rounded-2xl overflow-hidden bg-white/95 p-1 border border-white/20 shadow-md shadow-fuchsia-500/20 group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
               <img
                 src="/images/logos/poornima-royal.png"
                 alt="Poornima Group"
@@ -99,10 +99,10 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5 leading-none">
-                <span className="font-extrabold text-base tracking-tight text-white group-hover:text-blue-300 transition-colors">
+                <span className="font-extrabold text-base tracking-tight text-white group-hover:text-fuchsia-300 transition-colors">
                   Poornima
                 </span>
-                <span className="font-bold text-base gradient-text">
+                <span className="font-bold text-base gradient-text-serendale">
                   PlaceTrack
                 </span>
               </div>
@@ -113,7 +113,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/[0.08] p-1 rounded-full backdrop-blur-xl">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = pathname === link.href;
@@ -122,21 +122,21 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200",
+                    "flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200",
                     link.highlight
-                      ? "text-amber-400 hover:bg-amber-400/10 hover:text-amber-300"
+                      ? "text-fuchsia-300 bg-fuchsia-500/15 border border-fuchsia-500/30 hover:bg-fuchsia-500/25 shadow-[0_0_15px_rgba(217,70,239,0.25)]"
                       : isActive
-                      ? "text-blue-400 bg-blue-500/10"
-                      : "text-slate-300 hover:text-white hover:bg-white/8"
+                      ? "text-white bg-white/15 shadow-sm"
+                      : "text-slate-300 hover:text-white hover:bg-white/10"
                   )}
                 >
                   <Icon
-                    size={15}
-                    className={link.highlight ? "text-amber-400" : ""}
+                    size={14}
+                    className={link.highlight ? "text-fuchsia-300" : ""}
                   />
                   {link.label}
                   {link.highlight && (
-                    <span className="ml-0.5 px-1.5 py-0.5 text-[10px] font-semibold bg-amber-400/20 text-amber-300 rounded-md">
+                    <span className="ml-0.5 px-1.5 py-0.2 text-[9px] font-extrabold bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full">
                       AI
                     </span>
                   )}
@@ -228,20 +228,20 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
             ) : (
-              <>
+              <div className="flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200"
+                  className="px-4 py-2 text-xs font-semibold rounded-full text-slate-300 hover:text-white bg-white/[0.04] hover:bg-white/10 border border-white/15 transition-all duration-200"
                 >
                   Login
                 </Link>
                 <Link
                   href="/register"
-                  className="px-5 py-2 text-sm font-semibold bg-blue-500 hover:bg-blue-400 text-white rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
+                  className="px-5 py-2 text-xs font-bold rounded-full bg-gradient-to-r from-[#D946EF] to-[#8B5CF6] hover:from-[#E879F9] hover:to-[#A78BFA] text-white shadow-[0_0_20px_rgba(217,70,239,0.35)] border border-pink-400/30 transition-all duration-200 hover:scale-105 active:scale-95"
                 >
                   Get Started
                 </Link>
-              </>
+              </div>
             )}
           </div>
 

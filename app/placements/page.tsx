@@ -78,14 +78,14 @@ export default function PlacementsPage() {
   ).toFixed(1);
 
   return (
-    <div className="min-h-screen bg-[#0A0F1E] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#020408] text-white overflow-x-hidden selection:bg-[#D946EF] selection:text-white">
       <Navbar />
 
       {/* Hero Header */}
-      <section className="relative pt-28 pb-16 overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
-        <div className="absolute top-1/3 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/2 -right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative pt-28 pb-16 overflow-hidden border-b border-white/[0.08]">
+        <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
+        <div className="absolute top-1/3 -left-20 w-80 h-80 bg-[#FF2E93]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 -right-20 w-80 h-80 bg-[#8B5CF6]/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="section-container relative z-10">
           <motion.div
@@ -94,12 +94,12 @@ export default function PlacementsPage() {
             transition={{ duration: 0.5 }}
             className="text-center max-w-3xl mx-auto space-y-4"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-xs font-semibold tracking-wide uppercase">
-              <Sparkles size={13} className="text-amber-400" />
-              Verified Placement Intelligence
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-[#060813]/80 text-[#D946EF] text-xs font-semibold tracking-wide uppercase shadow-[0_0_20px_rgba(217,70,239,0.2)]">
+              <Sparkles size={13} className="text-[#FF2E93]" />
+              Verified Placement Intelligence • 109 Companies
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
-              Explore <span className="gradient-text">Placement Records</span>
+              Explore <span className="gradient-text-serendale">Placement Records</span>
             </h1>
             <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
               Transparent, student-verified placement records, CTC packages, engineering roles, and capstone projects from Poornima University, PCE, and PIET.

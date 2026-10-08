@@ -80,11 +80,11 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#060A14] border-t border-white/8 overflow-hidden">
+    <footer className="relative bg-[#020408] border-t border-white/[0.08] overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 left-1/4 w-96 h-64 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-48 bg-amber-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-64 bg-[#D946EF]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-48 bg-[#8B5CF6]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,7 +100,7 @@ export default function Footer() {
           <motion.div variants={itemVariants} className="lg:col-span-2">
             {/* Logo */}
             <Link href="/" className="inline-flex items-center gap-3 mb-4 group">
-              <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white/95 p-1 border border-white/20 shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
+              <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white/95 p-1 border border-white/20 shadow-lg shadow-fuchsia-500/20 group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
                 <img
                   src="/images/logos/poornima-royal.png"
                   alt="Poornima Group"
@@ -110,7 +110,7 @@ export default function Footer() {
               <div className="flex flex-col">
                 <span className="font-bold text-xl leading-none">
                   <span className="text-white">Poornima </span>
-                  <span className="gradient-text">PlaceTrack</span>
+                  <span className="gradient-text-serendale">PlaceTrack</span>
                 </span>
                 <span className="text-[10px] text-slate-400 font-medium tracking-wide mt-1 uppercase">
                   Official Placement Portal

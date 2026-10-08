@@ -443,339 +443,227 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0F1E] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#020408] text-white overflow-x-hidden selection:bg-[#D946EF] selection:text-white">
       <Navbar />
 
       {/* ══════════════════════════════════════════
           HERO SECTION
       ══════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
-        {/* Background image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-70"
-          style={{ backgroundImage: 'url("/images/poornima-real.jpg")' }}
-        />
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E] via-[#0A0F1E]/80 to-[#0A0F1E]/40 pointer-events-none" />
+      {/* ══════════════════════════════════════════
+          SERENDALE DARK NEON HERO SECTION
+      ══════════════════════════════════════════ */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center pt-28 pb-20 overflow-hidden bg-[#020408]">
+        {/* Serendale Cosmic Background Glows */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-gradient-to-r from-[#D946EF]/20 via-[#8B5CF6]/20 to-[#00F0FF]/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-12 left-10 w-96 h-96 bg-[#FF2E93]/15 rounded-full blur-[130px] pointer-events-none" />
+        <div className="absolute top-1/3 right-10 w-96 h-96 bg-[#8B5CF6]/15 rounded-full blur-[130px] pointer-events-none" />
 
-        {/* Background effects */}
-        <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none mix-blend-overlay" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl pointer-events-none mix-blend-screen" />
-        <div className="absolute top-1/3 -right-32 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none mix-blend-screen" />
+        {/* Ambient Grid overlay */}
+        <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
-        <div className="relative z-10 section-container w-full py-20">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left content */}
-            <motion.div
-              variants={stagger}
-              initial="hidden"
-              animate="visible"
-              className="space-y-8"
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+          {/* Pill Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8"
+          >
+            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-white/[0.12] bg-[#060813]/80 backdrop-blur-xl shadow-[0_0_25px_rgba(217,70,239,0.2)]">
+              <span className="w-2 h-2 rounded-full bg-[#FF2E93] animate-pulse" />
+              <span className="text-xs sm:text-sm font-medium tracking-wide text-white/90">
+                Poornima University Official Intelligence
+              </span>
+              <span className="text-white/30">•</span>
+              <span className="text-xs sm:text-sm font-semibold gradient-text-serendale">
+                109 Verified Drives
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Main Headline (Serendale typography) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="space-y-2 mb-6"
+          >
+            <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05]">
+              <span className="gradient-text-serendale block">A Fast Placement.</span>
+              <span className="text-white block mt-1">Scalable AI.</span>
+            </h1>
+          </motion.div>
+
+          {/* Subtitle description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8 font-normal"
+          >
+            Our technology powers verified campus placement intelligence (109 Partner Companies · ₹42.10 LPA Peak), company interview preparation, and AI career acceleration across Poornima institutions.
+          </motion.p>
+
+          {/* Dual Serendale Pill CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex flex-wrap items-center justify-center gap-4 mb-14"
+          >
+            <Link
+              href="/placements"
+              className="serendale-btn-primary px-9 py-3.5 rounded-full text-base font-semibold inline-flex items-center gap-2 group transition-all"
             >
-              {/* Badge */}
-              <motion.div variants={fadeUp}>
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-sm font-medium">
-                  <Sparkles size={14} className="text-amber-400" />
-                  Poornima University&apos;s Official Placement Portal
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                </span>
-              </motion.div>
+              <span>Get started</span>
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link
+              href="/placements"
+              className="serendale-btn-secondary px-9 py-3.5 rounded-full text-base font-semibold inline-flex items-center gap-2 transition-all group"
+            >
+              <span>Ecosystems</span>
+              <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-fuchsia-300 group-hover:bg-[#D946EF]/20">
+                109
+              </span>
+            </Link>
+            <Link
+              href="/ai"
+              className="px-6 py-3.5 rounded-full text-sm font-medium text-slate-300 hover:text-white border border-white/10 hover:border-white/20 bg-black/40 backdrop-blur-md inline-flex items-center gap-2 transition-all"
+            >
+              <Sparkles size={16} className="text-amber-400" />
+              <span>Ask SevenAI</span>
+            </Link>
+          </motion.div>
 
-              {/* Headline */}
-              <motion.div variants={fadeUp} className="space-y-3">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
-                  <span className="text-white">Find Your</span>
-                  <br />
-                  <span className="gradient-text-hero">Placement</span>
-                  <br />
-                  <span className="gradient-text">Path.</span>
-                </h1>
-                <p className="text-slate-400 text-lg sm:text-xl max-w-lg leading-relaxed">
-                  Real placement data, AI-powered prep, and senior connections —
-                  everything you need to land your dream job at{" "}
-                  <span className="text-blue-400 font-medium">
-                    Poornima University
-                  </span>{", "}
-                  <span className="text-purple-400 font-medium">
-                    Poornima Institute of Engineering & Technology
-                  </span>{", and "}
-                  <span className="text-emerald-400 font-medium">
-                    Poornima College of Engineering
-                  </span>.
-                </p>
-              </motion.div>
+          {/* 3D Cyberpunk AI Robot Graphic with floating telemetry */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.4 }}
+            className="relative w-full max-w-4xl mx-auto"
+          >
+            {/* Ambient neon backglow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E93]/30 via-[#D946EF]/20 to-[#8B5CF6]/30 rounded-3xl blur-3xl -z-10 scale-95" />
 
-              {/* CTAs */}
+            {/* Graphic card container */}
+            <div className="relative rounded-3xl overflow-hidden border border-white/[0.12] bg-[#030508]/80 shadow-[0_0_50px_rgba(217,70,239,0.25)]">
+              <img
+                src="/images/serendale-hero.jpg"
+                alt="Serendale AI Placement Exploration - Cyberpunk AI Robots"
+                className="w-full h-auto max-h-[520px] object-cover object-center"
+              />
+
+              {/* Serendale dark vignette bottom fade */}
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#020408] via-[#020408]/60 to-transparent pointer-events-none" />
+
+              {/* Floating Stat Badge 1: Top Left */}
               <motion.div
-                variants={fadeUp}
-                className="flex flex-wrap items-center gap-4"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-6 left-6 hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-[#060813]/85 backdrop-blur-xl border border-white/15 shadow-[0_0_20px_rgba(255,46,147,0.35)]"
               >
-                <Link
-                  href="/placements"
-                  className="btn-primary group text-base px-7 py-3.5"
-                >
-                  Explore Placements
-                  <ArrowRight
-                    size={18}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
-                </Link>
-                <Link
-                  href="/ai"
-                  className="btn-ghost group text-base px-7 py-3.5 border-amber-400/30 hover:border-amber-400/50"
-                >
-                  <Sparkles size={16} className="text-amber-400" />
-                  <span>Try SevenAI</span>
-                  <span className="px-1.5 py-0.5 text-[10px] font-semibold bg-amber-400/20 text-amber-300 rounded-md">
-                    FREE
-                  </span>
-                </Link>
-                <a
-                  href="https://www.poornima.edu.in/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-ghost group text-base px-7 py-3.5 border-white/20 hover:border-white/40"
-                >
-                  <Globe size={16} className="text-blue-400" />
-                  <span>Official Website</span>
-                </a>
-              </motion.div>
-
-              {/* Stats row */}
-              <motion.div
-                variants={fadeUp}
-                className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4"
-              >
-                {[
-                  {
-                    end: 5000,
-                    suffix: "+",
-                    label: "Placed Students",
-                    prefix: "",
-                  },
-                  {
-                    end: 200,
-                    suffix: "+",
-                    label: "Companies",
-                    prefix: "",
-                  },
-                  {
-                    end: 50,
-                    suffix: "+",
-                    label: "Universities",
-                    prefix: "",
-                  },
-                  {
-                    end: 32,
-                    suffix: " LPA",
-                    label: "Highest CTC",
-                    prefix: "₹",
-                  },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="text-center p-3 rounded-xl bg-white/3 border border-white/8"
-                  >
-                    <div className="text-2xl font-bold gradient-text">
-                      <AnimatedCounter
-                        end={stat.end}
-                        prefix={stat.prefix}
-                        suffix={stat.suffix}
-                        duration={2.5}
-                      />
-                    </div>
-                    <div className="text-xs text-slate-500 mt-1">
-                      {stat.label}
-                    </div>
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF2E93] to-[#8B5CF6] flex items-center justify-center text-white shadow-lg">
+                  <Trophy size={18} />
+                </div>
+                <div className="text-left">
+                  <div className="text-[11px] text-slate-400 font-medium">Highest Package</div>
+                  <div className="text-sm font-bold text-white">
+                    ₹42.10 LPA <span className="text-[#FF2E93] font-semibold text-xs">Amazon</span>
                   </div>
-                ))}
+                </div>
               </motion.div>
-            </motion.div>
 
-            {/* Right — Floating placement cards */}
-            <motion.div
-              variants={slideRight}
-              initial="hidden"
-              animate="visible"
-              className="relative hidden lg:flex items-center justify-center h-[520px]"
-            >
-              {/* Central glow orb */}
-              <div className="absolute w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse-glow" />
+              {/* Floating Stat Badge 2: Top Right */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 5, delay: 0.5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-6 right-6 hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-[#060813]/85 backdrop-blur-xl border border-white/15 shadow-[0_0_20px_rgba(139,92,246,0.35)]"
+              >
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#8B5CF6] to-[#00F0FF] flex items-center justify-center text-white shadow-lg">
+                  <Building2 size={18} />
+                </div>
+                <div className="text-left">
+                  <div className="text-[11px] text-slate-400 font-medium">Verified Recruitment</div>
+                  <div className="text-sm font-bold text-white">
+                    109 Companies <span className="text-emerald-400 font-semibold text-xs">100%</span>
+                  </div>
+                </div>
+              </motion.div>
 
-              {/* Floating cards */}
-              <div className="relative w-full h-full">
-                {/* Card 1 — top left */}
-                <motion.div
-                  className="absolute top-8 left-0 w-64"
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <GlassCard padding="sm" glow glowColor="blue">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-xs font-bold">
-                        AS
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold">Amit Sharma</p>
-                        <p className="text-xs text-slate-400">
-                          Google · SWE II
-                        </p>
-                      </div>
-                      <div className="ml-auto">
-                        <span className="text-xs font-bold text-emerald-400">
-                          ₹32 LPA
-                        </span>
-                      </div>
-                    </div>
-                  </GlassCard>
-                </motion.div>
+              {/* Floating Stat Badge 3: Bottom Left */}
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 4, delay: 1, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute bottom-6 left-6 hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-[#060813]/85 backdrop-blur-xl border border-white/15 shadow-[0_0_20px_rgba(0,240,255,0.3)]"
+              >
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#00F0FF] to-[#8B5CF6] flex items-center justify-center text-slate-900 font-bold">
+                  <Sparkles size={18} className="text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-[11px] text-slate-400 font-medium">SevenAI Placement Intelligence</div>
+                  <div className="text-sm font-bold text-white flex items-center gap-2">
+                    Flash 2.5 Active
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  </div>
+                </div>
+              </motion.div>
 
-                {/* Card 2 — top right */}
-                <motion.div
-                  className="absolute top-24 right-0 w-60"
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{
-                    duration: 4,
-                    delay: 0.8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <GlassCard padding="sm" glow glowColor="purple">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-xs font-bold">
-                        PM
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold">Priya Meena</p>
-                        <p className="text-xs text-slate-400">
-                          Microsoft · SWE
-                        </p>
-                      </div>
-                    </div>
-                    <div className="mt-2 flex items-center gap-2">
-                      <span className="text-xs font-bold text-emerald-400">
-                        ₹28 LPA
-                      </span>
-                      <span className="text-[10px] px-1.5 py-0.5 bg-emerald-400/15 text-emerald-400 rounded-md">
-                        2024
-                      </span>
-                    </div>
-                  </GlassCard>
-                </motion.div>
+              {/* Floating Stat Badge 4: Bottom Right */}
+              <motion.div
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 4.8, delay: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute bottom-6 right-6 hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-[#060813]/85 backdrop-blur-xl border border-white/15 shadow-[0_0_20px_rgba(217,70,239,0.35)]"
+              >
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF2E93] to-[#D946EF] flex items-center justify-center text-white">
+                  <TrendingUp size={18} />
+                </div>
+                <div className="text-left">
+                  <div className="text-[11px] text-slate-400 font-medium">CSE Batch Placed</div>
+                  <div className="text-sm font-bold text-emerald-400">
+                    95.6% <span className="text-slate-400 font-normal text-xs">Poornima Univ</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
 
-                {/* Central card */}
-                <motion.div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72"
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{
-                    duration: 5,
-                    delay: 0.3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <GlassCard padding="md" glow glowColor="blue" className="border-blue-500/30">
-                    <div className="flex items-center gap-2 mb-4">
-                      <Sparkles size={16} className="text-amber-400" />
-                      <span className="text-sm font-semibold text-amber-300">
-                        SevenAI Insight
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      📈 <span className="text-white font-medium">CSE 2024 batch</span>{" "}
-                      at Poornima University had{" "}
-                      <span className="text-blue-400 font-semibold">
-                        95.6% placement rate
-                      </span>{" "}
-                      with avg CTC of{" "}
-                      <span className="text-emerald-400 font-semibold">
-                        ₹7.8 LPA
-                      </span>
-                    </p>
-                    <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between">
-                      <span className="text-[10px] text-slate-500">
-                        Updated 2h ago
-                      </span>
-                      <div className="flex items-center gap-1">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="text-[10px] text-emerald-400">Live</span>
-                      </div>
-                    </div>
-                  </GlassCard>
-                </motion.div>
-
-                {/* Card 3 — bottom left */}
-                <motion.div
-                  className="absolute bottom-16 left-4 w-56"
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{
-                    duration: 4.5,
-                    delay: 1.2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <GlassCard padding="sm" glow glowColor="gold">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Trophy size={14} className="text-amber-400" />
-                      <span className="text-xs font-semibold text-amber-300">
-                        Highest Package
-                      </span>
-                    </div>
-                    <p className="text-2xl font-bold gradient-text-gold">
-                      ₹32 LPA
-                    </p>
-                    <p className="text-xs text-slate-400 mt-1">
-                      Google · Poornima University
-                    </p>
-                  </GlassCard>
-                </motion.div>
-
-                {/* Card 4 — bottom right */}
-                <motion.div
-                  className="absolute bottom-8 right-0 w-56"
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{
-                    duration: 3.8,
-                    delay: 1.8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <GlassCard padding="sm">
-                    <div className="text-xs text-slate-400 mb-1">
-                      Companies this season
-                    </div>
-                    <div className="text-xl font-bold text-white">
-                      210+
-                    </div>
-                    <div className="mt-2 flex -space-x-1">
-                      {["G", "M", "A", "F", "R"].map((l, i) => (
-                        <div
-                          key={i}
-                          className={`w-6 h-6 rounded-full border border-[#0A0F1E] flex items-center justify-center text-[9px] font-bold text-white bg-gradient-to-br ${avatarColors[i]}`}
-                        >
-                          {l}
-                        </div>
-                      ))}
-                      <div className="w-6 h-6 rounded-full border border-[#0A0F1E] bg-white/10 flex items-center justify-center text-[9px] text-slate-300">
-                        +
-                      </div>
-                    </div>
-                  </GlassCard>
-                </motion.div>
+          {/* Serendale Stats Counter Strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+            className="w-full max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10"
+          >
+            {[
+              { label: "Partner Companies", end: 109, suffix: "", prefix: "" },
+              { label: "Highest CTC Offer", end: 42.1, suffix: " LPA", prefix: "₹", decimals: 1 },
+              { label: "Placed Students", end: 5000, suffix: "+", prefix: "" },
+              { label: "Average CTC", end: 5.85, suffix: " LPA", prefix: "₹", decimals: 2 },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="p-4 rounded-2xl bg-[#060813]/80 border border-white/[0.08] backdrop-blur-xl hover:border-white/20 transition-all text-center group"
+              >
+                <div className="text-2xl sm:text-3xl font-extrabold gradient-text-serendale">
+                  <AnimatedCounter
+                    end={stat.end}
+                    prefix={stat.prefix}
+                    suffix={stat.suffix}
+                    duration={2.5}
+                    decimals={stat.decimals || 0}
+                  />
+                </div>
+                <div className="text-xs text-slate-400 mt-1 font-medium group-hover:text-slate-300">
+                  {stat.label}
+                </div>
               </div>
-            </motion.div>
-          </div>
+            ))}
+          </motion.div>
         </div>
 
-        {/* Bottom gradient fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0F1E] to-transparent pointer-events-none" />
+        {/* Bottom subtle divider fade */}
+        <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#020408] to-transparent pointer-events-none" />
       </section>
 
       {/* ══════════════════════════════════════════
