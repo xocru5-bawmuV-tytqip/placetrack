@@ -447,12 +447,27 @@ export default function HomePage() {
       <Navbar />
 
       {/* ══════════════════════════════════════════
-          HERO SECTION
-      ══════════════════════════════════════════ */}
-      {/* ══════════════════════════════════════════
           SERENDALE DARK NEON HERO SECTION
       ══════════════════════════════════════════ */}
       <section className="relative min-h-screen flex flex-col items-center justify-center pt-28 pb-20 overflow-hidden bg-[#020408]">
+        {/* Poornima University Campus Background with Obsidian Gradient */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-25 mix-blend-luminosity scale-105"
+          style={{ backgroundImage: 'url("/images/poornima-campus-4k.jpg")' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020408]/90 via-[#020408]/75 to-[#020408] pointer-events-none" />
+
+        {/* Poornima University Official PNG Logo Watermark in Hero Background */}
+        <div className="absolute top-24 left-1/2 -translate-x-1/2 w-full max-w-4xl flex items-center justify-center pointer-events-none select-none z-0">
+          <div className="relative p-6 rounded-3xl bg-white/[0.015] border border-white/[0.04] backdrop-blur-[1px]">
+            <img
+              src="/images/logos/poornima-university.png"
+              alt="Poornima University Background Watermark"
+              className="w-[520px] sm:w-[680px] h-auto object-contain brightness-0 invert opacity-20 filter drop-shadow-[0_0_40px_rgba(217,70,239,0.35)]"
+            />
+          </div>
+        </div>
+
         {/* Serendale Cosmic Background Glows */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-gradient-to-r from-[#D946EF]/20 via-[#8B5CF6]/20 to-[#00F0FF]/15 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute top-12 left-10 w-96 h-96 bg-[#FF2E93]/15 rounded-full blur-[130px] pointer-events-none" />
@@ -462,15 +477,22 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-          {/* Pill Badge */}
+          {/* Pill Badge with Official Poornima University PNG */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="mb-8"
           >
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-white/[0.12] bg-[#060813]/80 backdrop-blur-xl shadow-[0_0_25px_rgba(217,70,239,0.2)]">
-              <span className="w-2 h-2 rounded-full bg-[#FF2E93] animate-pulse" />
+            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-white/[0.12] bg-[#060813]/85 backdrop-blur-xl shadow-[0_0_25px_rgba(217,70,239,0.25)]">
+              <div className="bg-white/95 rounded-md px-1.5 py-0.5 flex items-center shadow-sm">
+                <img
+                  src="/images/logos/poornima-university.png"
+                  alt="Poornima University Logo"
+                  className="h-3.5 w-auto object-contain"
+                />
+              </div>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF2E93] animate-pulse" />
               <span className="text-xs sm:text-sm font-medium tracking-wide text-white/90">
                 Poornima University Official Intelligence
               </span>
