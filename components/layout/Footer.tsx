@@ -95,8 +95,8 @@ export default function Footer() {
             <Link href="/" className="inline-flex items-center gap-3 group">
               <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-white p-1 border border-white/20 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
                 <img
-                  src="/images/logos/poornima-group.jpg"
-                  alt="Poornima Group"
+                  src="/images/logos/poornima-university.png"
+                  alt="Poornima University"
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -148,29 +148,33 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* Column 2: Campuses */}
+          {/* Column 2: 3 Premier Campuses */}
           <motion.div variants={itemVariants}>
             <h3 className="text-xs font-bold text-white mb-4 uppercase tracking-wider">
-              Campuses
+              3 Institutions
             </h3>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/universities/poornima" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/universities/poornima-university" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
                   Poornima University (PU)
                 </Link>
               </li>
               <li>
-                <Link href="/universities/pce" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/universities/pce" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
                   PCE Jaipur (Estd. 2000)
                 </Link>
               </li>
               <li>
-                <Link href="/universities/piet" className="text-slate-400 hover:text-white transition-colors">
-                  PIET Autonomous (NAAC 'A')
+                <Link href="/universities/piet" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  PIET Autonomous (NAAC &apos;A&apos;)
                 </Link>
               </li>
               <li>
-                <Link href="/placements" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/placements" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                   Central TPO Office
                 </Link>
               </li>
@@ -249,6 +253,9 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Signature Reference Design: Royal Blue Bottom Ribbon Bookmark */}
+      <div className="hidden lg:block absolute right-8 sm:right-12 md:right-14 bottom-0 w-12 md:w-16 h-28 bg-[#0066FF] ribbon-notch-up z-10 shadow-2xl pointer-events-none" />
     </footer>
   );
 }

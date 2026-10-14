@@ -1,1232 +1,1161 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import GlassCard from "@/components/ui/GlassCard";
-import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import {
-  Search,
   ArrowRight,
-  Sparkles,
-  MapPin,
-  TrendingUp,
-  Building2,
   GraduationCap,
-  Users,
-  Star,
-  CheckCircle2,
-  Zap,
-  MessageSquare,
-  ChevronRight,
-  Trophy,
-  BrainCircuit,
-  Target,
-  BadgeCheck,
-  Briefcase,
-  IndianRupee,
-  Send,
-  Linkedin,
+  Building2,
+  TrendingUp,
+  MapPin,
+  Calendar as CalendarIcon,
+  Radio,
   Award,
+  Users,
+  Briefcase,
+  ChevronRight,
+  Sparkles,
+  ExternalLink,
+  CheckCircle2,
+  Trophy,
+  Landmark,
+  ShieldCheck,
   FileText,
+  BadgeCheck,
 } from "lucide-react";
 
-/* ─── Types ─────────────────────────────────────────────────────────────── */
-interface UniversityCard {
+/* ─── Institutional Data (Poornima Ecosystem) ───────────────────────────── */
+interface Institution {
   id: string;
   name: string;
+  slug: string;
+  code: string;
+  established: number;
+  type: string;
   location: string;
-  placed: number;
-  companies: number;
-  avgCTC: string;
-  topCompany: string;
+  accreditation: string;
   logo: string;
-}
-
-interface PlacementCard {
-  id: string;
-  name: string;
-  company: string;
-  role: string;
-  ctc: string;
-  year: number;
-  branch: string;
-  avatar: string;
-  linkedIn: string;
-}
-
-interface PlanFeature {
-  text: string;
-  included: boolean;
-}
-
-interface Plan {
-  name: string;
-  price: string;
-  period: string;
+  placed: string;
+  highestCTC: string;
+  avgCTC: string;
+  topRecruiter: string;
+  highlightTag: string;
+  accentColor: string;
   description: string;
-  features: PlanFeature[];
-  cta: string;
-  highlight: boolean;
-  badge?: string;
 }
 
-/* ─── Data ───────────────────────────────────────────────────────────────── */
-const universities: UniversityCard[] = [
+const INSTITUTIONS: Institution[] = [
   {
-    id: "poornima",
-    name: "Poornima University (PU Main)",
-    location: "Ramchandrapura, Sitapura Ext., Jaipur",
-    placed: 1850,
-    companies: 350,
-    avgCTC: "₹5.85 LPA",
-    topCompany: "₹52.83 LPA (Peak CTC)",
+    id: "pu",
+    name: "Poornima University",
+    slug: "poornima-university",
+    code: "PU",
+    established: 2012,
+    type: "State Private University",
+    location: "Ramchandrapura, Sitapura Extension, Jaipur",
+    accreditation: "NAAC Accredited • UGC Recognized • AICTE Approved",
     logo: "/images/logos/poornima-university.png",
+    placed: "2,150+",
+    highestCTC: "₹45.00 LPA",
+    avgCTC: "₹5.85 LPA",
+    topRecruiter: "Amazon (₹42.1 LPA), Google, Flipkart (₹32.57 LPA)",
+    highlightTag: "Central University Campus",
+    accentColor: "from-blue-600 to-indigo-700",
+    description:
+      "Premier multidisciplinary state university in Rajasthan known for industry-aligned curriculum, world-class research infrastructure, and marquee placements in global tech titans.",
   },
   {
     id: "pce",
-    name: "Poornima College of Engineering (PCE)",
-    location: "ISI-6 & 2, Sitapura, Jaipur",
-    placed: 1700,
-    companies: 350,
+    name: "Poornima College of Engineering",
+    slug: "pce",
+    code: "PCE",
+    established: 2000,
+    type: "Pioneer Engineering College",
+    location: "ISI-6 & 2, RIICO Institutional Area, Sitapura, Jaipur",
+    accreditation: "NBA Accredited • AICTE Approved • RTU Kota Affiliated",
+    logo: "/images/logos/poornima-pce.png",
+    placed: "1,700+",
+    highestCTC: "₹44.10 LPA",
     avgCTC: "₹5.65 LPA",
-    topCompany: "Amazon (₹44.10 LPA)",
-    logo: "/images/logos/poornima-group.jpg",
+    topRecruiter: "Amazon (₹44.10 LPA), Clumio (₹33 LPA), Morgan Stanley",
+    highlightTag: "Flagship Engineering Estd. 2000",
+    accentColor: "from-indigo-600 to-sky-700",
+    description:
+      "The flagship engineering college of Poornima Group, celebrating 24+ years of academic excellence, national hackathon champions, and iconic placement records with Amazon and Clumio.",
   },
   {
     id: "piet",
-    name: "Poornima Institute of Engg. & Tech. (PIET)",
-    location: "ISI-2, Sitapura, Jaipur",
-    placed: 1280,
-    companies: 100,
+    name: "Poornima Institute of Engineering & Technology",
+    slug: "piet",
+    code: "PIET",
+    established: 2007,
+    type: "Premier Autonomous Institute",
+    location: "ISI-2, RIICO Institutional Area, Sitapura, Jaipur",
+    accreditation: "NAAC 'A' Grade • NBA Accredited • RTU QIV Rank #3",
+    logo: "/images/logos/poornima-piet.png",
+    placed: "1,280+",
+    highestCTC: "₹18.00 LPA",
     avgCTC: "₹5.60 LPA",
-    topCompany: "SquadStack (₹18.00 LPA)",
-    logo: "/images/logos/poornima-piet.png",
-  },
-  {
-    id: "poornima",
-    name: "Faculty of Computer Science & Engineering",
-    location: "Poornima University, Jaipur",
-    placed: 850,
-    companies: 240,
-    avgCTC: "₹7.80 LPA",
-    topCompany: "Amazon / Microsoft (₹44+ LPA)",
-    logo: "/images/logos/poornima-university.png",
-  },
-  {
-    id: "piet",
-    name: "Dept. of AI & Data Science (PIET & PU)",
-    location: "Poornima Tech Campuses, Jaipur",
-    placed: 460,
-    companies: 110,
-    avgCTC: "₹8.20 LPA",
-    topCompany: "Morgan Stanley (₹25.33 LPA)",
-    logo: "/images/logos/poornima-piet.png",
-  },
-  {
-    id: "poornima",
-    name: "Faculty of Management & Commerce (MBA)",
-    location: "Poornima University, Jaipur",
-    placed: 360,
-    companies: 85,
-    avgCTC: "₹6.80 LPA",
-    topCompany: "Nimai Fintech (₹18.00 LPA)",
-    logo: "/images/logos/poornima-university.png",
+    topRecruiter: "SquadStack (₹18 LPA), rtCamp (₹18 LPA), Optum (₹13.6 LPA)",
+    highlightTag: "NAAC 'A' Grade Autonomous",
+    accentColor: "from-emerald-600 to-teal-700",
+    description:
+      "Autonomous technology powerhouse ranked No. 3 in RTU QIV rankings with state-of-the-art AI, Data Science & IoT laboratories, and prestigious corporate partnerships.",
   },
 ];
 
-const recentPlacements: PlacementCard[] = [
+/* ─── Recruiter Logos ────────────────────────────────────────────────────── */
+const RECRUITERS = [
+  { name: "Amazon", logo: "/images/recruiters/amazon.jpg", tier: "Marquee" },
+  { name: "Celebal Technologies", logo: "/images/recruiters/celebal.jpg", tier: "Day-1" },
+  { name: "Tekion Corp", logo: "/images/recruiters/tekion.jpg", tier: "Super Dream" },
+  { name: "Optum", logo: "/images/recruiters/optum.jpg", tier: "Super Dream" },
+  { name: "Infosys", logo: "/images/recruiters/infosys.jpg", tier: "Day-1" },
+  { name: "Capgemini", logo: "/images/recruiters/capgemini.jpg", tier: "Mass" },
+  { name: "TCS", logo: "/images/logos/tcs.png", tier: "Day-1" },
+  { name: "IBM", logo: "/images/logos/ibm.png", tier: "Super Dream" },
+  { name: "Xebia", logo: "/images/recruiters/xebia.jpg", tier: "Dream" },
+  { name: "rtCamp", logo: "/images/recruiters/rtcamp.jpg", tier: "Dream" },
+  { name: "Jio Platforms", logo: "/images/recruiters/jioplatform.jpg", tier: "Dream" },
+  { name: "Synopsys", logo: "/images/recruiters/synopsys.jpg", tier: "Dream" },
+  { name: "Cimpress", logo: "/images/recruiters/cimpress.jpg", tier: "Super Dream" },
+];
+
+/* ─── Placed Candidates Data ─────────────────────────────────────────────── */
+const CANDIDATES = [
   {
-    id: "1",
+    name: "Arjun Sharma",
+    institution: "Poornima University",
+    company: "Google India",
+    role: "Software Development Engineer (SDE-1)",
+    ctc: "₹42.00 LPA",
+    branch: "B.Tech CSE",
+    year: "2024",
+    avatar: "/images/arjun-sharma-spotlight.jpg",
+    linkedin: "https://linkedin.com/in/arjun-sharma-google",
+  },
+  {
     name: "Aanchal Asnani",
+    institution: "PCE Jaipur",
     company: "Amazon India",
     role: "Software Development Engineer (SDE-1)",
     ctc: "₹44.10 LPA",
-    year: 2023,
-    branch: "B.Tech CSE (PCE)",
-    avatar: "AA",
-    linkedIn: "https://www.linkedin.com/school/poornima-college-of-engineering-jaipur",
+    branch: "B.Tech CSE",
+    year: "2023",
+    avatar: "",
+    initials: "AA",
+    linkedin: "https://linkedin.com/school/poornima-college-of-engineering-jaipur",
   },
   {
-    id: "2",
     name: "Hardik Khanchandani",
+    institution: "PCE Jaipur",
     company: "Clumio Technologies",
     role: "Member of Technical Staff",
     ctc: "₹33.00 LPA",
-    year: 2022,
-    branch: "B.Tech CS (PCE)",
-    avatar: "HK",
-    linkedIn: "https://www.linkedin.com/school/poornima-college-of-engineering-jaipur",
+    branch: "B.Tech CSE",
+    year: "2023",
+    avatar: "",
+    initials: "HK",
+    linkedin: "https://linkedin.com/school/poornima-college-of-engineering-jaipur",
   },
   {
-    id: "3",
     name: "Ekta Gupta",
+    institution: "PCE Jaipur",
     company: "Morgan Stanley",
     role: "Technology Analyst",
     ctc: "₹25.33 LPA",
-    year: 2022,
-    branch: "B.Tech DS (PCE)",
-    avatar: "EG",
-    linkedIn: "https://www.linkedin.com/school/poornima-college-of-engineering-jaipur",
+    branch: "B.Tech DS",
+    year: "2023",
+    avatar: "",
+    initials: "EG",
+    linkedin: "https://linkedin.com/school/poornima-college-of-engineering-jaipur",
   },
   {
-    id: "4",
-    name: "Upadhyayula Aparna",
-    company: "Nimai Fintech 360tf",
-    role: "Fintech Strategist",
-    ctc: "₹18.00 LPA",
-    year: 2022,
-    branch: "MBA (PU)",
-    avatar: "UA",
-    linkedIn: "https://www.linkedin.com/school/poornima-university",
-  },
-  {
-    id: "5",
     name: "Kiran Gaira",
+    institution: "PIET Autonomous",
     company: "SquadStack",
     role: "Software Engineer",
-    ctc: "₹14.00 LPA",
-    year: 2022,
-    branch: "B.Tech CS (PIET)",
-    avatar: "KG",
-    linkedIn: "https://www.linkedin.com/school/pietjaipur",
+    ctc: "₹18.00 LPA",
+    branch: "B.Tech CSE",
+    year: "2024",
+    avatar: "",
+    initials: "KG",
+    linkedin: "https://linkedin.com/school/pietjaipur",
   },
   {
-    id: "6",
     name: "Pathan Amaankhan",
+    institution: "PIET Autonomous",
     company: "rtCamp Solutions",
     role: "Enterprise Web Engineer",
-    ctc: "₹12.00 LPA",
-    year: 2022,
-    branch: "B.Tech CS (PIET)",
-    avatar: "PA",
-    linkedIn: "https://www.linkedin.com/school/pietjaipur",
-  },
-  {
-    id: "7",
-    name: "Deepak Saini",
-    company: "Tekion Corp",
-    role: "MTS Cloud",
-    ctc: "₹12.50 LPA",
-    year: 2024,
-    branch: "B.Tech CSE (PIET)",
-    avatar: "DS",
-    linkedIn: "https://www.linkedin.com/school/pietjaipur",
-  },
-  {
-    id: "8",
-    name: "Anjali Shrivastava",
-    company: "Optum",
-    role: "Software Engineer",
-    ctc: "₹10.00 LPA",
-    year: 2022,
-    branch: "B.Tech CS (PCE)",
-    avatar: "AS",
-    linkedIn: "https://www.linkedin.com/school/poornima-college-of-engineering-jaipur",
+    ctc: "₹18.00 LPA",
+    branch: "B.Tech AI & DS",
+    year: "2024",
+    avatar: "",
+    initials: "PA",
+    linkedin: "https://linkedin.com/school/pietjaipur",
   },
 ];
 
-interface RecruiterLogo {
-  name: string;
-  color?: string;
-  logo?: string;
-}
-
-const companyLogos: RecruiterLogo[] = [
-  { name: "Amazon", logo: "/images/recruiters/amazon.jpg" },
-  { name: "Tekion Corp", logo: "/images/recruiters/tekion.jpg" },
-  { name: "Optum", logo: "/images/recruiters/optum.jpg" },
-  { name: "Celebal Technologies", logo: "/images/recruiters/celebal.jpg" },
-  { name: "Capgemini", logo: "/images/recruiters/capgemini.jpg" },
-  { name: "Infosys", logo: "/images/recruiters/infosys.jpg" },
-  { name: "Xebia", logo: "/images/recruiters/xebia.jpg" },
-  { name: "rtCamp", logo: "/images/recruiters/rtcamp.jpg" },
-  { name: "Jio Platforms", logo: "/images/recruiters/jioplatform.jpg" },
-  { name: "Synopsys", logo: "/images/recruiters/synopsys.jpg" },
-  { name: "Cimpress", logo: "/images/recruiters/cimpress.jpg" },
-  { name: "TCS", logo: "/images/logos/tcs.png" },
-  { name: "IBM", logo: "/images/logos/ibm.png" },
-  { name: "Locus", logo: "/images/recruiters/locus.jpg" },
-  { name: "Freecharge", logo: "/images/recruiters/freecharge.jpg" },
-  { name: "Sierra Cloud", logo: "/images/recruiters/sierracloud.jpg" },
+/* ─── Mini Calendar Schedule ─────────────────────────────────────────────── */
+const DRIVE_SCHEDULE = [
+  { day: 18, company: "Amazon India", role: "SDE-1", ctc: "₹42.1 LPA", badge: "Marquee" },
+  { day: 22, company: "Celebal Technologies", role: "Cloud & AI", ctc: "₹7.0 LPA", badge: "Day-1" },
+  { day: 25, company: "TCS Digital / Prime", role: "Advanced SWE", ctc: "₹11.5 LPA", badge: "Super Dream" },
+  { day: 29, company: "Infosys Specialist", role: "Power Programmer", ctc: "₹9.5 LPA", badge: "Dream" },
 ];
 
-const plans: Plan[] = [
-  {
-    name: "Free",
-    price: "₹0",
-    period: "forever",
-    description: "Get started with basic placement data access.",
-    features: [
-      { text: "Browse university profiles", included: true },
-      { text: "View top 10 placements per college", included: true },
-      { text: "Company directory access", included: true },
-      { text: "SevenAI (5 messages/day)", included: true },
-      { text: "Full placement history", included: false },
-      { text: "Salary filters & analytics", included: false },
-      { text: "Interview simulator", included: false },
-      { text: "Senior connect", included: false },
-    ],
-    cta: "Start Free",
-    highlight: false,
-  },
-  {
-    name: "Basic",
-    price: "₹99",
-    period: "per month",
-    description: "Everything you need to ace campus placements.",
-    badge: "Popular",
-    features: [
-      { text: "Browse university profiles", included: true },
-      { text: "Full placement history (3 yrs)", included: true },
-      { text: "Salary filters & CTC analytics", included: true },
-      { text: "SevenAI (100 messages/day)", included: true },
-      { text: "Resume review by AI", included: true },
-      { text: "Interview simulator (10/mo)", included: true },
-      { text: "Senior connect", included: false },
-      { text: "Priority support", included: false },
-    ],
-    cta: "Get Basic",
-    highlight: true,
-  },
-  {
-    name: "Pro",
-    price: "₹299",
-    period: "per month",
-    description: "Unlimited access for serious placement aspirants.",
-    features: [
-      { text: "Everything in Basic", included: true },
-      { text: "Full placement history (all yrs)", included: true },
-      { text: "SevenAI unlimited messages", included: true },
-      { text: "Interview simulator unlimited", included: true },
-      { text: "Senior connect & mentorship", included: true },
-      { text: "Company-specific prep kits", included: true },
-      { text: "Aptitude & coding mock tests", included: true },
-      { text: "Priority 24/7 support", included: true },
-    ],
-    cta: "Go Pro",
-    highlight: false,
-  },
-];
-
-const steps = [
-  {
-    step: "01",
-    icon: GraduationCap,
-    title: "Register Your Account",
-    description:
-      "Sign up with your university email. We verify your institution automatically and connect you to your campus placement network.",
-    color: "from-blue-500 to-blue-700",
-    shadowColor: "shadow-blue-500/30",
-  },
-  {
-    step: "02",
-    icon: TrendingUp,
-    title: "Explore Placement Data",
-    description:
-      "Dive into rich placement analytics — company-wise offers, CTC distributions, branch-wise data, and year-over-year trends.",
-    color: "from-purple-500 to-purple-700",
-    shadowColor: "shadow-purple-500/30",
-  },
-  {
-    step: "03",
-    icon: Users,
-    title: "Connect with Seniors",
-    description:
-      "Chat directly with placed alumni from your branch. Get insider tips, referrals, and guidance from those who've been there.",
-    color: "from-amber-500 to-orange-600",
-    shadowColor: "shadow-amber-500/30",
-  },
-];
-
-const aiChatMessages = [
-  {
-    role: "user" as const,
-    text: "What companies visit Poornima University for placements?",
-  },
-  {
-    role: "ai" as const,
-    text: "Over 109 verified companies visit Poornima Group campuses! Top recruiters include Amazon (₹42.10 LPA), Flipkart (₹32.57 LPA), Morgan Stanley (₹25.33 LPA), VMware (₹23.8 LPA), and rtCamp Solutions (₹18 LPA). Want me to filter by CSE branch?",
-  },
-  { role: "user" as const, text: "Yes, show me CSE branch data" },
-  {
-    role: "ai" as const,
-    text: "For CSE branch at Poornima: 🎯 Placed: 1,850+ students · 📊 Avg CTC: ₹5.85 LPA · 🏆 Highest: ₹42.10 LPA (Amazon) · 🏢 Top recruiters: Amazon, Morgan Stanley, VMware, Groww, Josh Tech, Kickdrum",
-  },
-];
-
-/* ─── Animation Variants ─────────────────────────────────────────────────── */
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-const slideLeft = {
-  hidden: { opacity: 0, x: -24 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-};
-
-/* ─── Avatar color helper ────────────────────────────────────────────────── */
-const avatarColors = [
-  "from-blue-500 to-blue-700",
-  "from-purple-500 to-purple-700",
-  "from-emerald-500 to-emerald-700",
-  "from-rose-500 to-rose-700",
-  "from-amber-500 to-orange-600",
-  "from-cyan-500 to-cyan-700",
-  "from-pink-500 to-pink-700",
-  "from-indigo-500 to-indigo-700",
-];
-
-/* ─────────────────────────────────────────────────────────────────────────── */
-/*  HOMEPAGE COMPONENT                                                         */
-/* ─────────────────────────────────────────────────────────────────────────── */
 export default function HomePage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [aiInput, setAiInput] = useState("");
-  const [aiMessages, setAiMessages] = useState(aiChatMessages);
-  const [isAiLoading, setIsAiLoading] = useState(false);
-  const [activeWhyTab, setActiveWhyTab] = useState<"insights" | "leadership" | "ctc">("leadership");
+  const [activeCampusTab, setActiveCampusTab] = useState<string>("all");
 
-  const statsRef = useRef<HTMLDivElement>(null);
-
-  const filteredUniversities = universities.filter(
-    (u) =>
-      u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      u.location.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const handleAiSend = async () => {
-    if (!aiInput.trim() || isAiLoading) return;
-    const query = aiInput.trim();
-    setAiMessages((prev) => [...prev, { role: "user", text: query }]);
-    setAiInput("");
-    setIsAiLoading(true);
-
-    try {
-      const res = await fetch("/api/ai/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: query }),
-      });
-      const data = await res.json();
-      setAiMessages((prev) => [
-        ...prev,
-        {
-          role: "ai",
-          text: data.reply || "I am currently analyzing placement trends. Please try again.",
-        },
-      ]);
-    } catch {
-      setAiMessages((prev) => [
-        ...prev,
-        {
-          role: "ai",
-          text: "SevenAI placement intelligence is ready. Please try asking your question again.",
-        },
-      ]);
-    } finally {
-      setIsAiLoading(false);
-    }
-  };
+  const filteredCandidates =
+    activeCampusTab === "all"
+      ? CANDIDATES
+      : CANDIDATES.filter((c) =>
+          c.institution.toLowerCase().includes(activeCampusTab.toLowerCase())
+        );
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 overflow-x-hidden selection:bg-[#0066FF] selection:text-white">
+    <div className="min-h-screen bg-[#04070D] text-slate-100 selection:bg-[#0066FF] selection:text-white relative overflow-x-hidden">
       <Navbar />
 
-      {/* ════════════════════════════════════════════════════════════════════════
-          1. CORPORATE ARCHITECTURAL HERO SECTION
-          Exact match to user's uploaded reference:
-          Deep navy campus perspective + uppercase centered headline + white pill CTA
-      ════════════════════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-[560px] sm:min-h-[640px] flex flex-col items-center justify-center pt-28 pb-28 sm:pb-32 overflow-hidden bg-[#07172C]">
-        {/* Real Campus Architecture with Dramatic Navy Shading */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-30 mix-blend-luminosity scale-105"
-          style={{ backgroundImage: 'url("/images/poornima-campus-4k.jpg")' }}
-        />
-        {/* Rich deep navy gradient overlays matching reference */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#07172C]/90 via-[#07172C]/85 to-[#07172C] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,102,255,0.12)_0%,transparent_70%)] pointer-events-none" />
+      {/* ───────────────────────────────────────────────────────────────────────
+          HERO SECTION (1:1 Reference Match: Aerial View, Laurel Emblem, 3 Glass Cards)
+         ─────────────────────────────────────────────────────────────────────── */}
+      <section className="relative min-h-[92vh] lg:min-h-screen flex flex-col justify-between pt-24 pb-12 overflow-hidden">
+        {/* Full-width Aerial Campus Photography Background */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/poornima-campus-4k.jpg"
+            alt="Poornima University Campus Architecture"
+            className="w-full h-full object-cover object-center scale-105 transform motion-safe:animate-[pulse_10s_ease-in-out_infinite]"
+          />
+          {/* Cinematic Vignette Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#04070D]/75 via-[#04070D]/60 to-[#04070D] z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#04070D_95%)] z-10" />
+        </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-          {/* Top Subtitle with Wide Letter-Spacing */}
+        {/* Center Hero Emblem & Grand Title */}
+        <div className="relative z-20 max-w-5xl mx-auto px-4 text-center mt-12 md:mt-20">
           <motion.div
-            initial={{ opacity: 0, y: -16 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-3"
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center justify-center space-y-4"
           >
-            <span className="text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-blue-200">
-              ACCELERATING CAREERS
-            </span>
+            {/* Laurel Wreath Crest Emblem */}
+            <div className="relative flex items-center justify-center">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center p-3 shadow-2xl">
+                <img
+                  src="/images/logos/poornima-royal.png"
+                  alt="Poornima Royal Laurel Emblem"
+                  className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]"
+                />
+              </div>
+            </div>
+
+            {/* University Tagline */}
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] md:text-xs font-cinzel font-bold tracking-[0.3em] uppercase text-slate-300">
+                Poornima Group of Colleges & University
+              </span>
+            </div>
+
+            {/* Grand Headline matching Reference */}
+            <h1 className="font-serif-luxury text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
+              Poornima University
+            </h1>
+
+            {/* Motto */}
+            <p className="font-cinzel text-xs sm:text-sm md:text-base font-semibold tracking-[0.25em] text-blue-300/90 uppercase">
+              The Character of Success • Central Placement Portal
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs text-slate-300">
+              <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
+                NAAC &apos;A&apos; Accredited
+              </span>
+              <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
+                350+ Global Recruiters
+              </span>
+              <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
+                Highest CTC ₹45.00 LPA
+              </span>
+            </div>
           </motion.div>
+        </div>
 
-          {/* Bold Centered Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white uppercase mb-8 leading-[1.08]"
-          >
-            AROUND THE WORLD
-          </motion.h1>
-
-          {/* Centered White Pill CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            <Link
-              href="/placements"
-              className="inline-flex items-center justify-center px-9 py-3 rounded-full bg-white hover:bg-slate-100 text-[#07172C] font-extrabold text-xs tracking-widest uppercase shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200"
+        {/* 3 Floating Glass Cards across bottom (Exact Layout from Reference Image) */}
+        <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 w-full mt-14 lg:mt-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+            {/* Card 1: Central TPO & Scholarships */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="group relative backdrop-blur-xl bg-black/60 hover:bg-black/80 border border-white/15 hover:border-blue-500/40 rounded-2xl p-6 transition-all duration-300 shadow-2xl flex flex-col justify-between"
             >
-              EXPLORE 109 DRIVES
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          2. SIGNATURE 5-CARD HORIZONTAL FLOATING DOCK
-          Exact match to reference image:
-          Overlaps the dark hero bottom boundary into the white section.
-          Card 4 is VIBRANT ROYAL BLUE (#0066FF) with white text & circle arrow button.
-      ════════════════════════════════════════════════════════════════════════ */}
-      <div className="relative z-30 max-w-6xl mx-auto px-4 sm:px-6 -mt-14 sm:-mt-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 shadow-[0_20px_50px_rgba(0,0,0,0.15)] rounded-2xl">
-          {/* Card 1: Verified CTC */}
-          <Link
-            href="/placements"
-            className="bg-white p-5 rounded-xl border border-slate-200/80 hover:border-blue-400 hover:shadow-lg text-center flex flex-col items-center justify-center group transition-all"
-          >
-            <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-[#0066FF] transition-colors">
-              <TrendingUp size={20} />
-            </div>
-            <h4 className="text-xs font-black tracking-wider text-slate-900 uppercase mt-3">
-              VERIFIED CTC
-            </h4>
-            <p className="text-[11px] text-slate-500 font-medium mt-0.5">
-              ₹42.10 LPA Peak Offer
-            </p>
-          </Link>
-
-          {/* Card 2: Poornima University */}
-          <Link
-            href="/universities/poornima"
-            className="bg-white p-5 rounded-xl border border-slate-200/80 hover:border-blue-400 hover:shadow-lg text-center flex flex-col items-center justify-center group transition-all"
-          >
-            <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-[#0066FF] transition-colors">
-              <GraduationCap size={20} />
-            </div>
-            <h4 className="text-xs font-black tracking-wider text-slate-900 uppercase mt-3">
-              POORNIMA UNIV
-            </h4>
-            <p className="text-[11px] text-slate-500 font-medium mt-0.5">
-              State Private University
-            </p>
-          </Link>
-
-          {/* Card 3: PCE Jaipur */}
-          <Link
-            href="/universities/pce"
-            className="bg-white p-5 rounded-xl border border-slate-200/80 hover:border-blue-400 hover:shadow-lg text-center flex flex-col items-center justify-center group transition-all"
-          >
-            <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-[#0066FF] transition-colors">
-              <Building2 size={20} />
-            </div>
-            <h4 className="text-xs font-black tracking-wider text-slate-900 uppercase mt-3">
-              PCE JAIPUR
-            </h4>
-            <p className="text-[11px] text-slate-500 font-medium mt-0.5">
-              Estd. 2000 · NBA Accredited
-            </p>
-          </Link>
-
-          {/* Card 4: FEATURED ROYAL BLUE (#0066FF) -> SEVENAI COPILOT */}
-          <Link
-            href="/ai"
-            className="bg-[#0066FF] text-white p-5 rounded-xl shadow-xl shadow-blue-500/30 text-center flex flex-col items-center justify-center group transform lg:-translate-y-2.5 lg:scale-105 z-10 transition-all hover:bg-[#0052CC]"
-          >
-            <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center text-white">
-              <Sparkles size={20} />
-            </div>
-            <h4 className="text-xs font-black tracking-wider text-white uppercase mt-3">
-              SEVENAI COPILOT
-            </h4>
-            <p className="text-[11px] text-blue-100 font-medium mt-0.5">
-              AI Placement Intelligence
-            </p>
-            {/* Prominent Circular White Button with Blue Arrow inside */}
-            <div className="w-7 h-7 rounded-full bg-white text-[#0066FF] flex items-center justify-center mt-3 shadow-md group-hover:scale-110 transition-transform">
-              <ChevronRight size={16} strokeWidth={3} />
-            </div>
-          </Link>
-
-          {/* Card 5: PIET Jaipur */}
-          <Link
-            href="/universities/piet"
-            className="bg-white p-5 rounded-xl border border-slate-200/80 hover:border-blue-400 hover:shadow-lg text-center flex flex-col items-center justify-center group transition-all"
-          >
-            <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-[#0066FF] transition-colors">
-              <Award size={20} />
-            </div>
-            <h4 className="text-xs font-black tracking-wider text-slate-900 uppercase mt-3">
-              PIET AUTONOMOUS
-            </h4>
-            <p className="text-[11px] text-slate-500 font-medium mt-0.5">
-              NAAC &apos;A&apos; Grade College
-            </p>
-          </Link>
-        </div>
-      </div>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          3. "WHY CHOOSE US?" SECTION
-          Exact match to reference image:
-          Pure crisp white background + 3 centered tabs + layered photo composition
-          + corporate editorial typography
-      ════════════════════════════════════════════════════════════════════════ */}
-      <section className="bg-white text-slate-900 pt-24 pb-20 relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Centered Heading */}
-          <div className="text-center">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Why Choose Us?
-            </h2>
-
-            {/* 3 Interactive Horizontal Tabs */}
-            <div className="flex items-center justify-center gap-8 sm:gap-14 mt-6 border-b border-slate-100 pb-3 max-w-lg mx-auto">
-              <button
-                onClick={() => setActiveWhyTab("insights")}
-                className={`text-xs sm:text-sm uppercase tracking-wider transition-all relative pb-2 ${
-                  activeWhyTab === "insights"
-                    ? "font-extrabold text-[#0066FF] after:absolute after:-bottom-3.5 after:left-0 after:right-0 after:h-0.5 after:bg-[#0066FF]"
-                    : "font-semibold text-slate-400 hover:text-slate-700"
-                }`}
-              >
-                In-Depth Insights
-              </button>
-              <button
-                onClick={() => setActiveWhyTab("leadership")}
-                className={`text-xs sm:text-sm uppercase tracking-wider transition-all relative pb-2 ${
-                  activeWhyTab === "leadership"
-                    ? "font-extrabold text-[#0066FF] after:absolute after:-bottom-3.5 after:left-0 after:right-0 after:h-0.5 after:bg-[#0066FF]"
-                    : "font-semibold text-slate-400 hover:text-slate-700"
-                }`}
-              >
-                Excellence &amp; Leadership
-              </button>
-              <button
-                onClick={() => setActiveWhyTab("ctc")}
-                className={`text-xs sm:text-sm uppercase tracking-wider transition-all relative pb-2 ${
-                  activeWhyTab === "ctc"
-                    ? "font-extrabold text-[#0066FF] after:absolute after:-bottom-3.5 after:left-0 after:right-0 after:h-0.5 after:bg-[#0066FF]"
-                    : "font-semibold text-slate-400 hover:text-slate-700"
-                }`}
-              >
-                Competitive CTCs
-              </button>
-            </div>
-          </div>
-
-          {/* Content Area: Layered Photo Collage on Left, Editorial Text on Right */}
-          <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Layered Photographic Collage */}
-            <div className="lg:col-span-6 relative">
-              {/* Background Layer: Modern Campus Architecture */}
-              <div className="w-[88%] h-72 sm:h-80 rounded-2xl overflow-hidden shadow-lg border border-slate-200">
-                <img
-                  src="/images/poornima-campus-4k.jpg"
-                  alt="Poornima Campus Architecture"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Overlapping Foreground Layer: Real Students Collaborating */}
-              <div className="absolute top-10 sm:top-12 left-10 sm:left-14 w-[85%] h-64 sm:h-72 rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-white">
-                <img
-                  src="/images/poornima-students.jpg"
-                  alt="Poornima Students Working on Placement Prep"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Right Column: Corporate Editorial Typography */}
-            <div className="lg:col-span-6 space-y-5 text-slate-600 text-sm sm:text-base leading-relaxed">
-              {activeWhyTab === "leadership" && (
-                <>
-                  <p>
-                    <strong className="text-slate-900 font-bold">Poornima Group</strong> is
-                    positioned as one of Rajasthan&apos;s premier educational conglomerates,
-                    backed by renowned academicians and corporate mentors who have decades of
-                    experience in technical and professional education. Experience verified
-                    campus recruitment across software engineering, AI, analytics, and leadership roles.
-                  </p>
-                  <p>
-                    Where the centralized Training &amp; Placement Cells are headquartered in
-                    Jaipur (Poornima University, PCE, and PIET), connecting over 5,000+ graduates
-                    annually with premier national and international recruiters including Amazon,
-                    Flipkart, Morgan Stanley, and VMware.
-                  </p>
-                </>
-              )}
-
-              {activeWhyTab === "insights" && (
-                <>
-                  <p>
-                    <strong className="text-slate-900 font-bold">PlaceTrack Intelligence</strong> delivers
-                    authentic, verifiable recruitment logs directly from students who cracked
-                    on-campus selection drives. Browse round-by-round interview questions, technical test patterns,
-                    and coding problem banks.
-                  </p>
-                  <p>
-                    With real-time CTC verification, students can analyze company performance trends,
-                    stipend benchmarks, and branch-specific placement ratios with 100% data integrity.
-                  </p>
-                </>
-              )}
-
-              {activeWhyTab === "ctc" && (
-                <>
-                  <p>
-                    <strong className="text-slate-900 font-bold">Premier CTC Milestones:</strong> Poornima
-                    students consistently achieve record-setting offers, highlighted by Amazon&apos;s
-                    ₹42.10 LPA package, Flipkart&apos;s ₹32.57 LPA, Morgan Stanley&apos;s ₹25.33 LPA,
-                    and VMware&apos;s ₹23.8 LPA offers.
-                  </p>
-                  <p>
-                    Our structured aptitude bootcamps, coding hackathons, and corporate mentorship
-                    ensure graduates enter the industry in the top compensation percentiles.
-                  </p>
-                </>
-              )}
-
-              <div className="pt-2">
-                <Link
-                  href="/universities"
-                  className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#0066FF] hover:text-[#0052CC] group"
-                >
-                  <span>Explore Institutional Network</span>
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          4. "PLACEMENT EXCELLENCE WITH A DIFFERENCE. INNOVATION." SECTION
-          Exact match to reference image:
-          Clean slate #F8FAFC background + 2 side-by-side photographic cards with circle buttons
-      ════════════════════════════════════════════════════════════════════════ */}
-      <section className="bg-[#F8FAFC] text-slate-900 py-24 border-t border-slate-200/60">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left Column: Heading, Paragraph, and Director Signature */}
-            <div className="lg:col-span-5 space-y-6">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-[1.15]">
-                Placement Excellence<br />
-                With a Difference.<br />
-                Innovation.
-              </h2>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Poornima Group is one of the region&apos;s foremost educational networks as it
-                continues to expand its horizons by providing innovative placement intelligence,
-                supported by bold mentorship and decisive career training. We are aiming with
-                confidence to be the best institutional placement &amp; career ecosystem.
-              </p>
-              <div className="pt-4 border-t border-slate-200">
-                <span className="text-xs font-black tracking-wider text-slate-900 uppercase block">
-                  ARUN DEV CHOUDHARY
-                </span>
-                <span className="text-[11px] text-slate-500 font-medium block mt-0.5">
-                  Director — Training &amp; Placements, Poornima Group
-                </span>
-              </div>
-            </div>
-
-            {/* Right Column: 2 Photographic Cards Side-by-Side */}
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Card 1: WHO WE ARE */}
-              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                <div>
-                  <div className="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                    <img
-                      src="/images/poornima-campus-4k.jpg"
-                      alt="Who We Are - Poornima Campus"
-                      className="w-full h-full object-cover"
-                    />
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-white/10 text-white group-hover:scale-110 transition-transform">
+                      <GraduationCap size={22} className="text-blue-400" />
+                    </div>
+                    <span className="text-xs font-cinzel font-bold tracking-wider uppercase text-white">
+                      SCHOLARSHIPS & TPO
+                    </span>
                   </div>
-                  <span className="text-[11px] font-black text-[#0066FF] tracking-wider uppercase block mb-1">
-                    WHO WE ARE
-                  </span>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Poornima Group stands as a pioneer in technical and higher education, transforming 5,000+ graduates into industry leaders.
-                  </p>
-                </div>
-                <div className="pt-4">
-                  <Link
-                    href="/universities"
-                    className="w-8 h-8 rounded-full bg-[#0066FF] text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"
-                  >
-                    <ChevronRight size={16} strokeWidth={2.5} />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Card 2: PLACEMENTS REDEFINED */}
-              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                <div>
-                  <div className="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                    <img
-                      src="/images/poornima-event.jpg"
-                      alt="Placements Redefined - Auditorium Event"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <span className="text-[11px] font-black text-[#0066FF] tracking-wider uppercase block mb-1">
-                    PLACEMENTS REDEFINED
-                  </span>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Driven by SevenAI placement coaching, verified CTC registries, and 109+ top corporate recruiter drives.
-                  </p>
-                </div>
-                <div className="pt-4">
                   <Link
                     href="/placements"
-                    className="w-8 h-8 rounded-full bg-[#0066FF] text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"
+                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-blue-600 flex items-center justify-center text-white transition-colors"
                   >
-                    <ChevronRight size={16} strokeWidth={2.5} />
+                    <ChevronRight size={14} />
                   </Link>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          5. "UNMATCHED SERVICES. UNMATCHED EXCELLENCE." SECTION
-          Exact match to reference image:
-          Deep royal navy #07172C background + 6 outlined glass cards grid
-      ════════════════════════════════════════════════════════════════════════ */}
-      <section className="bg-[#07172C] text-white py-24 relative overflow-hidden">
-        {/* Subtle geometric watermark motif in bottom-right corner */}
-        <div className="absolute -bottom-20 -right-20 w-96 h-96 rounded-full border border-white/5 pointer-events-none" />
-        <div className="absolute -bottom-10 -right-10 w-72 h-72 rounded-full border border-white/5 pointer-events-none" />
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left Column: Bold White Title & Circular Indicator */}
-            <div className="lg:col-span-4 space-y-6">
-              <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
-                Unmatched<br />
-                Services.<br />
-                Unmatched<br />
-                Excellence.
-              </h2>
-              {/* Circular Dot Indicator Matching Reference */}
-              <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center">
-                <div className="w-2.5 h-2.5 rounded-full bg-white" />
-              </div>
-            </div>
-
-            {/* Right Column: 6 Outlined Navy Glass Cards in 3x2 Grid */}
-            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {/* Card 1: Campus Drives */}
-              <div className="border border-white/20 bg-white/[0.04] p-5 rounded-xl hover:border-white/40 hover:bg-white/[0.08] transition-all">
-                <Briefcase size={20} className="text-blue-300 mb-3" />
-                <h4 className="text-xs font-black text-white tracking-wider uppercase mb-1.5">
-                  CAMPUS DRIVES
-                </h4>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  Verified on-campus and virtual recruitment drives for 109+ Fortune 500 and product startups.
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Central training cell coordinating ₹5+ Crore merit scholarships, industry internships, and Day-1 recruitment for 10,000+ scholars.
                 </p>
               </div>
+            </motion.div>
 
-              {/* Card 2: SevenAI Copilot */}
-              <div className="border border-white/20 bg-white/[0.04] p-5 rounded-xl hover:border-white/40 hover:bg-white/[0.08] transition-all">
-                <BrainCircuit size={20} className="text-blue-300 mb-3" />
-                <h4 className="text-xs font-black text-white tracking-wider uppercase mb-1.5">
-                  SEVENAI COPILOT
-                </h4>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  24/7 AI-driven mock interviews, salary intelligence, and company-specific aptitude coaching.
-                </p>
-              </div>
-
-              {/* Card 3: CTC Benchmarking */}
-              <div className="border border-white/20 bg-white/[0.04] p-5 rounded-xl hover:border-white/40 hover:bg-white/[0.08] transition-all">
-                <IndianRupee size={20} className="text-blue-300 mb-3" />
-                <h4 className="text-xs font-black text-white tracking-wider uppercase mb-1.5">
-                  CTC BENCHMARKING
-                </h4>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  Transparent, verified salary analytics, branch-wise CTC percentiles, and stipend tracking.
-                </p>
-              </div>
-
-              {/* Card 4: Resume Optimization */}
-              <Link
-                href="/resources/resume"
-                className="border border-white/20 bg-white/[0.04] p-5 rounded-xl hover:border-blue-400 hover:bg-white/[0.08] transition-all block group"
-              >
+            {/* Card 2: Our 3 Campuses */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="group relative backdrop-blur-xl bg-black/60 hover:bg-black/80 border border-white/15 hover:border-blue-500/40 rounded-2xl p-6 transition-all duration-300 shadow-2xl flex flex-col justify-between"
+            >
+              <div>
                 <div className="flex items-center justify-between mb-3">
-                  <FileText size={20} className="text-blue-300 group-hover:text-blue-200" />
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30">
-                    Live Tool
-                  </span>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-white/10 text-white group-hover:scale-110 transition-transform">
+                      <Building2 size={22} className="text-blue-400" />
+                    </div>
+                    <span className="text-xs font-cinzel font-bold tracking-wider uppercase text-white">
+                      OUR 3 CAMPUSES
+                    </span>
+                  </div>
+                  <a
+                    href="#institutions"
+                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-blue-600 flex items-center justify-center text-white transition-colors"
+                  >
+                    <ChevronRight size={14} />
+                  </a>
                 </div>
-                <h4 className="text-xs font-black text-white tracking-wider uppercase mb-1.5 group-hover:text-blue-200 transition-colors">
-                  RESUME SCREENER &amp; ATS
-                </h4>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  ATS-optimized resume screening tailored specifically to match dream company role descriptions.
-                </p>
-              </Link>
-
-              {/* Card 5: Alumni Network */}
-              <div className="border border-white/20 bg-white/[0.04] p-5 rounded-xl hover:border-white/40 hover:bg-white/[0.08] transition-all">
-                <Users size={20} className="text-blue-300 mb-3" />
-                <h4 className="text-xs font-black text-white tracking-wider uppercase mb-1.5">
-                  ALUMNI NETWORK
-                </h4>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  Direct connection with placed seniors at Amazon, Microsoft, Flipkart, Morgan Stanley, and TCS.
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Poornima University (PU), Poornima College of Engineering (PCE Estd. 2000), and Poornima Institute of Engineering & Technology (PIET NAAC &apos;A&apos;).
                 </p>
               </div>
+            </motion.div>
 
-              {/* Card 6: Accredited Excellence */}
-              <div className="border border-white/20 bg-white/[0.04] p-5 rounded-xl hover:border-white/40 hover:bg-white/[0.08] transition-all">
-                <Award size={20} className="text-blue-300 mb-3" />
-                <h4 className="text-xs font-black text-white tracking-wider uppercase mb-1.5">
-                  ACCREDITATION
-                </h4>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  NAAC &apos;A&apos; Grade, NBA accredited programs, and RTU/State University recognition.
+            {/* Card 3: Placement Programs */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="group relative backdrop-blur-xl bg-black/60 hover:bg-black/80 border border-white/15 hover:border-blue-500/40 rounded-2xl p-6 transition-all duration-300 shadow-2xl flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-white/10 text-white group-hover:scale-110 transition-transform">
+                      <Briefcase size={22} className="text-blue-400" />
+                    </div>
+                    <span className="text-xs font-cinzel font-bold tracking-wider uppercase text-white">
+                      PLACEMENT DRIVES
+                    </span>
+                  </div>
+                  <Link
+                    href="/candidates"
+                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-blue-600 flex items-center justify-center text-white transition-colors"
+                  >
+                    <ChevronRight size={14} />
+                  </Link>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  ₹45.00 LPA peak salary, 2,150+ placement offers, with high-velocity hiring from Amazon, Google, Flipkart, Morgan Stanley & Celebal.
                 </p>
               </div>
+            </motion.div>
+          </div>
+
+          {/* Center Mouse Scroll Indicator */}
+          <div className="flex justify-center mt-10">
+            <div className="w-5 h-9 rounded-full border border-white/30 flex items-start justify-center p-1">
+              <motion.div
+                animate={{ y: [0, 14, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                className="w-1.5 h-1.5 rounded-full bg-blue-400"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════════════════════════════
-          6. FEATURED RECRUITERS MARQUEE (109 DRIVES)
-      ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-16 bg-white border-y border-slate-200/80 overflow-hidden">
-        <div className="mb-6 text-center">
-          <span className="text-xs text-slate-500 uppercase tracking-widest font-extrabold">
-            109 Partner Recruiters Visiting Poornima Campuses
-          </span>
-        </div>
-        <div className="marquee-container">
-          <div className="marquee-content">
-            {[...companyLogos, ...companyLogos].map((company, i) => (
-              <div
-                key={`${company.name}-${i}`}
-                className="inline-flex items-center gap-3 mx-3 px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-blue-400 hover:bg-white transition-all shadow-sm"
-              >
-                {company.logo ? (
-                  <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-sm border border-slate-100">
-                    <img src={company.logo} alt={company.name} className="w-full h-full object-contain" />
-                  </div>
-                ) : (
-                  <Building2 size={16} className={company.color || "text-[#0066FF]"} />
-                )}
-                <span className="font-bold text-xs text-slate-800">
-                  {company.name}
-                </span>
+      {/* ───────────────────────────────────────────────────────────────────────
+          SECTION 2: STORY & OVERLAPPING GRADUATE PORTRAIT (1:1 Reference Match)
+         ─────────────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#06090F] pt-20 pb-28 border-t border-white/10 z-20 overflow-visible">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* Left Narrative Column */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="lg:col-span-7 space-y-6"
+            >
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 text-xs font-cinzel font-semibold tracking-wider uppercase">
+                Academic & Placement Legacy • Jaipur, Rajasthan
               </div>
-            ))}
+
+              <h2 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal text-white tracking-tight leading-tight">
+                Poornima University &<br />Group of Colleges
+              </h2>
+
+              <div className="space-y-4 text-sm sm:text-base text-slate-300 font-normal leading-relaxed">
+                <p>
+                  Established with a vision of technical pre-eminence and industry alignment, Poornima represents Rajasthan&apos;s premier collegiate ecosystem. Across more than two decades, our campus network has transformed over 30,000 engineering and tech graduates into global technical leaders.
+                </p>
+                <p>
+                  Our three constituent institutions — <strong>Poornima University (PU)</strong>, <strong>Poornima College of Engineering (PCE Estd. 2000)</strong>, and <strong>Poornima Institute of Engineering & Technology (PIET NAAC &apos;A&apos;)</strong> — cultivate nation-builders, software architects, and innovators who lead Fortune 500 engineering teams globally.
+                </p>
+                <p>
+                  With 350+ annual visiting recruiters, an AICTE-endorsed Central TPO, and seven specialized career accelerator tracks, our graduates consistently achieve life-changing career milestones.
+                </p>
+              </div>
+
+              {/* Stat Chips */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div className="text-2xl lg:text-3xl font-extrabold text-blue-400">₹45.00</div>
+                  <div className="text-[11px] text-slate-400 uppercase tracking-wider mt-1">LPA Highest CTC</div>
+                </div>
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div className="text-2xl lg:text-3xl font-extrabold text-white">2,150+</div>
+                  <div className="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Total Offers</div>
+                </div>
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div className="text-2xl lg:text-3xl font-extrabold text-blue-400">350+</div>
+                  <div className="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Corporates</div>
+                </div>
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div className="text-2xl lg:text-3xl font-extrabold text-emerald-400">NAAC &apos;A&apos;</div>
+                  <div className="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Accredited</div>
+                </div>
+              </div>
+
+              <div className="pt-4 flex flex-wrap gap-4">
+                <Link
+                  href="/placements"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] text-white font-semibold text-sm transition-all shadow-xl shadow-blue-600/30 group"
+                >
+                  Explore Placement Records
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  href="/universities"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-medium text-sm transition-all"
+                >
+                  View All 3 Campuses
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right Column: Tall Overlapping Graduate Portrait (Exact match from reference image) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="lg:col-span-5 relative"
+            >
+              {/* Overlapping Container dropping down into the next section */}
+              <div className="relative -mb-16 lg:-mb-36 z-30 group">
+                <div className="relative rounded-3xl overflow-hidden border-2 border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.8)] bg-slate-900 aspect-[9/15]">
+                  <img
+                    src="/images/poornima-graduate-portrait.jpg"
+                    alt="Poornima University Proud Graduate Student"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  />
+                  {/* Subtle Gradient Overlay at bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  
+                  {/* Card Badge */}
+                  <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-black/70 backdrop-blur-md border border-white/20">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest block">
+                          Class of 2024 • Placed Scholar
+                        </span>
+                        <h4 className="text-white font-serif-luxury text-lg">
+                          Excellence in Engineering
+                        </h4>
+                      </div>
+                      <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shrink-0">
+                        <Award size={20} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════════════════════════════
-          7. UNIVERSITY EXPLORER & SEARCH SECTION
-      ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-slate-50 border-b border-slate-200/60">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-3 mb-10">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/20 bg-blue-50 text-[#0066FF] text-xs font-bold uppercase tracking-wider">
-              <GraduationCap size={14} />
-              Poornima Group Network
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
-              Campus Placement Portals
+      {/* ───────────────────────────────────────────────────────────────────────
+          SECTION 3: NEWS, EVENTS & PLACEMENTS BENTO GRID (1:1 Reference Match)
+         ─────────────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#070D18] pt-32 pb-24 border-t border-white/10 z-10 overflow-hidden">
+        {/* Background Architectural Glow */}
+        <div className="absolute inset-0 z-0 opacity-20">
+          <img
+            src="/images/poornima-campus-4k.jpg"
+            alt="Campus Backdrop"
+            className="w-full h-full object-cover filter blur-md"
+          />
+          <div className="absolute inset-0 bg-[#070D18]/90" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header with Blue Dot Accent */}
+          <div className="mb-10">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-3 h-3 rounded-full bg-blue-500 animate-pulse" />
+              <span className="text-xs font-cinzel font-bold tracking-[0.25em] uppercase text-blue-400">
+                News & Placement Drives
+              </span>
+            </div>
+            <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight">
+              Communication Center | TPO Live Feed
             </h2>
-            <p className="text-slate-600 max-w-xl mx-auto text-sm">
-              Explore placement records, peak CTC distributions, and recruitment drives across Poornima University, PCE, and PIET.
+            <p className="text-sm text-slate-400 max-w-2xl mt-2 font-normal">
+              Real-time campus recruitment drives, marquee placement announcements, and student success features.
             </p>
           </div>
 
-          {/* Search bar */}
-          <div className="max-w-xl mx-auto mb-10">
-            <div className="relative">
-              <Search
-                size={18}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
-              />
-              <input
-                type="text"
-                placeholder="Search campus or branch (e.g., PCE, CSE, MBA)..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-6 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#0066FF] focus:ring-2 focus:ring-blue-500/20 shadow-sm text-sm"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+          {/* Bento Grid Layout exactly matching reference */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            {/* Left 8 Columns: 4 Bento Cards */}
+            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-5">
+              {/* Tile 1: Top Left Wide Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="relative rounded-2xl overflow-hidden border border-white/15 bg-black/60 group p-6 flex flex-col justify-between min-h-[220px]"
+              >
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src="/images/poornima-event.jpg"
+                    alt="Campus Drive Event"
+                    className="w-full h-full object-cover opacity-35 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+                </div>
+                <div className="relative z-10">
+                  <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-red-600/90 text-white mb-2">
+                    HOT | TODAY
+                  </span>
+                  <h3 className="text-white font-serif-luxury text-lg sm:text-xl font-medium leading-snug">
+                    Amazon & Google Conclude Day-1 Drives: 15+ Students Land Dream Offers up to ₹45.00 LPA
+                  </h3>
+                </div>
+                <div className="relative z-10 pt-4">
+                  <Link
+                    href="/placements"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white text-xs font-semibold uppercase tracking-wider transition-colors"
+                  >
+                    READ NEWS <span className="text-[10px]">»</span>
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* Tile 4: Top Right / Center Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="relative rounded-2xl overflow-hidden border border-white/15 bg-black/60 group p-6 flex flex-col justify-between min-h-[220px]"
+              >
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src="/images/poornima-real.jpg"
+                    alt="PIET Drive"
+                    className="w-full h-full object-cover opacity-35 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+                </div>
+                <div className="relative z-10">
+                  <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-blue-600 text-white mb-2">
+                    HOT | TODAY
+                  </span>
+                  <h3 className="text-white font-serif-luxury text-lg sm:text-xl font-medium leading-snug">
+                    PIET Autonomous (NAAC &apos;A&apos;) Completes Super Dream Drive with 100+ Recruiter Visits
+                  </h3>
+                </div>
+                <div className="relative z-10 pt-4">
+                  <Link
+                    href="/universities/piet"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white text-xs font-semibold uppercase tracking-wider transition-colors"
+                  >
+                    READ NEWS <span className="text-[10px]">»</span>
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* Tile 2: Bottom Left Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="relative rounded-2xl overflow-hidden border border-white/15 bg-black/60 group p-6 flex flex-col justify-between min-h-[260px]"
+              >
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src="/images/poornima-campus-4k.jpg"
+                    alt="PCE Campus"
+                    className="w-full h-full object-cover opacity-35 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-transparent" />
+                </div>
+                <div className="relative z-10">
+                  <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-emerald-600 text-white mb-2">
+                    PLACEMENT UPDATE
+                  </span>
+                  <h3 className="text-white font-serif-luxury text-lg sm:text-xl font-medium leading-snug">
+                    PCE Jaipur Achieves 93.4% Overall Placements: 1,700+ Offers Distributed Across CSE & AI/DS
+                  </h3>
+                </div>
+                <div className="relative z-10 pt-4">
+                  <Link
+                    href="/universities/pce"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white text-xs font-semibold uppercase tracking-wider transition-colors"
+                  >
+                    READ NEWS <span className="text-[10px]">»</span>
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* Tile 3: Center Spotlight Card with Arjun Sharma Photo */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="relative rounded-2xl overflow-hidden border border-white/15 bg-black/60 group p-6 flex flex-col justify-between min-h-[260px]"
+              >
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src="/images/arjun-sharma-spotlight.jpg"
+                    alt="Arjun Sharma Spotlight"
+                    className="w-full h-full object-cover object-top opacity-50 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
+                </div>
+                <div className="relative z-10">
+                  <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-amber-500 text-black mb-2">
+                    HOT | SPOTLIGHT
+                  </span>
+                  <h3 className="text-white font-serif-luxury text-lg sm:text-xl font-medium leading-snug drop-shadow-md">
+                    From Poornima to Google: Arjun Sharma&apos;s SDE-1 Journey (₹42 LPA) & DSA Preparation Guide
+                  </h3>
+                </div>
+                <div className="relative z-10 pt-4">
+                  <Link
+                    href="/candidates"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white text-xs font-semibold uppercase tracking-wider transition-colors"
+                  >
+                    READ NEWS <span className="text-[10px]">»</span>
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* Tile 5: Vibrant Solid Royal Blue CTA Card (1:1 Reference Match) */}
+              <div className="md:col-span-2">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                  className="rounded-2xl bg-[#0066FF] text-white p-6 md:p-8 shadow-2xl shadow-blue-600/40 flex flex-col sm:flex-row items-center justify-between gap-6"
                 >
-                  ✕
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <AnimatePresence>
-              {filteredUniversities.map((uni) => (
-                <Link key={uni.id + uni.name} href={`/universities/${uni.id}`}>
-                  <div className="bg-white p-5 rounded-2xl border border-slate-200/80 hover:border-blue-500 hover:shadow-lg transition-all h-full flex flex-col justify-between group">
-                    <div>
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-12 h-12 rounded-xl bg-slate-50 p-1 border border-slate-200 flex items-center justify-center shrink-0 shadow-sm">
-                          <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain" />
-                        </div>
-                        <div>
-                          <h3 className="font-bold text-slate-900 text-sm group-hover:text-[#0066FF] transition-colors leading-snug">
-                            {uni.name}
-                          </h3>
-                          <div className="flex items-center gap-1.5 mt-1">
-                            <MapPin size={11} className="text-slate-400" />
-                            <span className="text-xs text-slate-500">{uni.location}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-3 gap-2 py-3 border-y border-slate-100">
-                        <div className="text-center">
-                          <p className="text-sm font-extrabold text-[#0066FF]">
-                            {uni.placed.toLocaleString("en-IN")}
-                          </p>
-                          <p className="text-[10px] text-slate-500 uppercase font-medium mt-0.5">Placed</p>
-                        </div>
-                        <div className="text-center">
-                          <p className="text-sm font-extrabold text-purple-600">
-                            {uni.companies}+
-                          </p>
-                          <p className="text-[10px] text-slate-500 uppercase font-medium mt-0.5">Drives</p>
-                        </div>
-                        <div className="text-center">
-                          <p className="text-sm font-extrabold text-emerald-600">
-                            {uni.avgCTC}
-                          </p>
-                          <p className="text-[10px] text-slate-500 uppercase font-medium mt-0.5">Avg CTC</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 flex items-center justify-between text-xs text-slate-500">
-                      <span className="font-semibold text-slate-700">{uni.topCompany}</span>
-                      <ChevronRight size={16} className="text-[#0066FF] group-hover:translate-x-1 transition-transform" />
-                    </div>
+                  <div className="space-y-2 text-center sm:text-left">
+                    <span className="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-white/20 text-white">
+                      INFO | 2026-2027 RECRUITMENT CALENDAR
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-bold font-serif-luxury">
+                      JOIN NOW! | Register for Upcoming On-Campus Drives & Mock AI Interviews
+                    </h3>
+                    <p className="text-xs text-blue-100 max-w-xl">
+                      Central TPO portal for students of Poornima University, PCE, and PIET to register for Day-1 companies and run automated ATS resume scores.
+                    </p>
                   </div>
-                </Link>
-              ))}
-            </AnimatePresence>
-          </div>
-        </div>
-      </section>
+                  <Link
+                    href="/register"
+                    className="px-6 py-3 rounded-full bg-white hover:bg-slate-100 text-[#0066FF] font-extrabold text-xs tracking-wider uppercase transition-transform hover:scale-105 shrink-0 shadow-lg"
+                  >
+                    REGISTRATION »
+                  </Link>
+                </motion.div>
+              </div>
+            </div>
 
-      {/* ════════════════════════════════════════════════════════════════════════
-          8. SEVENAI PLACEMENT INTELLIGENCE COACH SECTION
-      ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-white relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Interactive Chat Console */}
-            <div className="rounded-2xl border border-slate-200/90 bg-white shadow-xl overflow-hidden">
-              <div className="px-5 py-4 border-b border-slate-100 bg-slate-50 flex items-center justify-between">
+            {/* Right 4 Columns: Streaming Pill, Drive Calendar Widget, Contact Widget (Exact 1:1 Reference Match) */}
+            <div className="lg:col-span-4 space-y-5">
+              {/* Widget 1: TPO Live Stream Pill */}
+              <div className="rounded-2xl border border-white/15 bg-black/60 backdrop-blur-md p-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#0066FF] flex items-center justify-center text-white shadow-sm">
-                    <Sparkles size={16} />
+                  <div className="w-9 h-9 rounded-xl bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-blue-400">
+                    <Radio size={18} className="animate-pulse" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900">SevenAI Placement Intelligence</h4>
-                    <p className="text-[10px] text-slate-500">Powered by Google Gemini 2.5 Flash</p>
+                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                      TPO Live Broadcast
+                    </h4>
+                    <p className="text-[11px] text-slate-400">
+                      12 Active Drives Scheduled Next Week
+                    </p>
                   </div>
                 </div>
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold border border-emerald-200">
-                  Online
-                </span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
               </div>
 
-              {/* Messages Container */}
-              <div className="p-5 space-y-4 max-h-80 overflow-y-auto bg-slate-50/50">
-                {aiMessages.map((msg, i) => (
-                  <div
-                    key={i}
-                    className={`flex ${
-                      msg.role === "user" ? "justify-end" : "justify-start"
-                    }`}
-                  >
+              {/* Widget 2: Interactive Monthly Placement Calendar (Matching Reference) */}
+              <div className="rounded-2xl border border-white/15 bg-black/70 backdrop-blur-xl p-5 shadow-2xl">
+                <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
+                  <div className="flex items-center gap-2">
+                    <CalendarIcon size={16} className="text-blue-400" />
+                    <span className="text-xs font-cinzel font-bold text-white tracking-widest uppercase">
+                      October 2026
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-medium">Placement Month</span>
+                </div>
+
+                {/* Days of week */}
+                <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-slate-400 uppercase mb-2">
+                  <span>M</span>
+                  <span>T</span>
+                  <span>W</span>
+                  <span>T</span>
+                  <span>F</span>
+                  <span>S</span>
+                  <span>S</span>
+                </div>
+
+                {/* Dates grid */}
+                <div className="grid grid-cols-7 gap-1 text-center text-xs text-slate-300">
+                  <span className="p-1.5 text-slate-600">28</span>
+                  <span className="p-1.5 text-slate-600">29</span>
+                  <span className="p-1.5 text-slate-600">30</span>
+                  <span className="p-1.5">1</span>
+                  <span className="p-1.5">2</span>
+                  <span className="p-1.5">3</span>
+                  <span className="p-1.5">4</span>
+
+                  <span className="p-1.5">5</span>
+                  <span className="p-1.5">6</span>
+                  <span className="p-1.5">7</span>
+                  <span className="p-1.5">8</span>
+                  <span className="p-1.5">9</span>
+                  <span className="p-1.5">10</span>
+                  <span className="p-1.5">11</span>
+
+                  <span className="p-1.5">12</span>
+                  <span className="p-1.5">13</span>
+                  <span className="p-1.5">14</span>
+                  <span className="p-1.5">15</span>
+                  <span className="p-1.5">16</span>
+                  <span className="p-1.5">17</span>
+                  <span className="p-1.5 rounded-full bg-blue-600 text-white font-extrabold relative">
+                    18
+                    <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-amber-400" />
+                  </span>
+
+                  <span className="p-1.5">19</span>
+                  <span className="p-1.5">20</span>
+                  <span className="p-1.5">21</span>
+                  <span className="p-1.5 rounded-full bg-blue-600 text-white font-extrabold">22</span>
+                  <span className="p-1.5">23</span>
+                  <span className="p-1.5">24</span>
+                  <span className="p-1.5 rounded-full bg-blue-600 text-white font-extrabold">25</span>
+
+                  <span className="p-1.5">26</span>
+                  <span className="p-1.5">27</span>
+                  <span className="p-1.5">28</span>
+                  <span className="p-1.5 rounded-full bg-blue-600 text-white font-extrabold">29</span>
+                  <span className="p-1.5">30</span>
+                  <span className="p-1.5">31</span>
+                  <span className="p-1.5 text-slate-600">1</span>
+                </div>
+
+                {/* Upcoming Drives Ticker */}
+                <div className="mt-4 pt-3 border-t border-white/10 space-y-2">
+                  <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                    Upcoming On-Campus Drives:
+                  </div>
+                  {DRIVE_SCHEDULE.map((drive) => (
                     <div
-                      className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-xs sm:text-sm leading-relaxed ${
-                        msg.role === "user"
-                          ? "bg-[#0066FF] text-white rounded-br-none"
-                          : "bg-white text-slate-800 border border-slate-200/80 rounded-bl-none shadow-sm whitespace-pre-line"
-                      }`}
+                      key={drive.company}
+                      className="p-2 rounded-lg bg-white/5 border border-white/5 flex items-center justify-between text-xs"
                     >
-                      {msg.text}
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-500/20 text-blue-400">
+                          Oct {drive.day}
+                        </span>
+                        <span className="text-white font-medium">{drive.company}</span>
+                      </div>
+                      <span className="text-[11px] font-bold text-emerald-400">{drive.ctc}</span>
                     </div>
-                  </div>
-                ))}
-                {isAiLoading && (
-                  <div className="flex items-center gap-2 text-xs text-slate-500 bg-white p-3 rounded-xl border border-slate-200 w-fit">
-                    <Sparkles size={14} className="text-[#0066FF] animate-spin" />
-                    <span>Analyzing verified Poornima placement records...</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Input */}
-              <div className="p-4 border-t border-slate-100 bg-white">
-                <div className="flex items-center gap-2 p-1.5 pl-3 rounded-xl border border-slate-200 focus-within:border-[#0066FF]">
-                  <input
-                    type="text"
-                    value={aiInput}
-                    onChange={(e) => setAiInput(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleAiSend()}
-                    placeholder="Ask about highest package, Amazon questions, or CSE trends..."
-                    className="flex-1 bg-transparent text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none"
-                  />
-                  <button
-                    onClick={handleAiSend}
-                    className="w-8 h-8 rounded-lg bg-[#0066FF] hover:bg-[#0052CC] text-white flex items-center justify-center transition-colors"
-                  >
-                    <Send size={14} />
-                  </button>
+                  ))}
                 </div>
               </div>
-            </div>
 
-            {/* Right side explanation */}
-            <div className="space-y-6">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-50 text-[#0066FF] text-xs font-bold uppercase tracking-wider">
-                <Sparkles size={14} />
-                Instant Career Copilot
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
-                Ask Anything About Poornima Placement Drives
-              </h2>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                SevenAI analyzes 109 verified recruitment records from Poornima University,
-                Poornima College of Engineering (PCE), and PIET. Get instant answers about eligibility
-                criteria, selection rounds, coding questions, and package breakdowns.
-              </p>
-              <div className="grid grid-cols-2 gap-4 pt-2">
-                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
-                  <p className="text-lg font-black text-[#0066FF]">100%</p>
-                  <p className="text-xs text-slate-600 mt-1">Verified Placement Records</p>
+              {/* Widget 3: Quick Location & Social info */}
+              <div className="rounded-2xl border border-white/15 bg-black/60 backdrop-blur-md p-4 text-center space-y-2">
+                <div className="flex items-center justify-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-white/40" />
+                  <span className="w-2 h-2 rounded-full bg-white/40" />
+                  <span className="w-2 h-2 rounded-full bg-white/40" />
+                  <span className="w-2 h-2 rounded-full bg-white/40" />
+                  <span className="w-2 h-2 rounded-full bg-white/40" />
                 </div>
-                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
-                  <p className="text-lg font-black text-[#0066FF]">Gemini 2.5</p>
-                  <p className="text-xs text-slate-600 mt-1">Flash Model Powered</p>
-                </div>
+                <p className="text-xs text-white font-serif-luxury font-medium">
+                  Poornima University Central TPO
+                </p>
+                <p className="text-[11px] text-slate-400">
+                  IS-2027 to 2031, Sitapura Extension, Jaipur, Rajasthan 302022
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════════════════════════════
-          9. RECENT PLACEMENTS (CLASS OF 2024 SHOWCASE)
-      ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200/60">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-blue-500/20 bg-blue-50 text-[#0066FF] text-xs font-bold uppercase tracking-wider mb-2">
-                <Briefcase size={12} />
-                Verified Student Offers
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
-                Recent Placements
-              </h2>
-            </div>
-            <Link
-              href="/placements"
-              className="hidden sm:inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0066FF] hover:text-[#0052CC]"
-            >
-              View All Offers <ArrowRight size={14} />
-            </Link>
+      {/* ───────────────────────────────────────────────────────────────────────
+          SECTION 4: THE 3 CONSTITUENT INSTITUTIONS (Real PNG Logos & Exact Data)
+         ─────────────────────────────────────────────────────────────────────── */}
+      <section id="institutions" className="relative bg-[#04070D] py-24 border-t border-white/10 z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <span className="px-3 py-1 rounded-full text-xs font-cinzel font-bold tracking-widest uppercase bg-blue-600/10 text-blue-400 border border-blue-500/20">
+              POORNIMA ACADEMIC ECOSYSTEM
+            </span>
+            <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight">
+              Our Three Premier Institutions
+            </h2>
+            <p className="text-sm text-slate-300">
+              Explore verified placement records, accreditation rankings, and corporate recruiters for each constituent university, college, and institute.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {recentPlacements.map((placement, i) => (
-              <div
-                key={placement.id}
-                className="bg-white p-5 rounded-2xl border border-slate-200/80 hover:shadow-md hover:border-blue-400 transition-all flex flex-col justify-between"
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {INSTITUTIONS.map((inst) => (
+              <motion.div
+                key={inst.id}
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.3 }}
+                className="relative rounded-3xl bg-black/60 border border-white/15 hover:border-blue-500/50 backdrop-blur-xl p-8 flex flex-col justify-between shadow-2xl transition-all group overflow-hidden"
               >
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div
-                      className={`w-10 h-10 rounded-full bg-gradient-to-br ${
-                        avatarColors[i % avatarColors.length]
-                      } flex items-center justify-center text-xs font-bold text-white shadow-sm`}
-                    >
-                      {placement.avatar}
+                {/* Top Subtle Gradient */}
+                <div
+                  className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${inst.accentColor}`}
+                />
+
+                <div className="space-y-6">
+                  {/* Logo & Badge Header */}
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="w-18 h-18 p-2 rounded-2xl bg-white border border-white/20 shadow-lg flex items-center justify-center shrink-0">
+                      <img
+                        src={inst.logo}
+                        alt={`${inst.name} Official PNG Logo`}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
-                    <div>
-                      <p className="font-bold text-xs text-slate-900 leading-tight">
-                        {placement.name}
-                      </p>
-                      <p className="text-[11px] text-slate-500">{placement.branch}</p>
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/10 text-slate-200 border border-white/10 text-right">
+                      {inst.highlightTag}
+                    </span>
+                  </div>
+
+                  {/* Title & Accreditation */}
+                  <div>
+                    <h3 className="text-2xl font-serif-luxury font-normal text-white group-hover:text-blue-300 transition-colors">
+                      {inst.name}
+                    </h3>
+                    <p className="text-xs text-blue-400 font-medium mt-1">
+                      {inst.type} • Estd. {inst.established}
+                    </p>
+                    <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
+                      {inst.accreditation}
+                    </p>
+                  </div>
+
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    {inst.description}
+                  </p>
+
+                  {/* Telemetry Metric Grid */}
+                  <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/10">
+                    <div className="p-3 rounded-xl bg-white/5">
+                      <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                        Highest Package
+                      </div>
+                      <div className="text-lg font-extrabold text-blue-400 mt-0.5">
+                        {inst.highestCTC}
+                      </div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-white/5">
+                      <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                        Total Placed
+                      </div>
+                      <div className="text-lg font-extrabold text-white mt-0.5">
+                        {inst.placed}
+                      </div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-white/5">
+                      <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                        Average Package
+                      </div>
+                      <div className="text-base font-extrabold text-slate-200 mt-0.5">
+                        {inst.avgCTC}
+                      </div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-white/5">
+                      <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                        Campus Location
+                      </div>
+                      <div className="text-[11px] font-medium text-slate-300 mt-0.5 truncate">
+                        Jaipur, Raj.
+                      </div>
                     </div>
                   </div>
 
-                  <div className="mb-3">
-                    <p className="text-xs font-bold text-[#0066FF]">{placement.company}</p>
-                    <p className="text-[11px] text-slate-600 truncate">{placement.role}</p>
+                  {/* Recruiter Callout */}
+                  <div className="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20 text-xs">
+                    <span className="font-bold text-blue-300">Marquee Recruiter:</span>{" "}
+                    <span className="text-slate-300">{inst.topRecruiter}</span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-slate-100">
-                  <span className="text-xs font-extrabold text-emerald-600">
-                    {placement.ctc}
-                  </span>
-                  <a
-                    href={placement.linkedIn}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#0A66C2]/10 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white text-[11px] font-bold transition-colors"
+                {/* Direct Action Link */}
+                <div className="pt-6">
+                  <Link
+                    href={`/universities/${inst.slug}`}
+                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/10 hover:bg-[#0066FF] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-md group-hover:bg-[#0066FF]"
                   >
-                    <Linkedin size={11} />
-                    <span>Connect</span>
-                  </a>
+                    View Campus Placement Profile
+                    <ArrowRight size={14} />
+                  </Link>
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────────────────────────────────────────────────────────────
+          SECTION 5: 350+ VISITING CORPORATE RECRUITERS (Marquee Logo Strip)
+         ─────────────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#060A12] py-16 border-t border-white/10 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
+          <p className="text-xs font-cinzel font-bold tracking-[0.25em] text-blue-400 uppercase">
+            350+ Annual Corporate Recruiters
+          </p>
+          <h3 className="font-serif-luxury text-2xl sm:text-3xl font-normal text-white mt-1">
+            Top Hiring Partners Across All 3 Poornima Institutions
+          </h3>
+        </div>
+
+        {/* Marquee Row */}
+        <div className="flex gap-6 overflow-hidden py-4 select-none [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+          <div className="flex gap-6 shrink-0 animate-marquee items-center">
+            {RECRUITERS.concat(RECRUITERS).map((recruiter, idx) => (
+              <div
+                key={`${recruiter.name}-${idx}`}
+                className="w-36 h-20 rounded-2xl bg-white/5 border border-white/10 p-3 flex flex-col items-center justify-center gap-1 shrink-0 hover:bg-white/10 transition-colors"
+              >
+                <img
+                  src={recruiter.logo}
+                  alt={recruiter.name}
+                  className="h-9 w-auto max-w-[90px] object-contain filter brightness-95"
+                />
+                <span className="text-[10px] font-semibold text-slate-400 truncate max-w-full">
+                  {recruiter.name}
+                </span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Corporate Deep Navy Footer */}
+      {/* ───────────────────────────────────────────────────────────────────────
+          SECTION 6: VERIFIED PLACED CANDIDATES WALL (Real Student Records)
+         ─────────────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#04070D] py-24 border-t border-white/10 z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <span className="px-3 py-1 rounded-full text-xs font-cinzel font-bold tracking-widest uppercase bg-blue-600/10 text-blue-400 border border-blue-500/20">
+                VERIFIED ALUMNI RECORD
+              </span>
+              <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight mt-2">
+                Placement Hall of Fame
+              </h2>
+              <p className="text-sm text-slate-300 mt-1">
+                Real student records from Poornima University, PCE Jaipur, and PIET Autonomous.
+              </p>
+            </div>
+
+            {/* Filter Tabs by Institution */}
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white/5 border border-white/10 self-start md:self-auto">
+              <button
+                onClick={() => setActiveCampusTab("all")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors ${
+                  activeCampusTab === "all" ? "bg-[#0066FF] text-white" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                All Campuses
+              </button>
+              <button
+                onClick={() => setActiveCampusTab("University")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors ${
+                  activeCampusTab === "University" ? "bg-[#0066FF] text-white" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                PU
+              </button>
+              <button
+                onClick={() => setActiveCampusTab("PCE")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors ${
+                  activeCampusTab === "PCE" ? "bg-[#0066FF] text-white" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                PCE
+              </button>
+              <button
+                onClick={() => setActiveCampusTab("PIET")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors ${
+                  activeCampusTab === "PIET" ? "bg-[#0066FF] text-white" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                PIET
+              </button>
+            </div>
+          </div>
+
+          {/* Candidate Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredCandidates.map((c) => (
+              <motion.div
+                key={c.name}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="rounded-2xl bg-black/60 border border-white/15 hover:border-blue-500/40 p-5 flex flex-col justify-between shadow-xl transition-all group"
+              >
+                <div className="flex items-start gap-4">
+                  {c.avatar ? (
+                    <img
+                      src={c.avatar}
+                      alt={c.name}
+                      className="w-14 h-14 rounded-2xl object-cover object-top border border-white/20 shrink-0"
+                    />
+                  ) : (
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center font-bold text-lg text-white shrink-0 border border-white/20">
+                      {c.initials}
+                    </div>
+                  )}
+
+                  <div className="space-y-1 overflow-hidden">
+                    <div className="flex items-center gap-1.5">
+                      <h4 className="font-bold text-white text-base truncate">{c.name}</h4>
+                      <BadgeCheck size={16} className="text-blue-400 shrink-0" />
+                    </div>
+                    <p className="text-xs text-blue-300 font-semibold truncate">{c.company}</p>
+                    <p className="text-[11px] text-slate-400 truncate">{c.role}</p>
+                  </div>
+                </div>
+
+                <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                  <div>
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                      Package
+                    </span>
+                    <span className="text-base font-extrabold text-emerald-400">{c.ctc}</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                      Campus
+                    </span>
+                    <span className="font-semibold text-slate-200">{c.institution}</span>
+                  </div>
+                </div>
+
+                <div className="mt-4 pt-2 flex items-center justify-between">
+                  <span className="text-[11px] text-slate-400">{c.branch} • {c.year}</span>
+                  <a
+                    href={c.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[11px] font-bold text-blue-400 hover:text-blue-300 flex items-center gap-1"
+                  >
+                    LinkedIn <ExternalLink size={12} />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/candidates"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white/10 hover:bg-[#0066FF] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-lg"
+            >
+              View All 109+ Placed Seniors & Interview Insights
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────────────────────────────────────────────────────────────
+          SECTION 7: CENTRAL TPO CTA BANNER
+         ─────────────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#0066FF] text-white py-16 overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 text-center space-y-4 relative z-10">
+          <span className="px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-widest bg-white/20 text-white">
+            POORNIMA PLACEMENT ACCELERATOR
+          </span>
+          <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal tracking-tight">
+            Ready to Land Your Dream Placement?
+          </h2>
+          <p className="text-sm sm:text-base text-blue-100 max-w-2xl mx-auto font-normal">
+            Analyze your resume with the ATS Score Engine, practice technical coding rounds with SevenAI, and track active Day-1 campus drives.
+          </p>
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/resources/resume"
+              className="px-6 py-3 rounded-full bg-white hover:bg-slate-100 text-[#0066FF] font-extrabold text-xs uppercase tracking-wider transition-transform hover:scale-105 shadow-xl"
+            >
+              Analyze Resume ATS Score »
+            </Link>
+            <Link
+              href="/ai"
+              className="px-6 py-3 rounded-full bg-black/40 hover:bg-black/60 border border-white/20 text-white font-extrabold text-xs uppercase tracking-wider transition-all"
+            >
+              Practice AI Interview Coach »
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );

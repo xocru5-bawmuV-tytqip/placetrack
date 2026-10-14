@@ -98,8 +98,8 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white p-1 border border-white/20 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
               <img
-                src="/images/logos/poornima-group.jpg"
-                alt="Poornima Group"
+                src="/images/logos/poornima-university.png"
+                alt="Poornima University"
                 className="w-full h-full object-contain"
               />
             </div>
@@ -119,7 +119,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = pathname === link.href;
@@ -128,7 +128,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide uppercase transition-all duration-200",
+                    "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide uppercase transition-all duration-200",
                     link.highlight
                       ? "text-white bg-[#0066FF] hover:bg-[#0052CC] shadow-md shadow-blue-500/20"
                       : isActive
@@ -151,8 +151,16 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Desktop Auth */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Desktop Auth & Social Dots */}
+          <div className="hidden md:flex items-center gap-3 pr-16 lg:pr-20">
+            {/* 5 Social indicator dots matching reference */}
+            <div className="hidden xl:flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/5 border border-white/10">
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="w-2 h-2 rounded-full bg-white/40 hover:bg-blue-400 transition-colors" title="LinkedIn" />
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="w-2 h-2 rounded-full bg-white/40 hover:bg-blue-400 transition-colors" title="Twitter" />
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-2 h-2 rounded-full bg-white/40 hover:bg-pink-400 transition-colors" title="Instagram" />
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="w-2 h-2 rounded-full bg-white/40 hover:bg-red-400 transition-colors" title="YouTube" />
+              <a href="https://poornima.edu.in" target="_blank" rel="noreferrer" className="w-2 h-2 rounded-full bg-white/40 hover:bg-emerald-400 transition-colors" title="Official Website" />
+            </div>
             {status === "loading" ? (
               <div className="w-20 h-8 rounded-xl bg-white/5 animate-pulse" />
             ) : session ? (
@@ -366,6 +374,17 @@ export default function Navbar() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Signature Reference Design: Royal Blue Hanging Bookmark Ribbon */}
+        <div className="hidden lg:block absolute right-8 sm:right-12 md:right-14 top-0 w-12 md:w-16 h-36 bg-[#0066FF] ribbon-notch-down z-50 shadow-2xl shadow-blue-900/60 transition-transform duration-300 hover:translate-y-1.5 pointer-events-auto">
+          <div className="w-full h-full flex flex-col items-center justify-start pt-3">
+            <div className="w-2 h-2 rounded-full bg-white/50 mb-1" />
+            <div className="w-1.5 h-1.5 rounded-full bg-white/30 mb-3" />
+            <span className="text-[10px] font-extrabold tracking-widest text-white uppercase [writing-mode:vertical-lr] rotate-180">
+              POORNIMA
+            </span>
+          </div>
+        </div>
       </header>
 
       {/* Overlay to close user menu */}
