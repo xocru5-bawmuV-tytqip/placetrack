@@ -482,28 +482,28 @@ export default function HomePage() {
               className="lg:col-span-5 relative"
             >
               {/* Overlapping Container dropping down into the next section */}
-              <div className="relative -mb-16 lg:-mb-36 z-30 group">
-                <div className="relative rounded-3xl overflow-hidden border-2 border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.8)] bg-slate-900 aspect-[9/14] sm:aspect-[9/13]">
+              <div className="relative -mb-10 lg:-mb-24 z-30 group">
+                <div className="relative rounded-3xl overflow-hidden border-2 border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.8)] bg-slate-900 aspect-[16/11] sm:aspect-[4/3]">
                   <img
-                    src="/images/poornima-student-victory.png"
-                    alt="Poornima University Student Celebrating Placement Success"
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                    src="/images/poornima-student-scholar.png"
+                    alt="Poornima University Student in Official Uniform Celebrating Placement Victory"
+                    className="w-full h-full object-cover object-[30%_center] group-hover:scale-105 transition-transform duration-700"
                   />
                   {/* Subtle Gradient Overlay at bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
                   
                   {/* Card Badge */}
-                  <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-black/75 backdrop-blur-md border border-white/20">
+                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-black/75 backdrop-blur-md border border-white/20">
                     <div className="flex items-center justify-between">
                       <div>
                         <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest block">
-                          Poornima University • Placed Scholar
+                          Poornima Scholar • Placed 2024
                         </span>
-                        <h4 className="text-white font-serif-luxury text-lg">
+                        <h4 className="text-white font-serif-luxury text-base sm:text-lg">
                           Excellence in Engineering
                         </h4>
                       </div>
-                      <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-600/40">
                         <Award size={20} />
                       </div>
                     </div>
