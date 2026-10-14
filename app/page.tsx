@@ -225,36 +225,38 @@ export default function HomePage() {
           HERO SECTION (1:1 Reference Match: Aerial View, Laurel Emblem, 3 Glass Cards)
          ─────────────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[92vh] lg:min-h-screen flex flex-col justify-between pt-24 pb-12 overflow-hidden">
-        {/* Full-width Aerial Campus Photography Background */}
+        {/* Full-width Daylight Campus Architecture Photography Background */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/poornima-campus-4k.jpg"
-            alt="Poornima University Campus Architecture"
-            className="w-full h-full object-cover object-center scale-105 transform motion-safe:animate-[pulse_10s_ease-in-out_infinite]"
+            src="/images/poornima-main-campus.jpg"
+            alt="Poornima University Main Academic Campus"
+            className="w-full h-full object-cover object-center scale-100"
           />
-          {/* Cinematic Vignette Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#04070D]/75 via-[#04070D]/60 to-[#04070D] z-10" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#04070D_95%)] z-10" />
+          {/* Balanced cinematic overlay to keep campus architecture crisp while ensuring text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#04070D]/80 via-[#04070D]/55 to-[#04070D] z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,#04070D_90%)] z-10" />
         </div>
 
-        {/* Center Hero Emblem & Grand Title */}
-        <div className="relative z-20 max-w-5xl mx-auto px-4 text-center mt-12 md:mt-20">
+        {/* Center Hero Content & Grand Title */}
+        <div className="relative z-20 max-w-5xl mx-auto px-4 text-center mt-12 md:mt-16">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center justify-center space-y-4"
           >
-            {/* Laurel Wreath Crest Emblem */}
-            <div className="relative flex items-center justify-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center p-3 shadow-2xl">
-                <img
-                  src="/images/logos/poornima-royal.png"
-                  alt="Poornima Royal Laurel Emblem"
-                  className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]"
-                />
-              </div>
-            </div>
+            {/* QS I-GAUGE Diamond Rating Badge */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-950/80 border border-blue-400/40 text-blue-200 text-xs backdrop-blur-md shadow-xl"
+            >
+              <Sparkles size={14} className="text-amber-400 shrink-0" />
+              <span>
+                <strong className="text-white font-semibold">&quot;Diamond&quot; Rated University</strong> in India by QS I-GAUGE
+              </span>
+            </motion.div>
 
             {/* University Tagline */}
             <div className="flex items-center gap-2">
@@ -268,9 +270,9 @@ export default function HomePage() {
               Poornima University
             </h1>
 
-            {/* Motto */}
+            {/* Motto & Official Vision */}
             <p className="font-cinzel text-xs sm:text-sm md:text-base font-semibold tracking-[0.25em] text-blue-300/90 uppercase">
-              The Character of Success • Central Placement Portal
+              Ignite Excellence, Explore Education • Central Placement Portal
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs text-slate-300">
@@ -278,9 +280,15 @@ export default function HomePage() {
                 NAAC &apos;A&apos; Accredited
               </span>
               <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
-                350+ Global Recruiters
+                Approved by UGC • Estd. 2012
               </span>
               <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
+                12,000+ Students • 17,500+ Alumni
+              </span>
+              <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
+                350+ Global Recruiters
+              </span>
+              <span className="px-3 py-1 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/30 text-blue-200 font-semibold">
                 Highest CTC ₹45.00 LPA
               </span>
             </div>

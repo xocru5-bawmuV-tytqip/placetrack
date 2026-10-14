@@ -21,7 +21,7 @@ function AuthBranding() {
       <div className="relative z-10">
         <Link href="/" className="inline-flex items-center gap-3">
           <div className="w-11 h-11 rounded-2xl bg-white p-1 border border-white/20 flex items-center justify-center shadow-lg shadow-blue-500/30 overflow-hidden shrink-0">
-            <img src="/images/logos/poornima-royal.png" alt="Poornima Group" className="w-full h-full object-contain" />
+            <img src="/images/logos/poornima-university.png" alt="Poornima Group" className="w-full h-full object-contain" />
           </div>
           <div>
             <span className="font-extrabold text-xl tracking-tight text-white">Poornima PlaceTrack</span>
