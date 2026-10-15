@@ -320,9 +320,17 @@ export default function PlacementsPage() {
                       {/* Top Header Row */}
                       <div className="flex items-start justify-between gap-3 mb-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-700 flex items-center justify-center font-bold text-white text-base shadow-md">
-                            {candidate.avatar}
-                          </div>
+                          {candidate.avatar?.startsWith("/") ? (
+                            <img
+                              src={candidate.avatar}
+                              alt={candidate.name}
+                              className="w-12 h-12 rounded-xl object-cover object-top border border-white/20 shadow-md shrink-0"
+                            />
+                          ) : (
+                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-700 flex items-center justify-center font-bold text-white text-base shadow-md shrink-0">
+                              {candidate.avatar}
+                            </div>
+                          )}
                           <div>
                             <h3 className="font-bold text-white text-base leading-tight group-hover:text-blue-300 transition-colors">
                               {candidate.name}

@@ -95,8 +95,8 @@ export default function Footer() {
             <Link href="/" className="inline-flex items-center gap-3 group">
               <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-white p-1 border border-white/20 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
                 <img
-                  src="/images/logos/poornima-university.png"
-                  alt="Poornima University"
+                  src="/images/poornima-real/pu-logo-official.png"
+                  alt="Poornima University Official Logo"
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -112,15 +112,32 @@ export default function Footer() {
             </Link>
 
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              The official placement intelligence platform for Poornima Group of Colleges
-              (Poornima University, PCE & PIET). Connecting 10,000+ students with 109 global recruiters.
+              The official placement intelligence platform for Poornima University & Group of Colleges. Connecting 12,000+ students with 350+ global recruiters.
             </p>
 
+            {/* Official Contact Info from poornima.edu.in */}
+            <div className="space-y-1.5 text-xs text-slate-400 pt-1">
+              <div className="flex items-center gap-2">
+                <MapPin size={13} className="text-blue-400 shrink-0" />
+                <span>Plot No. IS-2027 to 2031, Ramchandrapura, Sitapura Ext., Jaipur 303905</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail size={13} className="text-blue-400 shrink-0" />
+                <a href="mailto:info@poornima.edu.in" className="hover:text-blue-300">info@poornima.edu.in</a>
+                <span className="text-slate-600">•</span>
+                <a href="https://www.poornima.edu.in" target="_blank" rel="noreferrer" className="text-blue-400 hover:underline">poornima.edu.in</a>
+              </div>
+            </div>
+
             {/* Accreditation Badges */}
-            <div className="flex items-center gap-2 pt-1">
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <div className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 flex items-center gap-1.5 text-[11px] text-slate-300">
+                <img src="/images/poornima-real/qs-igauge.webp" alt="QS Diamond" className="h-4 w-auto object-contain" />
+                <span>QS Diamond</span>
+              </div>
               <div className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 flex items-center gap-1.5 text-[11px] text-slate-300">
                 <img src="/images/logos/aicte.png" alt="AICTE" className="h-4 w-auto object-contain" />
-                <span>AICTE Approved</span>
+                <span>AICTE</span>
               </div>
               <div className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 flex items-center gap-1.5 text-[11px] text-slate-300">
                 <img src="/images/logos/rtu-logo.png" alt="RTU" className="h-4 w-auto object-contain" />

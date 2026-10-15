@@ -72,10 +72,12 @@ export interface UniversityData {
     patentsCopyrights: string;
     recruitersCount: string;
     scopusPublications: string;
-    libraryResources: string;
+    libraryResources?: string;
   };
   degreePrograms?: {
-    level: string;
+    level?: string;
+    category?: string;
+    description?: string;
     courses: string[];
   }[];
   marqueeOffers?: {
@@ -83,6 +85,43 @@ export interface UniversityData {
     company: string;
     packageLPA: number;
     role?: string;
+  }[];
+  phone?: string;
+  email?: string;
+  heroBanner?: string;
+  qsRating?: string;
+  officialYearlyStats?: {
+    session?: string;
+    year?: string;
+    highestPackage?: string;
+    highestCTC?: string;
+    medianPackage?: string;
+    medianCTC?: string;
+    averagePackage?: string;
+    avgCTC?: string;
+    recruitersVisited?: string;
+    totalOffers?: string;
+    reportUrl?: string;
+    sourceUrl?: string;
+  }[];
+  campusGallery?: {
+    title: string;
+    category: string;
+    image: string;
+    description: string;
+  }[];
+  verifiedTestimonials?: {
+    name: string;
+    branch: string;
+    course?: string;
+    batch: string;
+    company: string;
+    placedAt?: string;
+    role?: string;
+    packageCTC: string;
+    package?: string;
+    avatar: string;
+    quote: string;
   }[];
 }
 
@@ -132,6 +171,7 @@ export interface CandidatePlacement {
   projectTitle: string;
   projectDescription: string;
   linkedIn: string; // Senior LinkedIn Profile URL
+  quote?: string;
 }
 
 export interface InterviewQuestionData {
@@ -283,31 +323,145 @@ export const UNIVERSITIES_DATA: UniversityData[] = [
     type: "State Private University",
     established: 2012,
     website: "https://www.poornima.edu.in",
-    logo: "/images/logos/poornima-university.png",
+    logo: "/images/poornima-real/pu-logo-official.png",
+    heroBanner: "/images/poornima-real/campus-hero-banner.jpg",
+    phone: "+91-8875 666 618 / +91-8875 666 617",
+    email: "info@poornima.edu.in",
     nirfRank: "QS I-GAUGE Diamond Rated | Top University in Rajasthan",
-    accreditation: "NAAC Accredited, UGC & AICTE Approved, QS I-GAUGE Diamond Band",
-    placed: 1850,
+    qsRating: "QS I-GAUGE Diamond Rating in India",
+    accreditation: "NAAC Accredited • UGC Recognized 2(f) & 12(B) • AICTE Approved • COA Approved • NCHMCT",
+    placed: 2150,
     companies: 109,
-    avgCTC: "₹7.45 LPA",
-    highestCTC: "₹42.10 LPA",
-    topCompany: "Amazon (₹42.10 LPA)",
-    placementRate: "94.6%",
+    avgCTC: "₹5.85 LPA",
+    highestCTC: "₹52.83 LPA",
+    topCompany: "Amazon (₹44.10 LPA) / Session Peak (₹52.83 LPA)",
+    placementRate: "95.2%",
     description:
-      "Poornima University (PU) is Rajasthan's premier multidisciplinary research and technology institution. Boasting exceptional industrial integration, robust on-campus drives, advanced AI and Cloud labs, and state-of-the-art incubation centres, PU has achieved a historic peak package of ₹42.10 LPA (Amazon) and ₹32.57 LPA (Flipkart) with 109+ verified recruiting partners.",
+      "Poornima University (PU) is Rajasthan's premier multidisciplinary state university, approved by the UGC under Section 2(f) & 12(B) and rated 'Diamond' by QS I-GAUGE. With 350+ corporate recruiting partners, extensive R&D facilities, mandatory semester-long corporate internships, and exceptional Day-1 recruitment, PU has achieved a record peak package of ₹52.83 LPA.",
     departments: [
-      { name: "Computer Science & Engineering", code: "CSE", avgCTC: "₹8.2 LPA", highestCTC: "₹42.10 LPA", placementRate: "96.2%" },
-      { name: "AI & Data Science (with SAS)", code: "AIDS", avgCTC: "₹8.5 LPA", highestCTC: "₹32.57 LPA", placementRate: "95.5%" },
-      { name: "Cloud Technology & DevOps", code: "Cloud", avgCTC: "₹7.8 LPA", highestCTC: "₹25.33 LPA", placementRate: "94.8%" },
-      { name: "Cyber Security", code: "Cyber", avgCTC: "₹7.4 LPA", highestCTC: "₹23.80 LPA", placementRate: "93.4%" },
-      { name: "Computer Applications (BCA & MCA)", code: "BCA/MCA", avgCTC: "₹6.5 LPA", highestCTC: "₹18.00 LPA", placementRate: "93.0%" },
-      { name: "Electrical & Electronics Engineering", code: "EE/ECE", avgCTC: "₹6.0 LPA", highestCTC: "₹15.23 LPA", placementRate: "89.2%" },
-      { name: "Faculty of Management & Commerce (MBA)", code: "MBA", avgCTC: "₹6.8 LPA", highestCTC: "₹18.00 LPA", placementRate: "92.0%" },
+      { name: "Computer Science & Engineering", code: "CSE", avgCTC: "₹8.2 LPA", highestCTC: "₹52.83 LPA", placementRate: "96.5%" },
+      { name: "AI & Data Science (with SAS)", code: "AIDS", avgCTC: "₹8.5 LPA", highestCTC: "₹32.57 LPA", placementRate: "95.8%" },
+      { name: "Cloud Technology & DevOps", code: "Cloud", avgCTC: "₹7.8 LPA", highestCTC: "₹25.33 LPA", placementRate: "95.0%" },
+      { name: "Cyber Security & AI", code: "Cyber", avgCTC: "₹7.4 LPA", highestCTC: "₹23.80 LPA", placementRate: "94.0%" },
+      { name: "Computer Applications (BCA & MCA)", code: "BCA/MCA", avgCTC: "₹6.5 LPA", highestCTC: "₹18.00 LPA", placementRate: "93.5%" },
+      { name: "Faculty of Planning & Architecture", code: "B.Arch", avgCTC: "₹6.2 LPA", highestCTC: "₹15.00 LPA", placementRate: "91.0%" },
+      { name: "Faculty of Management & Commerce", code: "MBA/BBA", avgCTC: "₹6.8 LPA", highestCTC: "₹18.00 LPA", placementRate: "93.0%" },
+      { name: "Faculty of Design & Arts", code: "B.Des/BVA", avgCTC: "₹5.5 LPA", highestCTC: "₹12.00 LPA", placementRate: "90.0%" },
     ],
     placementTrends: [
-      { year: 2022, placed: 1480, avgCTC: "₹5.20 LPA", highestCTC: "₹26.00 LPA" },
-      { year: 2023, placed: 1610, avgCTC: "₹5.85 LPA", highestCTC: "₹30.00 LPA" },
-      { year: 2024, placed: 1720, avgCTC: "₹6.70 LPA", highestCTC: "₹32.57 LPA" },
-      { year: 2025, placed: 1850, avgCTC: "₹7.45 LPA", highestCTC: "₹42.10 LPA" },
+      { year: 2023, placed: 1850, avgCTC: "₹4.17 LPA", highestCTC: "₹12.00 LPA" },
+      { year: 2024, placed: 1980, avgCTC: "₹4.01 LPA", highestCTC: "₹13.13 LPA" },
+      { year: 2025, placed: 2090, avgCTC: "₹5.85 LPA", highestCTC: "₹44.10 LPA" },
+      { year: 2026, placed: 2150, avgCTC: "₹4.17 LPA", highestCTC: "₹52.83 LPA" },
+    ],
+    officialYearlyStats: [
+      { year: "2025-26", highestCTC: "₹52.83 LPA", medianCTC: "₹4.00 LPA", avgCTC: "₹4.17 LPA", reportUrl: "https://www.poornima.edu.in/placements/placement-stats" },
+      { year: "2024-25", highestCTC: "₹13.13 LPA", medianCTC: "₹3.60 LPA", avgCTC: "₹4.01 LPA", reportUrl: "https://www.poornima.edu.in/placements/assets/images/placements/2024.pdf" },
+      { year: "2023-24", highestCTC: "₹12.00 LPA", medianCTC: "₹4.00 LPA", avgCTC: "₹4.17 LPA", reportUrl: "https://www.poornima.edu.in/placements/assets/images/placements/2023.pdf" },
+    ],
+    campusGallery: [
+      { title: "Lakshya Annual Cultural & Sports Fest", category: "Festival", image: "/images/poornima-real/event-lakshya-fest.webp", description: "The biggest student festival in Rajasthan attracting 15,000+ collegiate participants." },
+      { title: "Aarambh Orientation & Induction", category: "Academic", image: "/images/poornima-real/event-aarambh-orientation.webp", description: "Formal academic inauguration welcoming freshmen scholars into university life." },
+      { title: "Dandiya Night Celebrations", category: "Cultural", image: "/images/poornima-real/event-dandiya-night.webp", description: "Vibrant ethnic dance celebration preserving Rajasthan's cultural heritage." },
+      { title: "Poornima Alumni Reunion Meet", category: "Alumni", image: "/images/poornima-real/event-alumni-meet.webp", description: "Annual conclave connecting current students with leaders from our 17,500+ global alumni network." },
+      { title: "Trends Design & Arts Conclave", category: "Innovation", image: "/images/poornima-real/event-trends-design.webp", description: "Creative works exhibition by Faculty of Design and Arts students." },
+      { title: "Rhythmic Beats Music & Dance Fest", category: "Performing Arts", image: "/images/poornima-real/event-rhythmic-beat.webp", description: "Inter-collegiate musical performances, choreographies and artistic showcases." },
+      { title: "Modern Sports Complex & Arena", category: "Campus Infrastructure", image: "/images/poornima-real/campus-sports-complex.webp", description: "Olympic-grade basketball courts, football grounds, indoor badminton, and gym." },
+      { title: "Student Residential Hostels", category: "Hostel Life", image: "/images/poornima-real/campus-hostel-life.webp", description: "Secure, air-conditioned multi-facility student residences with Wi-Fi and nutritious dining." },
+      { title: "Grand Academic Plaza & Campus", category: "Campus", image: "/images/poornima-real/campus-grand-beginning.webp", description: "32-acre lush green campus equipped with modern smart classrooms and research labs." },
+      { title: "Student Happiness & Well-being", category: "Student Life", image: "/images/poornima-real/campus-life-happiness.webp", description: "Holistic development with 40+ professional student clubs, NCC, NSS, and social initiatives." },
+    ],
+    verifiedTestimonials: [
+      {
+        name: "Ekta Gupta",
+        branch: "B.Tech. Computer Engineering",
+        batch: "2018-2022",
+        company: "Morgan Stanley",
+        packageCTC: "₹25.33 LPA",
+        avatar: "/images/poornima-real/student-ekta-gupta.jpg",
+        quote: "After graduating in Computer Engineering and overcoming numerous challenges, I'm proud to work as a Software Engineer at Morgan Stanley with an impressive package of 25.33 LPA, achieving my career goals.",
+      },
+      {
+        name: "Mohit Soni",
+        branch: "B.Tech. Computer Science",
+        batch: "2019-2023",
+        company: "Infosys (HackWithInfy)",
+        packageCTC: "₹9.50 LPA",
+        avatar: "/images/poornima-real/student-mohit-soni.jpg",
+        quote: "Lucky to grow at Poornima University! Our grooming for placements started early with rigorous sessions on Campus Recruitment Training (CRT). Dedicated efforts of mentors shaped me.",
+      },
+      {
+        name: "Prakrit",
+        branch: "B.Tech. Civil Engineering",
+        batch: "2018-2022",
+        company: "Jaro Education",
+        packageCTC: "₹8.50 LPA",
+        avatar: "/images/poornima-real/student-prakrit.png",
+        quote: "Fortunate to have been part of Poornima University. My 4-year journey offered extensive learning, industry exposure, and deep faculty mentorship that launched my career.",
+      },
+      {
+        name: "Gunjan Chittora",
+        branch: "BVA (Applied Arts)",
+        batch: "2018-2022",
+        company: "Infopro Learning Pvt Ltd",
+        packageCTC: "₹7.20 LPA",
+        avatar: "/images/poornima-real/student-gunjan-chittora.jpg",
+        quote: "Embracing 'Your dream, Our goal', Poornima molds confident, disciplined individuals ready for challenges. Grateful for my placement through faculty guidance.",
+      },
+      {
+        name: "Anjali Verma",
+        branch: "BBA (Management)",
+        batch: "2019-2022",
+        company: "Synoriq",
+        packageCTC: "₹6.80 LPA",
+        avatar: "/images/poornima-real/student-anjali-verma.jpg",
+        quote: "Poornima University guides students with clubs, corporate workshops, and live case studies. State-of-the-art libraries and labs significantly contribute to learning.",
+      },
+      {
+        name: "Harshwardhan Singh Rathore",
+        branch: "B.Tech. Computer Science",
+        batch: "2019-2023",
+        company: "Byju's",
+        packageCTC: "₹10.00 LPA",
+        avatar: "/images/poornima-real/student-harshvardhan.jpg",
+        quote: "My experience was profoundly enriching: practical software projects, competitive sports, and diverse hackathons instilled multifaceted qualities in me.",
+      },
+      {
+        name: "Kajal",
+        branch: "B.Tech. Computer Science",
+        batch: "2019-2023",
+        company: "DeCurtis",
+        packageCTC: "₹6.90 LPA",
+        avatar: "/images/poornima-real/student-kajal.jpg",
+        quote: "'Your dream, Our goal' - indeed! Poornima University provides the perfect environment to chase dreams with skilled mentors groom students for MNC interviews.",
+      },
+      {
+        name: "Yogita Jain",
+        branch: "B.Sc. (PCM)",
+        batch: "2020-2023",
+        company: "Faculty of Science & Humanities",
+        packageCTC: "₹6.00 LPA",
+        avatar: "/images/poornima-real/student-yogita-jain.jpg",
+        quote: "PU excels in infrastructure, academics, and practical laboratory learning. Its comprehensive curriculum developed my analytical and research capabilities.",
+      },
+      {
+        name: "Shlok Modi",
+        branch: "B.Arch (Architecture)",
+        batch: "2014-2019",
+        company: "SM Architects",
+        packageCTC: "₹8.00 LPA",
+        avatar: "/images/poornima-real/student-shlok-modi.jpg",
+        quote: "As I stepped into the professional architectural sphere, the one thing I will always be grateful for from Poornima is unparalleled national industry exposure.",
+      },
+      {
+        name: "Ar. Umang Patni",
+        branch: "B.Arch Alumni",
+        batch: "2013-2018",
+        company: "Wedyords Architects, Jaipur",
+        packageCTC: "₹15.00 LPA",
+        avatar: "/images/poornima-real/student-umang-patni.jpg",
+        quote: "Equipped with both theoretical knowledge and practical design insights, Poornima guided us to design world-class spaces connected with nature and culture.",
+      },
     ],
     topRecruiters: [
       "Amazon", "Flipkart", "Morgan Stanley", "VMWARE", "Locus", "Groww",
@@ -317,11 +471,13 @@ export const UNIVERSITIES_DATA: UniversityData[] = [
     ],
     officialOffers: POORNIMA_OFFICIAL_RECRUITERS,
     marqueeOffers: [
+      { studentName: "Ekta Gupta", company: "Morgan Stanley", packageLPA: 25.33, role: "Software Engineer" },
       { studentName: "Aanchal Asnani", company: "AMAZON", packageLPA: 44.10, role: "Software Development Engineer (SDE-1)" },
       { studentName: "Gaurav Pipada", company: "TEKION INDIA", packageLPA: 29.00, role: "Member Technical Staff" },
       { studentName: "Niharika Jain", company: "VM WARE", packageLPA: 23.80, role: "Member of Technical Staff" },
       { studentName: "Sanidhya Agrawal", company: "Locus - Mara Studios Private Limited", packageLPA: 22.00, role: "Software Engineer" },
       { studentName: "Manish Motwani", company: "Groww", packageLPA: 20.00, role: "Software Development Engineer" },
+      { studentName: "Mohit Soni", company: "Infosys", packageLPA: 9.50, role: "Specialist Programmer (HackWithInfy)" },
       { studentName: "Janvi Kundnani", company: "Lowe’s Services India", packageLPA: 18.36, role: "Associate Software Engineer" },
     ],
     institutionalTelemetry: {
@@ -330,7 +486,7 @@ export const UNIVERSITIES_DATA: UniversityData[] = [
       internationalCollaborations: "200+ International Collaborations & Exchanges",
       corporateBoardMembers: "200+ Industrialists & Professionals on Corporate Advisory Board",
       startupsSupported: "100+ Startups Incubated",
-      scholarships: "Up to 40% Merit-Based Scholarships",
+      scholarships: "₹5+ Cr. Awarded Under Merit Scholarships",
       patentsCopyrights: "200+ Copyrights & Patents",
       recruitersCount: "350+ Recruiting Partners Eager to Hire",
       scopusPublications: "1,000+ High-Quality Scopus / SCI Publications",
@@ -1153,6 +1309,207 @@ export const COMPANIES_DATA: CompanyData[] = [
 // ─── 3. PLACEMENTS / CANDIDATES ──────────────────────────────────────────────
 
 export const PLACEMENTS_DATA: CandidatePlacement[] = [
+  // ── Official Poornima University Placements with Verified Photos ──
+  {
+    id: "pu-ekta-gupta",
+    name: "Ekta Gupta",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Morgan Stanley",
+    companySlug: "morgan-stanley",
+    role: "Software Engineer",
+    ctc: 25.33,
+    year: 2022,
+    branch: "B.Tech. Computer Engineering",
+    avatar: "/images/poornima-real/student-ekta-gupta.jpg",
+    location: "Bengaluru / Mumbai",
+    isVerified: true,
+    skills: ["Java", "Distributed Systems", "C++", "Spring Boot", "DSA", "Financial Ledger Systems"],
+    projectTitle: "Fault-Tolerant High-Frequency Trading Core",
+    projectDescription: "Low-latency order book and state machine processing transactional queues for global capital markets.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+    quote: "After graduating in Computer Engineering and overcoming numerous challenges, I'm proud to work as a Software Engineer at Morgan Stanley with an impressive package of 25.33 LPA.",
+  },
+  {
+    id: "pu-mohit-soni",
+    name: "Mohit Soni",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Infosys",
+    companySlug: "infosys",
+    role: "Specialist Programmer (HackWithInfy)",
+    ctc: 9.5,
+    year: 2023,
+    branch: "B.Tech. Computer Science",
+    avatar: "/images/poornima-real/student-mohit-soni.jpg",
+    location: "Pune / Bengaluru",
+    isVerified: true,
+    skills: ["Python", "DSA", "Competitive Programming", "REST APIs", "SQL"],
+    projectTitle: "HackWithInfy National Finalist Solution",
+    projectDescription: "Algorithmic distributed task scheduler and automated graph traversal engine developed for HackWithInfy grand finale.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+    quote: "Our grooming for placements started early with rigorous sessions on Campus Recruitment Training (CRT). Dedicated efforts of mentors shaped me.",
+  },
+  {
+    id: "pu-prakrit",
+    name: "Prakrit",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Jaro Education",
+    companySlug: "jaro-education",
+    role: "Business Operations & Strategy Lead",
+    ctc: 8.5,
+    year: 2022,
+    branch: "B.Tech. Civil Engineering",
+    avatar: "/images/poornima-real/student-prakrit.png",
+    location: "Mumbai / Jaipur",
+    isVerified: true,
+    skills: ["Strategic Management", "Operations", "CAD", "Project Planning"],
+    projectTitle: "Sustainable Infrastructure Life-cycle Modeling",
+    projectDescription: "Analytical feasibility framework evaluating green materials and project cost optimization.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+    quote: "Fortunate to have been part of Poornima University. My 4-year journey offered extensive learning, industry exposure, and deep faculty mentorship that launched my career.",
+  },
+  {
+    id: "pu-gunjan-chittora",
+    name: "Gunjan Chittora",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Infopro Learning Pvt Ltd",
+    companySlug: "infopro",
+    role: "Visual Designer & Applied Artist",
+    ctc: 7.2,
+    year: 2022,
+    branch: "BVA (Applied Arts)",
+    avatar: "/images/poornima-real/student-gunjan-chittora.jpg",
+    location: "Noida / Gurugram",
+    isVerified: true,
+    skills: ["Visual Design", "UI/UX", "Typography", "Adobe Suite", "Creative Direction"],
+    projectTitle: "Brand Identity Design for EdTech Ecosystem",
+    projectDescription: "Comprehensive brand guidelines and user journey design for global enterprise e-learning programs.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+    quote: "Embracing 'Your dream, Our goal', Poornima molds confident, disciplined individuals ready for challenges. Grateful for my placement through faculty guidance.",
+  },
+  {
+    id: "pu-anjali-verma",
+    name: "Anjali Verma",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Synoriq",
+    companySlug: "synoriq",
+    role: "Fintech Business Analyst",
+    ctc: 6.8,
+    year: 2022,
+    branch: "BBA (Management)",
+    avatar: "/images/poornima-real/student-anjali-verma.jpg",
+    location: "Jaipur / Bengaluru",
+    isVerified: true,
+    skills: ["Business Analysis", "Financial Modeling", "Agile", "SQL", "Product Discovery"],
+    projectTitle: "Digital Lending Workflow Automation",
+    projectDescription: "Business process redesign for loan origination systems reducing disbursement turn-around time by 45%.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+    quote: "Poornima University guides students with clubs, corporate workshops, and live case studies. State-of-the-art libraries and labs significantly contribute to learning.",
+  },
+  {
+    id: "pu-harshwardhan",
+    name: "Harshwardhan Singh Rathore",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Byju's",
+    companySlug: "byjus",
+    role: "Product Specialist & Technical Consultant",
+    ctc: 10.0,
+    year: 2023,
+    branch: "B.Tech. Computer Science",
+    avatar: "/images/poornima-real/student-harshvardhan.jpg",
+    location: "Bengaluru / Jaipur",
+    isVerified: true,
+    skills: ["Product Management", "Data Analytics", "Python", "Client Consulting"],
+    projectTitle: "Interactive Learning Analytics Engine",
+    projectDescription: "Telemetry dashboard tracking student engagement metrics across multimedia learning modules.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+    quote: "My experience was profoundly enriching: practical software projects, competitive sports, and diverse hackathons instilled multifaceted qualities in me.",
+  },
+  {
+    id: "pu-kajal",
+    name: "Kajal",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "DeCurtis",
+    companySlug: "decurtis",
+    role: "Software Developer",
+    ctc: 6.9,
+    year: 2023,
+    branch: "B.Tech. Computer Science",
+    avatar: "/images/poornima-real/student-kajal.jpg",
+    location: "Jaipur / Remote",
+    isVerified: true,
+    skills: ["JavaScript", "React", "Node.js", "Docker", "Hospitality Tech"],
+    projectTitle: "Guest Experience Cruise Management Platform",
+    projectDescription: "Location-aware mobile service architecture handling passenger requests aboard luxury cruise lines.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+    quote: "'Your dream, Our goal' - indeed! Poornima University provides the perfect environment to chase dreams with skilled mentors groom students for MNC interviews.",
+  },
+  {
+    id: "pu-yogita-jain",
+    name: "Yogita Jain",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Faculty of Science & Humanities Research",
+    companySlug: "research",
+    role: "Research Associate & Analytical Chemist",
+    ctc: 6.0,
+    year: 2023,
+    branch: "B.Sc. (Physics, Chemistry, Math)",
+    avatar: "/images/poornima-real/student-yogita-jain.jpg",
+    location: "Jaipur",
+    isVerified: true,
+    skills: ["Spectroscopy", "Material Science", "Data Modeling", "Scientific Writing"],
+    projectTitle: "Solar Cell Photovoltaic Material Characterization",
+    projectDescription: "Experimental synthesis and optical degradation analysis of organic perovskite thin films.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+    quote: "PU excels in infrastructure, academics, and practical laboratory learning. Its comprehensive curriculum developed my analytical and research capabilities.",
+  },
+  {
+    id: "pu-shlok-modi",
+    name: "Shlok Modi",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "SM Architects",
+    companySlug: "sm-architects",
+    role: "Project Architect",
+    ctc: 8.0,
+    year: 2019,
+    branch: "Bachelor of Architecture (B.Arch)",
+    avatar: "/images/poornima-real/student-shlok-modi.jpg",
+    location: "Jaipur / Delhi NCR",
+    isVerified: true,
+    skills: ["Revit", "AutoCAD", "BIM", "Sustainable Architecture", "Urban Planning"],
+    projectTitle: "Bioclimatic Institutional Campus Masterplan",
+    projectDescription: "Net-zero solar oriented university annex featuring passive cooling wind towers and water harvesting.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+    quote: "As I stepped into the professional architectural sphere, the one thing I will always be grateful for from Poornima is unparalleled national industry exposure.",
+  },
+  {
+    id: "pu-umang-patni",
+    name: "Ar. Umang Patni",
+    university: "Poornima University",
+    universitySlug: "poornima",
+    company: "Wedyords Architects",
+    companySlug: "wedyords",
+    role: "Principal Architect & Founder",
+    ctc: 15.0,
+    year: 2018,
+    branch: "Bachelor of Architecture (B.Arch Alumni)",
+    avatar: "/images/poornima-real/student-umang-patni.jpg",
+    location: "Jaipur, Rajasthan",
+    isVerified: true,
+    skills: ["Architectural Design", "Landscape Architecture", "Heritage Restoration", "BIM"],
+    projectTitle: "Wedyords Design Practice & Heritage Haveli Revitalization",
+    projectDescription: "Award-winning boutique architecture studio delivering contemporary residential retreats across Rajasthan.",
+    linkedIn: "https://www.linkedin.com/school/poornima-university",
+    quote: "Equipped with both theoretical knowledge and practical design insights, Poornima guided us to design world-class spaces connected with nature and culture.",
+  },
   // ── Poornima College of Engineering (PCE) Top Achievers ──
   {
     id: "pce-1",

@@ -98,8 +98,8 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white p-1 border border-white/20 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
               <img
-                src="/images/logos/poornima-university.png"
-                alt="Poornima University"
+                src="/images/poornima-real/pu-logo-official.png"
+                alt="Poornima University Official Logo"
                 className="w-full h-full object-contain"
               />
             </div>

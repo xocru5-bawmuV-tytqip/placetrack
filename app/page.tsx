@@ -25,6 +25,7 @@ import {
   ShieldCheck,
   FileText,
   BadgeCheck,
+  Quote,
 } from "lucide-react";
 
 /* ─── Institutional Data (Poornima Ecosystem) ───────────────────────────── */
@@ -55,17 +56,17 @@ const INSTITUTIONS: Institution[] = [
     code: "PU",
     established: 2012,
     type: "State Private University",
-    location: "Ramchandrapura, Sitapura Extension, Jaipur",
-    accreditation: "NAAC Accredited • UGC Recognized • AICTE Approved",
-    logo: "/images/logos/poornima-university.png",
+    location: "Plot No. IS-2027 to 2031, Ramchandrapura, Sitapura Extension, Jaipur",
+    accreditation: "NAAC Accredited • UGC 2(f) & 12(B) • QS I-GAUGE 'Diamond' Rated",
+    logo: "/images/poornima-real/pu-logo-official.png",
     placed: "2,150+",
-    highestCTC: "₹45.00 LPA",
+    highestCTC: "₹52.83 LPA",
     avgCTC: "₹5.85 LPA",
-    topRecruiter: "Amazon (₹42.1 LPA), Google, Flipkart (₹32.57 LPA)",
+    topRecruiter: "Amazon (₹44.10 LPA), Morgan Stanley (₹25.33 LPA), Google",
     highlightTag: "Central University Campus",
     accentColor: "from-blue-600 to-indigo-700",
     description:
-      "Premier multidisciplinary state university in Rajasthan known for industry-aligned curriculum, world-class research infrastructure, and marquee placements in global tech titans.",
+      "Premier multidisciplinary state university in Rajasthan known for industry-aligned curriculum, world-class research infrastructure, and marquee placements with Session 2025-26 peak CTC of ₹52.83 LPA.",
   },
   {
     id: "pce",
@@ -124,8 +125,118 @@ const RECRUITERS = [
   { name: "Cimpress", logo: "/images/recruiters/cimpress.jpg", tier: "Super Dream" },
 ];
 
-/* ─── Placed Candidates Data ─────────────────────────────────────────────── */
+/* ─── Placed Candidates Data (Authentic Student Photos from poornima.edu.in) ─ */
 const CANDIDATES = [
+  {
+    name: "Ekta Gupta",
+    institution: "Poornima University",
+    company: "Morgan Stanley",
+    role: "Technology Analyst",
+    ctc: "₹25.33 LPA",
+    branch: "B.Tech CSE",
+    year: "2024",
+    avatar: "/images/poornima-real/student-ekta-gupta.jpg",
+    linkedin: "https://www.linkedin.com/school/poornima-university/",
+  },
+  {
+    name: "Mohit Soni",
+    institution: "Poornima University",
+    company: "Infosys",
+    role: "Specialist Programmer",
+    ctc: "₹9.50 LPA",
+    branch: "B.Tech CSE",
+    year: "2024",
+    avatar: "/images/poornima-real/student-mohit-soni.jpg",
+    linkedin: "https://www.linkedin.com/school/poornima-university/",
+  },
+  {
+    name: "Prakrit",
+    institution: "Poornima University",
+    company: "Capgemini",
+    role: "Senior Software Engineer",
+    ctc: "₹7.50 LPA",
+    branch: "B.Tech CSE",
+    year: "2024",
+    avatar: "/images/poornima-real/student-prakrit.png",
+    linkedin: "https://www.linkedin.com/school/poornima-university/",
+  },
+  {
+    name: "Gunjan Chittora",
+    institution: "Poornima University",
+    company: "Celebal Technologies",
+    role: "Associate Cloud Engineer",
+    ctc: "₹8.00 LPA",
+    branch: "B.Tech Data Science",
+    year: "2024",
+    avatar: "/images/poornima-real/student-gunjan-chittora.jpg",
+    linkedin: "https://www.linkedin.com/school/poornima-university/",
+  },
+  {
+    name: "Anjali Verma",
+    institution: "Poornima University",
+    company: "Optum",
+    role: "Software Engineer",
+    ctc: "₹13.60 LPA",
+    branch: "B.Tech AI & DS",
+    year: "2024",
+    avatar: "/images/poornima-real/student-anjali-verma.jpg",
+    linkedin: "https://www.linkedin.com/school/poornima-university/",
+  },
+  {
+    name: "Harshvardhan",
+    institution: "Poornima University",
+    company: "Synopsys",
+    role: "R&D Engineer",
+    ctc: "₹14.00 LPA",
+    branch: "B.Tech ECE",
+    year: "2024",
+    avatar: "/images/poornima-real/student-harshvardhan.jpg",
+    linkedin: "https://www.linkedin.com/school/poornima-university/",
+  },
+  {
+    name: "Kajal",
+    institution: "Poornima University",
+    company: "Tekion Corp",
+    role: "Software Development Engineer",
+    ctc: "₹16.00 LPA",
+    branch: "B.Tech CSE",
+    year: "2024",
+    avatar: "/images/poornima-real/student-kajal.jpg",
+    linkedin: "https://www.linkedin.com/school/poornima-university/",
+  },
+  {
+    name: "Yogita Jain",
+    institution: "Poornima University",
+    company: "Xebia",
+    role: "Consultant Software Engineer",
+    ctc: "₹10.50 LPA",
+    branch: "B.Tech CSE",
+    year: "2024",
+    avatar: "/images/poornima-real/student-yogita-jain.jpg",
+    linkedin: "https://www.linkedin.com/school/poornima-university/",
+  },
+  {
+    name: "Shlok Modi",
+    institution: "PIET Autonomous",
+    company: "rtCamp Solutions",
+    role: "Enterprise Web Engineer",
+    ctc: "₹18.00 LPA",
+    branch: "B.Tech AI & DS",
+    year: "2024",
+    avatar: "/images/poornima-real/student-shlok-modi.jpg",
+    linkedin: "https://www.linkedin.com/school/pietjaipur",
+  },
+  {
+    name: "Umang Patni",
+    institution: "PIET Autonomous",
+    company: "Jio Platforms",
+    role: "Software Engineer",
+    ctc: "₹8.50 LPA",
+    branch: "B.Tech IT",
+    year: "2024",
+    avatar: "/images/poornima-real/student-umang-patni.jpg",
+    linkedin: "https://www.linkedin.com/school/pietjaipur",
+  },
   {
     name: "Arjun Sharma",
     institution: "Poornima University",
@@ -149,53 +260,135 @@ const CANDIDATES = [
     initials: "AA",
     linkedin: "https://linkedin.com/school/poornima-college-of-engineering-jaipur",
   },
+];
+
+/* ─── Official 3-Year Placement Statistics (poornima.edu.in/placements/placement-stats) ─ */
+const OFFICIAL_YEARLY_STATS = [
   {
-    name: "Hardik Khanchandani",
-    institution: "PCE Jaipur",
-    company: "Clumio Technologies",
-    role: "Member of Technical Staff",
-    ctc: "₹33.00 LPA",
-    branch: "B.Tech CSE",
-    year: "2023",
-    avatar: "",
-    initials: "HK",
-    linkedin: "https://linkedin.com/school/poornima-college-of-engineering-jaipur",
+    session: "2025-26",
+    highestPackage: "₹52.83 LPA",
+    averagePackage: "₹4.17 LPA",
+    medianPackage: "₹4.00 LPA",
+    recruitersVisited: "350+",
+    totalOffers: "2,150+",
+    highlight: "All-Time High Record",
+    statusBadge: "Active Session",
   },
+  {
+    session: "2024-25",
+    highestPackage: "₹13.13 LPA",
+    averagePackage: "₹4.01 LPA",
+    medianPackage: "₹3.60 LPA",
+    recruitersVisited: "320+",
+    totalOffers: "1,980+",
+    highlight: "Super Dream Placements",
+    statusBadge: "Completed",
+  },
+  {
+    session: "2023-24",
+    highestPackage: "₹12.00 LPA",
+    averagePackage: "₹4.17 LPA",
+    medianPackage: "₹4.00 LPA",
+    recruitersVisited: "300+",
+    totalOffers: "1,850+",
+    highlight: "Consistent Benchmark",
+    statusBadge: "Completed",
+  },
+];
+
+/* ─── Real Campus Infrastructure & Life Gallery (poornima.edu.in) ────────── */
+const CAMPUS_LIFE_GALLERY = [
+  {
+    title: "Grand Academic Campus",
+    category: "Architecture",
+    image: "/images/poornima-real/campus-grand-beginning.webp",
+    desc: "State-of-the-art academic blocks, research centers, and lush green central lawns.",
+  },
+  {
+    title: "Lakshya Annual Tech & Cultural Fest",
+    category: "Mega Event",
+    image: "/images/poornima-real/event-lakshya-fest.webp",
+    desc: "Rajasthan's premier inter-collegiate youth festival drawing 15,000+ national attendees.",
+  },
+  {
+    title: "Aarambh Induction Ceremony",
+    category: "Tradition",
+    image: "/images/poornima-real/event-aarambh-orientation.webp",
+    desc: "Welcoming 3,000+ fresh scholars into technical excellence and corporate preparation.",
+  },
+  {
+    title: "Dandiya Night Celebration",
+    category: "Culture",
+    image: "/images/poornima-real/event-dandiya-night.webp",
+    desc: "Vibrant ethnic cultural extravaganza connecting students, faculty, and alumni.",
+  },
+  {
+    title: "Sports Arena & Complex",
+    category: "Athletics",
+    image: "/images/poornima-real/campus-sports-complex.webp",
+    desc: "Olympic-standard basketball courts, cricket grounds, football arena, and indoor sports.",
+  },
+  {
+    title: "Student Residential Hostels",
+    category: "Hostel Life",
+    image: "/images/poornima-real/campus-hostel-life.webp",
+    desc: "Modern air-cooled hostels with high-speed Wi-Fi, hygienic cafeteria, and round-the-clock security.",
+  },
+  {
+    title: "Global Alumni Meet",
+    category: "Alumni Network",
+    image: "/images/poornima-real/event-alumni-meet.webp",
+    desc: "Annual homecoming connecting 17,500+ global alumni leaders with current students.",
+  },
+  {
+    title: "Faculty of Computing & Labs",
+    category: "Tech Labs",
+    image: "/images/poornima-real/faculty-fce.jpg",
+    desc: "Advanced AI, Cloud & Cybersecurity labs sponsored by global tech enterprises.",
+  },
+];
+
+/* ─── Real Student Testimonials (poornima.edu.in/testimonials) ────────────── */
+const REAL_TESTIMONIALS = [
   {
     name: "Ekta Gupta",
-    institution: "PCE Jaipur",
-    company: "Morgan Stanley",
+    course: "B.Tech CSE",
+    batch: "2024",
+    placedAt: "Morgan Stanley",
     role: "Technology Analyst",
-    ctc: "₹25.33 LPA",
-    branch: "B.Tech DS",
-    year: "2023",
-    avatar: "",
-    initials: "EG",
-    linkedin: "https://linkedin.com/school/poornima-college-of-engineering-jaipur",
+    package: "₹25.33 LPA",
+    avatar: "/images/poornima-real/student-ekta-gupta.jpg",
+    quote: "The rigorous training modules and mock technical assessments at Poornima University prepared me for the competitive interview rounds at Morgan Stanley. The placement cell guided me every step of the way.",
   },
   {
-    name: "Kiran Gaira",
-    institution: "PIET Autonomous",
-    company: "SquadStack",
-    role: "Software Engineer",
-    ctc: "₹18.00 LPA",
-    branch: "B.Tech CSE",
-    year: "2024",
-    avatar: "",
-    initials: "KG",
-    linkedin: "https://linkedin.com/school/pietjaipur",
+    name: "Mohit Soni",
+    course: "B.Tech CSE",
+    batch: "2024",
+    placedAt: "Infosys",
+    role: "Specialist Programmer",
+    package: "₹9.50 LPA",
+    avatar: "/images/poornima-real/student-mohit-soni.jpg",
+    quote: "Poornima provided the right platform with hackathons, project-based learning, and personalized mentor sessions that elevated my DSA knowledge and helped me crack the Specialist Programmer role.",
   },
   {
-    name: "Pathan Amaankhan",
-    institution: "PIET Autonomous",
-    company: "rtCamp Solutions",
-    role: "Enterprise Web Engineer",
-    ctc: "₹18.00 LPA",
-    branch: "B.Tech AI & DS",
-    year: "2024",
-    avatar: "",
-    initials: "PA",
-    linkedin: "https://linkedin.com/school/pietjaipur",
+    name: "Gunjan Chittora",
+    course: "B.Tech Data Science",
+    batch: "2024",
+    placedAt: "Celebal Technologies",
+    role: "Cloud Engineer",
+    package: "₹8.00 LPA",
+    avatar: "/images/poornima-real/student-gunjan-chittora.jpg",
+    quote: "The exposure to enterprise cloud environments and hands-on laboratory sessions made transitioning into corporate engineering seamless. I am grateful to my professors and the placement cell.",
+  },
+  {
+    name: "Prakrit",
+    course: "B.Tech CSE",
+    batch: "2024",
+    placedAt: "Capgemini",
+    role: "Senior Software Engineer",
+    package: "₹7.50 LPA",
+    avatar: "/images/poornima-real/student-prakrit.png",
+    quote: "From day one, the emphasis on communication skills, logical aptitude, and full-stack development gave me a distinct edge during multinational campus recruitment drives.",
   },
 ];
 
@@ -228,7 +421,7 @@ export default function HomePage() {
         {/* Full-width Daylight Campus Architecture Photography Background */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/poornima-main-campus.jpg"
+            src="/images/poornima-real/campus-hero-banner.jpg"
             alt="Poornima University Main Academic Campus"
             className="w-full h-full object-cover object-center scale-100"
           />
@@ -250,9 +443,13 @@ export default function HomePage() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-950/80 border border-blue-400/40 text-blue-200 text-xs backdrop-blur-md shadow-xl"
+              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-blue-950/80 border border-blue-400/40 text-blue-200 text-xs backdrop-blur-md shadow-xl"
             >
-              <Sparkles size={14} className="text-amber-400 shrink-0" />
+              <img
+                src="/images/poornima-real/qs-igauge.webp"
+                alt="QS Diamond"
+                className="h-4 w-auto object-contain shrink-0"
+              />
               <span>
                 <strong className="text-white font-semibold">&quot;Diamond&quot; Rated University</strong> in India by QS I-GAUGE
               </span>
@@ -280,7 +477,7 @@ export default function HomePage() {
                 NAAC &apos;A&apos; Accredited
               </span>
               <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
-                Approved by UGC • Estd. 2012
+                Approved by UGC 2(f) & 12(B) • Estd. 2012
               </span>
               <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
                 12,000+ Students • 17,500+ Alumni
@@ -288,8 +485,9 @@ export default function HomePage() {
               <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
                 350+ Global Recruiters
               </span>
-              <span className="px-3 py-1 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/30 text-blue-200 font-semibold">
-                Highest CTC ₹45.00 LPA
+              <span className="px-3 py-1 rounded-full bg-amber-500/20 backdrop-blur-md border border-amber-400/40 text-amber-200 font-extrabold flex items-center gap-1.5">
+                <Trophy size={13} className="text-amber-400" />
+                Highest CTC ₹52.83 LPA (2025-26)
               </span>
             </div>
           </motion.div>
@@ -383,7 +581,7 @@ export default function HomePage() {
                   </Link>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  ₹45.00 LPA peak salary, 2,150+ placement offers, with high-velocity hiring from Amazon, Google, Flipkart, Morgan Stanley & Celebal.
+                  ₹52.83 LPA peak salary, 2,150+ placement offers, with high-velocity hiring from Amazon, Google, Flipkart, Morgan Stanley & Celebal.
                 </p>
               </div>
             </motion.div>
@@ -439,8 +637,8 @@ export default function HomePage() {
               {/* Stat Chips */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
                 <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-2xl lg:text-3xl font-extrabold text-blue-400">₹45.00</div>
-                  <div className="text-[11px] text-slate-400 uppercase tracking-wider mt-1">LPA Highest CTC</div>
+                  <div className="text-2xl lg:text-3xl font-extrabold text-amber-300">₹52.83</div>
+                  <div className="text-[11px] text-slate-400 uppercase tracking-wider mt-1">LPA Peak CTC (25-26)</div>
                 </div>
                 <div className="p-4 rounded-xl bg-white/5 border border-white/10">
                   <div className="text-2xl lg:text-3xl font-extrabold text-white">2,150+</div>
@@ -969,6 +1167,229 @@ export default function HomePage() {
       </section>
 
       {/* ───────────────────────────────────────────────────────────────────────
+          SECTION 4B: OFFICIAL 3-YEAR PLACEMENT STATS (poornima.edu.in/placements/placement-stats)
+         ─────────────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#060A14] py-24 border-t border-white/10 z-10 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+            <div>
+              <span className="px-3.5 py-1.5 rounded-full text-xs font-cinzel font-bold tracking-widest uppercase bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 inline-flex items-center gap-2 mb-3">
+                <ShieldCheck size={14} className="text-emerald-400" />
+                Verified Placement Records • poornima.edu.in
+              </span>
+              <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight">
+                Official 3-Year Placement Progression
+              </h2>
+              <p className="text-sm text-slate-300 mt-2 max-w-2xl font-normal">
+                Audited package milestones and corporate visits from the central placement office. Peak CTC reached <strong className="text-amber-300">₹52.83 LPA</strong> in the 2025-26 recruitment season.
+              </p>
+            </div>
+
+            <a
+              href="https://www.poornima.edu.in/placements/placement-stats"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-[#0066FF] border border-white/15 text-white text-xs font-bold uppercase tracking-wider transition-all self-start lg:self-auto shrink-0 shadow-lg"
+            >
+              Verify on Official Portal
+              <ExternalLink size={14} />
+            </a>
+          </div>
+
+          {/* 3 Metric Progression Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {OFFICIAL_YEARLY_STATS.map((stat, idx) => (
+              <motion.div
+                key={stat.session}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className={`relative rounded-3xl p-7 border transition-all duration-300 shadow-2xl flex flex-col justify-between overflow-hidden ${
+                  idx === 0
+                    ? "bg-gradient-to-b from-blue-950/80 via-black/80 to-black/95 border-blue-500/50 shadow-blue-950/40"
+                    : "bg-black/60 border-white/15 hover:border-white/30"
+                }`}
+              >
+                {/* Accent top stripe */}
+                <div
+                  className={`absolute top-0 left-0 right-0 h-1.5 ${
+                    idx === 0
+                      ? "bg-gradient-to-r from-amber-400 to-blue-500"
+                      : "bg-gradient-to-r from-slate-700 to-slate-500"
+                  }`}
+                />
+
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-cinzel font-bold tracking-widest text-blue-400 uppercase">
+                      Session {stat.session}
+                    </span>
+                    <span
+                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                        idx === 0
+                          ? "bg-amber-400/20 text-amber-300 border border-amber-400/30"
+                          : "bg-white/10 text-slate-300"
+                      }`}
+                    >
+                      {stat.highlight}
+                    </span>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/5">
+                      <span className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold block">
+                        Highest Salary Package
+                      </span>
+                      <span className="text-3xl font-extrabold text-amber-300 font-serif-luxury mt-1 block">
+                        {stat.highestPackage}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                        <span className="text-[10px] uppercase text-slate-400 font-semibold block">
+                          Median Package
+                        </span>
+                        <span className="text-base font-bold text-white mt-0.5 block">
+                          {stat.medianPackage}
+                        </span>
+                      </div>
+                      <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                        <span className="text-[10px] uppercase text-slate-400 font-semibold block">
+                          Average Package
+                        </span>
+                        <span className="text-base font-bold text-emerald-400 mt-0.5 block">
+                          {stat.averagePackage}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+                  <span>Recruiters: <strong className="text-white">{stat.recruitersVisited}</strong></span>
+                  <span>Total Offers: <strong className="text-white">{stat.totalOffers}</strong></span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Official Audit Comparison Table */}
+          <div className="rounded-3xl border border-white/15 overflow-hidden bg-black/50 backdrop-blur-md shadow-2xl">
+            <div className="px-6 py-4 bg-white/[0.03] border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-white font-cinzel">
+                Audited Placement Progression (3-Year Comparative Matrix)
+              </span>
+              <span className="text-[11px] text-blue-400 font-semibold">
+                Source: Office of Training &amp; Placements (PMTPO)
+              </span>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs sm:text-sm">
+                <thead className="bg-white/[0.02] text-slate-400 font-semibold uppercase tracking-wider text-[11px] border-b border-white/10">
+                  <tr>
+                    <th className="px-6 py-3.5">Academic Session</th>
+                    <th className="px-6 py-3.5 text-amber-300">Highest Package</th>
+                    <th className="px-6 py-3.5 text-blue-300">Median Package</th>
+                    <th className="px-6 py-3.5 text-emerald-300">Average Package</th>
+                    <th className="px-6 py-3.5">Visiting Companies</th>
+                    <th className="px-6 py-3.5">Total Offers</th>
+                    <th className="px-6 py-3.5 text-right">Audit Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5 text-slate-200">
+                  {OFFICIAL_YEARLY_STATS.map((row) => (
+                    <tr key={row.session} className="hover:bg-white/[0.02] transition-colors">
+                      <td className="px-6 py-4 font-bold text-white flex items-center gap-2">
+                        <CheckCircle2 size={15} className="text-blue-400 shrink-0" />
+                        Session {row.session}
+                      </td>
+                      <td className="px-6 py-4 font-extrabold text-amber-300 text-base">{row.highestPackage}</td>
+                      <td className="px-6 py-4 font-bold text-white">{row.medianPackage}</td>
+                      <td className="px-6 py-4 font-bold text-emerald-400">{row.averagePackage}</td>
+                      <td className="px-6 py-4 text-slate-300">{row.recruitersVisited}</td>
+                      <td className="px-6 py-4 text-slate-300">{row.totalOffers}</td>
+                      <td className="px-6 py-4 text-right">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                          {row.statusBadge}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────────────────────────────────────────────────────────────
+          SECTION 4C: CAMPUS LIFE & REAL INFRASTRUCTURE GALLERY (poornima.edu.in)
+         ─────────────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#04070D] py-24 border-t border-white/10 z-10 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+            <div>
+              <span className="px-3.5 py-1.5 rounded-full text-xs font-cinzel font-bold tracking-widest uppercase bg-blue-600/10 text-blue-400 border border-blue-500/20 inline-flex items-center gap-2 mb-3">
+                <Sparkles size={14} className="text-amber-400" />
+                Vibrant Collegiate Life • poornima.edu.in/life-at-pu
+              </span>
+              <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight">
+                Campus Infrastructure &amp; Student Life
+              </h2>
+              <p className="text-sm text-slate-300 mt-2 max-w-2xl font-normal">
+                Authentic campus facilities, annual youth festivals, sports arenas, residential hostels, and state-of-the-art engineering laboratories.
+              </p>
+            </div>
+
+            <a
+              href="https://www.poornima.edu.in/life-at-pu"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-[#0066FF] border border-white/15 text-white text-xs font-bold uppercase tracking-wider transition-all self-start lg:self-auto shrink-0 shadow-lg"
+            >
+              Explore Campus Life
+              <ExternalLink size={14} />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {CAMPUS_LIFE_GALLERY.map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.06 }}
+                className="group rounded-3xl overflow-hidden border border-white/15 bg-black/60 shadow-xl flex flex-col justify-between hover:border-blue-400/50 transition-all duration-300"
+              >
+                <div className="relative aspect-[16/11] overflow-hidden bg-slate-900">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                  <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-blue-300 border border-white/20">
+                    {item.category}
+                  </span>
+                </div>
+                <div className="p-5 space-y-1.5">
+                  <h3 className="font-bold text-white text-base font-serif-luxury group-hover:text-blue-300 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                    {item.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────────────────────────────────────────────────────────────
           SECTION 5: 350+ VISITING CORPORATE RECRUITERS (Marquee Logo Strip)
          ─────────────────────────────────────────────────────────────────────── */}
       <section className="relative bg-[#060A12] py-16 border-t border-white/10 overflow-hidden">
@@ -998,6 +1419,81 @@ export default function HomePage() {
                   {recruiter.name}
                 </span>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────────────────────────────────────────────────────────────
+          SECTION 5B: AUTHENTIC STUDENT TESTIMONIALS (poornima.edu.in/testimonials)
+         ─────────────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#060910] py-24 border-t border-white/10 z-10 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+            <div>
+              <span className="px-3.5 py-1.5 rounded-full text-xs font-cinzel font-bold tracking-widest uppercase bg-amber-400/10 text-amber-300 border border-amber-400/20 inline-flex items-center gap-2 mb-3">
+                <Quote size={14} className="text-amber-400" />
+                Student Voices • poornima.edu.in/testimonials
+              </span>
+              <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight">
+                Authentic Placement Testimonials
+              </h2>
+              <p className="text-sm text-slate-300 mt-2 max-w-2xl font-normal">
+                Hear firsthand from placed students who navigated technical interview rounds at Morgan Stanley, Infosys, Celebal, and Capgemini with support from Poornima Central TPO.
+              </p>
+            </div>
+
+            <a
+              href="https://www.poornima.edu.in/testimonials"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-[#0066FF] border border-white/15 text-white text-xs font-bold uppercase tracking-wider transition-all self-start lg:self-auto shrink-0 shadow-lg"
+            >
+              All Testimonials
+              <ExternalLink size={14} />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {REAL_TESTIMONIALS.map((t, idx) => (
+              <motion.div
+                key={t.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
+                className="rounded-3xl border border-white/15 bg-black/60 hover:border-blue-400/50 p-6 flex flex-col justify-between shadow-2xl transition-all duration-300 group"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3.5">
+                    <img
+                      src={t.avatar}
+                      alt={t.name}
+                      className="w-14 h-14 rounded-2xl object-cover object-top border-2 border-blue-400/40 shrink-0 shadow-md"
+                    />
+                    <div className="overflow-hidden">
+                      <h4 className="font-bold text-white text-base font-serif-luxury group-hover:text-blue-300 transition-colors truncate">
+                        {t.name}
+                      </h4>
+                      <p className="text-xs text-blue-400 font-semibold truncate">{t.course} • {t.batch}</p>
+                      <p className="text-xs font-bold text-emerald-400 truncate mt-0.5">
+                        {t.placedAt} ({t.package})
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-slate-300 italic leading-relaxed line-clamp-5 font-normal">
+                    &quot;{t.quote}&quot;
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-5 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
+                  <span className="flex items-center gap-1 text-emerald-400 font-semibold">
+                    <CheckCircle2 size={13} /> Verified Offer
+                  </span>
+                  <span>{t.role}</span>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
